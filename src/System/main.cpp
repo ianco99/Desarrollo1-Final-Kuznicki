@@ -1,7 +1,10 @@
 #include <iostream>
+#include "RunGame.h"
 
 int main()
 {
-	//RunGame
+	kuznickiSystem::RunGame runGame = kuznickiSystem::RunGame();
+
+	runGame.Start();
 	return 0;
 }

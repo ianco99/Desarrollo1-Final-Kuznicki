@@ -88,10 +88,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\include;$(SolutionDir)src\GameObjects;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,21 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Managers\Bullet.cpp" />
-    <ClCompile Include="..\src\Managers\BulletManager.cpp" />
-    <ClCompile Include="..\src\Managers\Enemy.cpp" />
-    <ClCompile Include="..\src\Managers\EnemyManager.cpp" />
+    <ClCompile Include="..\src\GameObjects\Player.cpp" />
     <ClCompile Include="..\src\Managers\GameManager.cpp" />
-    <ClCompile Include="..\src\Managers\HudManager.cpp" />
     <ClCompile Include="..\src\Managers\Menu.cpp" />
-    <ClCompile Include="..\src\Managers\PauseManager.cpp" />
-    <ClCompile Include="..\src\Managers\Player.cpp" />
     <ClCompile Include="..\src\Managers\PlayerManager.cpp" />
-    <ClCompile Include="..\src\Managers\TimeManager.cpp" />
     <ClCompile Include="..\src\System\main.cpp" />
     <ClCompile Include="..\src\System\RunGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\GameObjects\Player.h" />
     <ClInclude Include="..\src\System\RunGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

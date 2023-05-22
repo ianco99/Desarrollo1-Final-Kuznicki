@@ -11,5 +11,7 @@ namespace kuznickiSystem
 	public:
 		RunGame();
 		~RunGame();
+
+		void Start();
 	};
 }

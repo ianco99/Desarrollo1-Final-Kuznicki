@@ -19,40 +19,22 @@
     <ClCompile Include="..\src\Managers\GameManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Managers\TimeManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Managers\PlayerManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Managers\HudManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Managers\EnemyManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Managers\PauseManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Managers\BulletManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Managers\Player.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Managers\Enemy.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Managers\Bullet.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Managers\Menu.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameObjects\Player.cpp">
+      <Filter>GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\RunGame.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameObjects\Player.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
