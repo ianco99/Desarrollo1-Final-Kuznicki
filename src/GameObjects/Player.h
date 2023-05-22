@@ -13,6 +13,8 @@ namespace kuznickiGameObjects
 		Player(float posX, float posY, float sizeX, float sizeY, Color givenColor);
 		~Player();
 
+		void Reposition(float newX, float newY);
+		Rectangle GetBody();
 		void Draw();
 	};
 

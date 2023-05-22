@@ -1,11 +1,12 @@
 #pragma once
+#include "Player.h"
 
 namespace kuznickiSystem
 {
 	class RunGame
 	{
 	private:
-
+		kuznickiGameObjects::Player player = { 0,0,1,1, WHITE };
 
 
 	public:
@@ -13,5 +14,7 @@ namespace kuznickiSystem
 		~RunGame();
 
 		void Start();
+
+		void TakeInput();
 	};
 }

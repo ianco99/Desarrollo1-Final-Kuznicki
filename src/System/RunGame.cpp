@@ -2,8 +2,8 @@
 #include "raylib.h"
 #include "Player.h"
 
-using namespace kuznickiSystem;
 using namespace kuznickiGameObjects;
+using namespace kuznickiSystem;
 
 RunGame::RunGame()
 {
@@ -18,13 +18,34 @@ void RunGame::Start()
 {
 	InitWindow(1024, 768, "MyFinal");
 
-	Player player = Player(GetScreenWidth() / 2, GetScreenHeight() / 2, 20,20,WHITE);
+	player = Player(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f, 20,20,WHITE);
 
 	while (true)
 	{
+		TakeInput();
+
 		BeginDrawing();
 		ClearBackground(BLACK);
 		player.Draw();
 		EndDrawing();
 	}
+}
+
+void RunGame::TakeInput()
+{
+	float speed = 450;
+	Rectangle newBody = player.GetBody();
+
+	if (IsKeyDown(KEY_W))
+		newBody.y -= speed * GetFrameTime();
+	if(IsKeyDown(KEY_S))
+		newBody.y += speed * GetFrameTime();
+	if(IsKeyDown(KEY_A))
+		newBody.x -= speed * GetFrameTime();
+	if(IsKeyDown(KEY_D))
+		newBody.x += speed * GetFrameTime();
+
+
+
+	player.Reposition(newBody.x, newBody.y);
 }
