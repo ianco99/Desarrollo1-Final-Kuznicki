@@ -28,12 +28,18 @@
     <ClCompile Include="..\src\GameObjects\Player.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameObjects\Gun.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\RunGame.h">
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameObjects\Player.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameObjects\Gun.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

@@ -20,6 +20,12 @@ void Player::Reposition(float newX, float newY)
 	body.y = newY;
 }
 
+void Player::ShootGun()
+{
+	this->gun.Shoot();
+	//maybe play an anim
+}
+
 void Player::Draw()
 {
 	DrawRectangleRec(body, color);

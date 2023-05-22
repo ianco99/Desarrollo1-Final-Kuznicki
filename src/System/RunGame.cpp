@@ -39,13 +39,14 @@ void RunGame::TakeInput()
 	if (IsKeyDown(KEY_W) && newBody.y > 0)
 		newBody.y -= speed * GetFrameTime();
 	if(IsKeyDown(KEY_S) && newBody.y + newBody.height < GetScreenHeight())
-		newBody.y += speed * GetFrameTime();
+		newBody.y += speed * GetFrameTime();	
 	if(IsKeyDown(KEY_A) && newBody.x > 0)
 		newBody.x -= speed * GetFrameTime();
 	if(IsKeyDown(KEY_D) && newBody.x + newBody.width < GetScreenWidth())
 		newBody.x += speed * GetFrameTime();
 
-
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		player.ShootGun();
 
 	player.Reposition(newBody.x, newBody.y);
 }

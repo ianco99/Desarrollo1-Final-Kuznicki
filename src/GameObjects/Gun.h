@@ -1,16 +1,21 @@
 #pragma once
 
-const int maxBullets = 200;
-
-class Gun
+namespace kuznickiGameObjects
 {
-private:
-	int bullets[maxBullets];
-	bool canShoot = false;
+	const int maxBullets = 200;
 
-public:
-	Gun();
-	~Gun();
+	class Gun
+	{
+	private:
+		int bullets[maxBullets];
+		bool canShoot = false;
 
-	void ToggleCanShoot(bool value);
-};
+	public:
+		Gun();
+		~Gun();
+
+		void ToggleCanShoot(bool value);
+		
+		void Shoot();
+	};
+}
