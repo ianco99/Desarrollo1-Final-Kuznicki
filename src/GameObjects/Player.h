@@ -1,6 +1,5 @@
 #pragma once
 #include "raylib.h"
-
 #include "Gun.h"
 
 namespace kuznickiGameObjects
@@ -10,12 +9,14 @@ namespace kuznickiGameObjects
 	private:
 		Rectangle body;
 		Color color;
-
 		Gun gun;
+
 
 	public:
 		Player(float posX, float posY, float sizeX, float sizeY, Color givenColor);
 		~Player();
+
+		void Update();
 
 		void Reposition(float newX, float newY);
 		void ShootGun();

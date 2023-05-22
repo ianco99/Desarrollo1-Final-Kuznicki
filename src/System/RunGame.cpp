@@ -24,6 +24,8 @@ void RunGame::Start()
 	{
 		TakeInput();
 
+		Update();
+
 		BeginDrawing();
 		ClearBackground(BLACK);
 		player.Draw();
@@ -49,4 +51,9 @@ void RunGame::TakeInput()
 		player.ShootGun();
 
 	player.Reposition(newBody.x, newBody.y);
+}
+
+void RunGame::Update()
+{
+	player.Update();
 }

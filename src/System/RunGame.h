@@ -14,6 +14,7 @@ namespace kuznickiSystem
 		~RunGame();
 
 		void Start();
+		void Update();
 
 		void TakeInput();
 	};

@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "Player.h"
+#include "Gun.h"
 
 using namespace kuznickiGameObjects;
 
@@ -7,11 +8,18 @@ Player::Player(float posX, float posY, float sizeX, float sizeY, Color givenColo
 {
 	this->body = { posX, posY, sizeX, sizeY };
 	this->color = givenColor;
+
+	//this->gun = Gun(this);
 }
 
 Player::~Player()
 {
 
+}
+
+void Player::Update()
+{
+	this->gun.Update();
 }
 
 void Player::Reposition(float newX, float newY)
@@ -22,13 +30,15 @@ void Player::Reposition(float newX, float newY)
 
 void Player::ShootGun()
 {
-	this->gun.Shoot();
+	this->gun.PullTrigger();
 	//maybe play an anim
 }
 
 void Player::Draw()
 {
 	DrawRectangleRec(body, color);
+
+	gun.Draw();
 }
 
 Rectangle Player::GetBody()

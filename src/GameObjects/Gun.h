@@ -1,4 +1,7 @@
 #pragma once
+#include "raylib.h"
+
+#include "Player.h"
 
 namespace kuznickiGameObjects
 {
@@ -7,15 +10,21 @@ namespace kuznickiGameObjects
 	class Gun
 	{
 	private:
-		int bullets[maxBullets];
+		//Player myPlayer;
+		Rectangle bullets[maxBullets];
 		bool canShoot = false;
 
 	public:
 		Gun();
 		~Gun();
 
+		void Update();
+
 		void ToggleCanShoot(bool value);
 		
+		void PullTrigger();
 		void Shoot();
+
+		void Draw();
 	};
 }
