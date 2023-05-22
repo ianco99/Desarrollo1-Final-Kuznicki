@@ -36,13 +36,13 @@ void RunGame::TakeInput()
 	float speed = 450;
 	Rectangle newBody = player.GetBody();
 
-	if (IsKeyDown(KEY_W))
+	if (IsKeyDown(KEY_W) && newBody.y > 0)
 		newBody.y -= speed * GetFrameTime();
-	if(IsKeyDown(KEY_S))
+	if(IsKeyDown(KEY_S) && newBody.y + newBody.height < GetScreenHeight())
 		newBody.y += speed * GetFrameTime();
-	if(IsKeyDown(KEY_A))
+	if(IsKeyDown(KEY_A) && newBody.x > 0)
 		newBody.x -= speed * GetFrameTime();
-	if(IsKeyDown(KEY_D))
+	if(IsKeyDown(KEY_D) && newBody.x + newBody.width < GetScreenWidth())
 		newBody.x += speed * GetFrameTime();
 
 
