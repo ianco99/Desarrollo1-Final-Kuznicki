@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "RunGame.h"
 #include "raylib.h"
 #include "Player.h"
@@ -48,7 +50,10 @@ void RunGame::TakeInput()
 		newBody.x += speed * GetFrameTime();
 
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	{
 		player.ShootGun();
+		std::cout << "god";
+	}
 
 	player.Reposition(newBody.x, newBody.y);
 }

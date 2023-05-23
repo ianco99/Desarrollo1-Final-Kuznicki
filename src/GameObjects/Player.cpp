@@ -6,10 +6,10 @@ using namespace kuznickiGameObjects;
 
 Player::Player(float posX, float posY, float sizeX, float sizeY, Color givenColor)
 {
-	this->body = { posX, posY, sizeX, sizeY };
+	this->body = new Rectangle{ posX, posY, sizeX, sizeY };
 	this->color = givenColor;
 
-	//this->gun = Gun(this);
+	this->gun = Gun(this->body);
 }
 
 Player::~Player()
@@ -24,8 +24,8 @@ void Player::Update()
 
 void Player::Reposition(float newX, float newY)
 {
-	body.x = newX;
-	body.y = newY;
+	body->x = newX;
+	body->y = newY;
 }
 
 void Player::ShootGun()
@@ -36,12 +36,12 @@ void Player::ShootGun()
 
 void Player::Draw()
 {
-	DrawRectangleRec(body, color);
+	DrawRectangleRec(*body, color);
 
 	gun.Draw();
 }
 
 Rectangle Player::GetBody()
 {
-	return body;
+	return *body;
 }

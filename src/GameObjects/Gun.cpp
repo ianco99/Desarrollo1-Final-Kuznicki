@@ -1,18 +1,21 @@
 #include "Gun.h"
-#include "Player.h"
 #include <iostream>
 
 using namespace kuznickiGameObjects;
 
-Gun::Gun()
+Gun::Gun(Rectangle* myPlayer)
 {
 	for (int i = 0; i < maxBullets; i++)
 	{
-		bullets[i] = { 0,0,5,5 };
+		bullets[i] = { myPlayer->x,myPlayer->y,5,5 };
 	}
 
-	//this->myPlayer = player;
-	//canShoot = true;
+	this->myPlayer = myPlayer;
+	canShoot = true;
+}
+
+Gun::Gun()
+{
 }
 
 Gun::~Gun()
@@ -21,9 +24,9 @@ Gun::~Gun()
 
 void Gun::Update()
 {
-	if (canShoot)
+	if (!canShoot)
 	{
-		bullets[0].x = 
+		//bullets[0].x = 
 		bullets[0].x += 200 * GetFrameTime();
 	}
 }
@@ -35,22 +38,25 @@ void Gun::ToggleCanShoot(bool value)
 
 void Gun::PullTrigger()
 {
-	//if (canShoot)
-	//{
+	if (canShoot)
+	{
 		Shoot();
-	//}
-	//else
-	//{
-
-	//}
+	}
+	else
+	{
+		Shoot();
+	}
 }
 
 void Gun::Shoot()
 {
-	canShoot = true;
+	canShoot = false;
+	bullets[0].x = myPlayer->x + myPlayer->width/2;
+	bullets[0].y = myPlayer->y + myPlayer->height / 2;
 }
 
 void Gun::Draw()
 {
-	DrawRectangleRec(bullets[0], RED);
+	if (!canShoot)
+		DrawRectangleRec(bullets[0], RED);
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+
 #include "Gun.h"
 
 namespace kuznickiGameObjects
@@ -7,7 +8,7 @@ namespace kuznickiGameObjects
 	class Player
 	{
 	private:
-		Rectangle body;
+		Rectangle* body;
 		Color color;
 		Gun gun;
 
