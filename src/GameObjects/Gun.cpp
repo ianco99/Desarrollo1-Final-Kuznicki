@@ -1,62 +1,63 @@
 #include "Gun.h"
 #include <iostream>
 
-using namespace kuznickiGameObjects;
-
-Gun::Gun(Rectangle* myPlayer)
+namespace kuznickiGameObjects
 {
-	for (int i = 0; i < maxBullets; i++)
+	Gun::Gun(Rectangle* myPlayer)
 	{
-		bullets[i] = { myPlayer->x,myPlayer->y,5,5 };
+		for (int i = 0; i < maxBullets; i++)
+		{
+			bullets[i] = { myPlayer->x,myPlayer->y,5,5 };
+		}
+
+		this->myPlayer = myPlayer;
+		canShoot = true;
 	}
 
-	this->myPlayer = myPlayer;
-	canShoot = true;
-}
-
-Gun::Gun()
-{
-}
-
-Gun::~Gun()
-{
-}
-
-void Gun::Update()
-{
-	if (!canShoot)
+	Gun::Gun()
 	{
-		//bullets[0].x = 
-		bullets[0].x += 200 * GetFrameTime();
 	}
-}
 
-void Gun::ToggleCanShoot(bool value)
-{
-	canShoot = value;
-}
-
-void Gun::PullTrigger()
-{
-	if (canShoot)
+	Gun::~Gun()
 	{
-		Shoot();
 	}
-	else
+
+	void Gun::Update()
 	{
-		Shoot();
+		if (!canShoot)
+		{
+			//bullets[0].x = 
+			bullets[0].x += 200 * GetFrameTime();
+		}
 	}
-}
 
-void Gun::Shoot()
-{
-	canShoot = false;
-	bullets[0].x = myPlayer->x + myPlayer->width/2;
-	bullets[0].y = myPlayer->y + myPlayer->height / 2;
-}
+	void Gun::ToggleCanShoot(bool value)
+	{
+		canShoot = value;
+	}
 
-void Gun::Draw()
-{
-	if (!canShoot)
-		DrawRectangleRec(bullets[0], RED);
+	void Gun::PullTrigger()
+	{
+		if (canShoot)
+		{
+			Shoot();
+		}
+		else
+		{
+			Shoot();
+		}
+	}
+
+	void Gun::Shoot()
+	{
+		canShoot = false;
+		bullets[0].x = myPlayer->x + myPlayer->width / 2;
+		bullets[0].y = myPlayer->y + myPlayer->height / 2;
+	}
+
+	void Gun::Draw()
+	{
+		if (!canShoot)
+			DrawRectangleRec(bullets[0], RED);
+	}
 }
