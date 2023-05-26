@@ -20,14 +20,22 @@ namespace kuznickiGameObjects
 
 	public:
 		Bullet(float sizeX, float sizeY, int health, Color color);
+		Bullet();
 		~Bullet();
 
 		void ChangeDirection(Vector2 direction);
 		void ChangeVelocity(Vector2 velocity);
+		void ChangePosition(Vector2 velocity);
+
+		void Move();
 
 		void RecieveDamage(int damage);
 
-		void ChangeColor(Color color);
+		void SetColor(Color color);
+		void SetBody(Rectangle newBody);
+
+		Rectangle GetBody();
+		Color GetColor();
 	};
 
 

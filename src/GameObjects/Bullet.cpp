@@ -12,6 +12,11 @@ namespace kuznickiGameObjects
 		this->color = color;
 	}
 
+	Bullet::Bullet()
+	{
+
+	}
+	
 	Bullet::~Bullet()
 	{
 
@@ -24,7 +29,20 @@ namespace kuznickiGameObjects
 
 	void Bullet::ChangeVelocity(Vector2 velocity)
 	{
+		this->velocity = velocity;
+	}
 
+	void Bullet::ChangePosition(Vector2 newPosition)
+	{
+		this->body.x = newPosition.x;
+		this->body.y = newPosition.y;
+	}
+
+	void Bullet::Move()
+	{
+		
+		this->body.x += direction.x * velocity.x * GetFrameTime();
+		this->body.y += direction.y * velocity.y * GetFrameTime();
 	}
 
 	void Bullet::RecieveDamage(int damage)
@@ -32,8 +50,23 @@ namespace kuznickiGameObjects
 
 	}
 
-	void Bullet::ChangeColor(Color color)
+	void Bullet::SetColor(Color color)
 	{
 
+	}
+	
+	void Bullet::SetBody(Rectangle newBody)
+	{
+		this->body = newBody;
+	}
+
+	Rectangle Bullet::GetBody()
+	{
+		return this->body;
+	}
+
+	Color Bullet::GetColor()
+	{
+		return this->color;
 	}
 }

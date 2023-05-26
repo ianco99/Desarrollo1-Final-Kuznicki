@@ -10,7 +10,7 @@ namespace kuznickiGameObjects
 	private:
 		Rectangle* body;
 		Color color;
-		Gun gun;
+		Gun gun = Gun(body);
 
 
 	public:
