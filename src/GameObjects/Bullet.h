@@ -7,7 +7,8 @@ namespace kuznickiGameObjects
 	{
 	private:
 		Rectangle body = { 0,0,0,0 };
-		
+		float angle;
+
 		Vector2 velocity;	//Only positive values
 		Vector2 acceleration;	//In case I need the bullet to speed up overtime
 		Vector2 direction;
@@ -33,6 +34,8 @@ namespace kuznickiGameObjects
 
 		void SetColor(Color color);
 		void SetBody(Rectangle newBody);
+		void SetAngle(float newAngle);
+		float GetAngle();
 
 		Rectangle GetBody();
 		Color GetColor();

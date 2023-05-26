@@ -69,6 +69,7 @@ namespace kuznickiGameObjects
 			rotationAngle += 180;
 		}
 
+		bullets[0].SetAngle(rotationAngle);
 		bullets[0].ChangeDirection(Vector2Normalize(distance));
 		bullets[0].ChangeVelocity({ 500,500 });
 		bullets[0].ChangePosition({ myPlayer->x,myPlayer->y});
@@ -80,6 +81,7 @@ namespace kuznickiGameObjects
 
 	void Gun::Draw()
 	{
+		//pls mira el asteroids y copia lo de draw texture pro
 		if (!canShoot)
 			DrawRectangleRec(bullets[0].GetBody(), bullets[0].GetColor());
 	}

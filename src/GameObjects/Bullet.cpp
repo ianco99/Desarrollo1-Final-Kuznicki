@@ -60,6 +60,16 @@ namespace kuznickiGameObjects
 		this->body = newBody;
 	}
 
+	void Bullet::SetAngle(float newAngle)
+	{
+		this->angle = newAngle;
+	}
+
+	float Bullet::GetAngle()
+	{
+		return this->angle;
+	}
+
 	Rectangle Bullet::GetBody()
 	{
 		return this->body;
