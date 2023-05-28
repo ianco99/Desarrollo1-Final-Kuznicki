@@ -82,7 +82,13 @@ namespace kuznickiGameObjects
 	void Gun::Draw()
 	{
 		//pls mira el asteroids y copia lo de draw texture pro
+
+
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(bullets[0].GetBody().width), static_cast<float>(bullets[0].GetBody().height) };
+		Rectangle spriteDestination = { bullets[0].GetBody().x, bullets[0].GetBody().y, bullets[0].GetBody().width, bullets[0].GetBody().height };
+		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
 		if (!canShoot)
-			DrawRectangleRec(bullets[0].GetBody(), bullets[0].GetColor());
+			DrawRectanglePro(bullets[0].GetBody(), spriteOrigin, bullets[0].GetAngle(), bullets[0].GetColor());
 	}
 }
