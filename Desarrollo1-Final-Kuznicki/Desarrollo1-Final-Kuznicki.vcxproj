@@ -146,7 +146,6 @@
     <ClCompile Include="..\src\GameObjects\Gun.cpp" />
     <ClCompile Include="..\src\GameObjects\Player.cpp" />
     <ClCompile Include="..\src\Managers\GameManager.cpp" />
-    <ClCompile Include="..\src\Managers\Menu.cpp" />
     <ClCompile Include="..\src\Managers\PlayerManager.cpp" />
     <ClCompile Include="..\src\System\main.cpp" />
     <ClCompile Include="..\src\System\RunGame.cpp" />
@@ -156,6 +155,7 @@
     <ClInclude Include="..\src\GameObjects\Gun.h" />
     <ClInclude Include="..\src\GameObjects\Player.h" />
     <ClInclude Include="..\src\System\RunGame.h" />
+    <ClInclude Include="Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

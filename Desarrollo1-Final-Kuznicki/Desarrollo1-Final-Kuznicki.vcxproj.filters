@@ -22,9 +22,6 @@
     <ClCompile Include="..\src\Managers\PlayerManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Managers\Menu.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameObjects\Player.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
@@ -47,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="..\src\GameObjects\Bullet.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

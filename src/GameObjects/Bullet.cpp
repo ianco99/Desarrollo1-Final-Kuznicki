@@ -47,12 +47,12 @@ namespace kuznickiGameObjects
 
 	void Bullet::RecieveDamage(int damage)
 	{
-
+		health -= damage;
 	}
 
 	void Bullet::SetColor(Color color)
 	{
-
+		this->color = color;
 	}
 	
 	void Bullet::SetBody(Rectangle newBody)

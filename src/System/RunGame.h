@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+//#include "Menu.h"
 
 namespace kuznickiSystem
 {
@@ -7,7 +8,7 @@ namespace kuznickiSystem
 	{
 	private:
 		kuznickiGameObjects::Player player = { 0,0,1,1, WHITE };
-
+		//Menu gameMenu;
 
 	public:
 		RunGame();
