@@ -20,7 +20,7 @@ namespace kuznickiSystem
 	{
 		InitWindow(1024, 768, "MyFinal");
 
-		//gameMenu.
+		//gameMenu.a
 
 
 		player = Player(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f, 20, 20, WHITE);

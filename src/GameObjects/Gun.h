@@ -25,6 +25,9 @@ namespace kuznickiGameObjects
 		void PullTrigger();
 		void Shoot();
 
+		Vector2 GetBulletDirection();
+		float GetBulletRotation(Vector2 distance);
+
 		void Draw();
 	};
 }

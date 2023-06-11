@@ -40,20 +40,37 @@ namespace kuznickiGameObjects
 		{
 			Shoot();
 		}
-		else
-		{
-			Shoot();
-		}
 	}
 
 	void Gun::Shoot()
 	{
 		canShoot = false;
 
-		Vector2 mousePos = GetMousePosition();
-		Vector2 distance = Vector2Subtract(mousePos,{ myPlayer->x , myPlayer->y });
+		Vector2 direction = GetBulletDirection();
+
+		float rotationAngle = GetBulletRotation(direction);
 					
-		float rotationAngle = atan(distance.y/distance.x);
+		
+
+		bullets[0].SetAngle(rotationAngle);
+		bullets[0].ChangeDirection(Vector2Normalize(direction));
+		bullets[0].ChangeVelocity({ 500,500 });
+		bullets[0].ChangePosition({ myPlayer->x,myPlayer->y});
+		std::cout << "GODDD";
+
+		/*bullets[0].x = myPlayer->x + myPlayer->width / 2;
+		bullets[0].y = myPlayer->y + myPlayer->height / 2;*/
+	}
+
+	Vector2 Gun::GetBulletDirection()
+	{
+		Vector2 mousePos = GetMousePosition();
+		Vector2 distance = Vector2Subtract(mousePos, { myPlayer->x , myPlayer->y });
+	}
+
+	float Gun::GetBulletRotation(Vector2 distance)
+	{
+		float rotationAngle = atan(distance.y / distance.x);
 		rotationAngle = rotationAngle * 180 / PI;
 
 		if (distance.x > 0 && distance.y < 0) //Quad 4
@@ -69,14 +86,7 @@ namespace kuznickiGameObjects
 			rotationAngle += 180;
 		}
 
-		bullets[0].SetAngle(rotationAngle);
-		bullets[0].ChangeDirection(Vector2Normalize(distance));
-		bullets[0].ChangeVelocity({ 500,500 });
-		bullets[0].ChangePosition({ myPlayer->x,myPlayer->y});
-		std::cout << "GODDD";
-
-		/*bullets[0].x = myPlayer->x + myPlayer->width / 2;
-		bullets[0].y = myPlayer->y + myPlayer->height / 2;*/
+		return rotationAngle;
 	}
 
 	void Gun::Draw()
