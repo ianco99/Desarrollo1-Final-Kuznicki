@@ -49,17 +49,18 @@ namespace kuznickiGameObjects
 		Vector2 direction = GetBulletDirection();
 
 		float rotationAngle = GetBulletRotation(direction);
-					
-		
 
-		bullets[0].SetAngle(rotationAngle);
-		bullets[0].ChangeDirection(Vector2Normalize(direction));
-		bullets[0].ChangeVelocity({ 500,500 });
-		bullets[0].ChangePosition({ myPlayer->x,myPlayer->y});
-		std::cout << "GODDD";
-
-		/*bullets[0].x = myPlayer->x + myPlayer->width / 2;
-		bullets[0].y = myPlayer->y + myPlayer->height / 2;*/
+		for (int i = 0; i < maxBullets; i++)
+		{
+			if (!bullets[i].GetIsAlive())
+			{
+				bullets[i].SetAngle(rotationAngle);
+				bullets[i].ChangeDirection(Vector2Normalize(direction));
+				bullets[i].ChangeVelocity({ 500,500 });
+				bullets[i].ChangePosition({ myPlayer->x,myPlayer->y });
+				std::cout << "GODDD";
+			}
+		}
 	}
 
 	Vector2 Gun::GetBulletDirection()

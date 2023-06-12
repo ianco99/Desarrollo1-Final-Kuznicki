@@ -79,4 +79,9 @@ namespace kuznickiGameObjects
 	{
 		return this->color;
 	}
+
+	bool Bullet::GetIsAlive()
+	{
+		return isAlive;
+	}
 }
