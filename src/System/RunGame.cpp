@@ -60,6 +60,13 @@ namespace kuznickiSystem
 	void RunGame::Update()
 	{
 		player.Update();
-
+		
+		for (int i = 0; i < maxEnemies; i++)
+		{
+			if (enemies[i].GetIsAlive())
+			{
+				enemies[i].Update();
+			}
+		}
 	}
 };

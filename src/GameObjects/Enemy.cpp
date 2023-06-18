@@ -12,33 +12,48 @@ namespace kuznickiGameObjects
 
 	}
 
-	void Reposition(Vector2 newPos)
+	void Enemy::Update()
 	{
 
 	}
 
-	Vector2 GetPosition()
+	void Enemy::Reposition(Vector2 newPos)
 	{
 
 	}
 
-	void SetVelocity(Vector2 newVelocity)
+	Vector2 Enemy::GetPosition()
+	{
+		return position;
+	}
+
+	void Enemy::SetVelocity(Vector2 newVelocity)
 	{
 
 	}
 
-	Vector2 GetVelocity()
+	Vector2 Enemy::GetVelocity()
+	{
+		return velocity;
+	}
+
+	void Enemy::SetAcceleration(Vector2 newAcceleration)
 	{
 
 	}
 
-	void SetAcceleration(Vector2 newAcceleration)
+	Vector2 Enemy::GetAcceleration()
 	{
-
+		return acceleration;
 	}
 
-	Vector2 GetAcceleration()
+	bool Enemy::GetIsAlive()
 	{
+		return isAlive;
+	}
 
+	void Enemy::SetIsAlive(bool value)
+	{
+		isAlive = value;
 	}
 }

@@ -15,10 +15,13 @@ namespace kuznickiGameObjects
 
 		int damage;
 
+		bool isAlive;
 
 	public:
 		Enemy();
 		~Enemy();
+
+		void Update();
 
 		void Reposition(Vector2 newPos);
 		Vector2 GetPosition();
@@ -27,5 +30,8 @@ namespace kuznickiGameObjects
 
 		void SetAcceleration(Vector2 newAcceleration);
 		Vector2 GetAcceleration();
+
+		void SetIsAlive(bool value);
+		bool GetIsAlive();
 	};
 }
