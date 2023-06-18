@@ -31,6 +31,9 @@
     <ClCompile Include="..\src\GameObjects\Bullet.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameObjects\Enemy.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\RunGame.h">
@@ -47,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameObjects\Enemy.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

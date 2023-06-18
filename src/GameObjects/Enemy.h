@@ -1,28 +1,31 @@
 #pragma once
 #include "raylib.h"
 
-class Enemy
+namespace kuznickiGameObjects
 {
-private:
-	Vector2 position;
-	Vector2 velocity;
-	Vector2 acceleration;
-	float radius;
+	class Enemy
+	{
+	private:
+		Vector2 position;
+		Vector2 velocity;
+		Vector2 acceleration;
+		float radius;
 
-	Color color;
+		Color color;
 
-	int damage;
+		int damage;
 
 
-public:
-	Enemy();
-	~Enemy();
+	public:
+		Enemy();
+		~Enemy();
 
-	void Reposition(Vector2 newPos);
-	Vector2 GetPosition();
-	void SetVelocity(Vector2 newVelocity);
-	Vector2 GetVelocity();
+		void Reposition(Vector2 newPos);
+		Vector2 GetPosition();
+		void SetVelocity(Vector2 newVelocity);
+		Vector2 GetVelocity();
 
-	void SetAcceleration(Vector2 newAcceleration);
-	Vector2 GetAcceleration();
-};
+		void SetAcceleration(Vector2 newAcceleration);
+		Vector2 GetAcceleration();
+	};
+}

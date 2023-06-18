@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\GameObjects\Bullet.cpp" />
+    <ClCompile Include="..\src\GameObjects\Enemy.cpp" />
     <ClCompile Include="..\src\GameObjects\Gun.cpp" />
     <ClCompile Include="..\src\GameObjects\Player.cpp" />
     <ClCompile Include="..\src\Managers\GameManager.cpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\GameObjects\Bullet.h" />
+    <ClInclude Include="..\src\GameObjects\Enemy.h" />
     <ClInclude Include="..\src\GameObjects\Gun.h" />
     <ClInclude Include="..\src\GameObjects\Player.h" />
     <ClInclude Include="..\src\System\RunGame.h" />
