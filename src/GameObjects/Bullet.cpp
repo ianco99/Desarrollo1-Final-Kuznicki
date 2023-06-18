@@ -84,4 +84,9 @@ namespace kuznickiGameObjects
 	{
 		return isAlive;
 	}
+
+	void Bullet::SetIsAlive(bool value)
+	{
+		isAlive = value;
+	}
 }

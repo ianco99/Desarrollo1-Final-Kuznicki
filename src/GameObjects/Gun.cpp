@@ -9,6 +9,7 @@ namespace kuznickiGameObjects
 		for (int i = 0; i < maxBullets; i++)
 		{
 			bullets[i] = Bullet(20, 20, 1, RED);
+			bullets[i].SetIsAlive(false);
 		}
 
 		this->myPlayer = myPlayer;
@@ -22,10 +23,10 @@ namespace kuznickiGameObjects
 
 	void Gun::Update()
 	{
-		if (!canShoot)
+		for (int i = 0; i < maxBullets; i++)
 		{
-			//bullets[0].x = 
-			bullets[0].Move();
+			if (bullets[i].GetIsAlive())
+				bullets[i].Move();
 		}
 	}
 
@@ -44,7 +45,7 @@ namespace kuznickiGameObjects
 
 	void Gun::Shoot()
 	{
-		canShoot = false;
+		//canShoot = false;
 
 		Vector2 direction = GetBulletDirection();
 
@@ -58,6 +59,8 @@ namespace kuznickiGameObjects
 				bullets[i].ChangeDirection(Vector2Normalize(direction));
 				bullets[i].ChangeVelocity({ 500,500 });
 				bullets[i].ChangePosition({ myPlayer->x,myPlayer->y });
+				bullets[i].SetIsAlive(true);
+				break;
 				std::cout << "GODDD";
 			}
 		}
@@ -67,6 +70,8 @@ namespace kuznickiGameObjects
 	{
 		Vector2 mousePos = GetMousePosition();
 		Vector2 distance = Vector2Subtract(mousePos, { myPlayer->x , myPlayer->y });
+
+		return distance;
 	}
 
 	float Gun::GetBulletRotation(Vector2 distance)
@@ -92,14 +97,17 @@ namespace kuznickiGameObjects
 
 	void Gun::Draw()
 	{
-		//pls mira el asteroids y copia lo de draw texture pro
 
+		for (int i = 0; i < maxBullets; i++)
+		{
+			if (bullets[i].GetIsAlive())
+			{
+				Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(bullets[i].GetBody().width), static_cast<float>(bullets[i].GetBody().height) };
+				Rectangle spriteDestination = { bullets[i].GetBody().x, bullets[i].GetBody().y, bullets[i].GetBody().width, bullets[i].GetBody().height };
+				Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(bullets[0].GetBody().width), static_cast<float>(bullets[0].GetBody().height) };
-		Rectangle spriteDestination = { bullets[0].GetBody().x, bullets[0].GetBody().y, bullets[0].GetBody().width, bullets[0].GetBody().height };
-		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
-
-		if (!canShoot)
-			DrawRectanglePro(bullets[0].GetBody(), spriteOrigin, bullets[0].GetAngle(), bullets[0].GetColor());
+				DrawRectanglePro(bullets[i].GetBody(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
+			}
+		}
 	}
 }

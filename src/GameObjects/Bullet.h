@@ -39,6 +39,7 @@ namespace kuznickiGameObjects
 
 		Rectangle GetBody();
 		Color GetColor();
+		void SetIsAlive(bool value);
 		bool GetIsAlive();
 	};
 
