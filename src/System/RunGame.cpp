@@ -2,6 +2,7 @@
 
 #include "RunGame.h"
 #include "raylib.h"
+#include "raymath.h"
 #include "Player.h"
 
 using namespace kuznickiGameObjects;
@@ -21,6 +22,10 @@ namespace kuznickiSystem
 		InitWindow(1024, 768, "MyFinal");
 
 		player = Player(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f, 20, 20, WHITE);
+		enemies[0] = Enemy();
+		enemies[0].SetIsAlive(true);
+		enemies[0].Reposition({ -1.0f, -1.0f });
+		enemies[0].SetVelocity({ 400.0f, 400.0f });
 
 		while (true)
 		{
@@ -31,6 +36,13 @@ namespace kuznickiSystem
 			BeginDrawing();
 			ClearBackground(BLACK);
 			player.Draw();
+
+			for (int i = 0; i < maxEnemies; i++)
+			{
+				if (enemies[i].GetIsAlive())
+					DrawCircleV(enemies[i].GetPosition(), 20, RAYWHITE);
+			}
+
 			EndDrawing();
 		}
 	}
@@ -60,12 +72,13 @@ namespace kuznickiSystem
 	void RunGame::Update()
 	{
 		player.Update();
-		
+		enemies[0].SetDirection(Vector2Normalize({ player.GetBody().x, player.GetBody().y }));
+
 		for (int i = 0; i < maxEnemies; i++)
 		{
 			if (enemies[i].GetIsAlive())
 			{
-				enemies[i].Update();
+				enemies[i].Update(player);
 			}
 		}
 	}

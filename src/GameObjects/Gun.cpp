@@ -95,6 +95,16 @@ namespace kuznickiGameObjects
 		return rotationAngle;
 	}
 
+	Bullet Gun::GetBulletByIndex(int index)
+	{
+		return bullets[index];
+	}
+
+	int Gun::GetMaxBullets()
+	{
+		return maxBullets;
+	}
+
 	void Gun::Draw()
 	{
 

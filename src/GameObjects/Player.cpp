@@ -28,6 +28,11 @@ namespace kuznickiGameObjects
 		body->y = newY;
 	}
 
+	Gun Player::GetGun()
+	{
+		return gun;
+	}
+
 	void Player::ShootGun()
 	{
 		this->gun.PullTrigger();

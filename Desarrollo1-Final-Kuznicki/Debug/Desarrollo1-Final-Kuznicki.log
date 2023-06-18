@@ -1,15 +1,2 @@
-﻿  Enemy.cpp
-  main.cpp
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\System\RunGame.h(11,24): error C2039: "Enemy": no es un miembro de "kuznickiGameObjects"
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\GameObjects\Player.h(6): message : vea la declaración de 'kuznickiGameObjects'
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\System\RunGame.h(11,30): error C3646: 'enemy': especificador de invalidación desconocido
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\System\RunGame.h(11,35): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
-  RunGame.cpp
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\System\RunGame.h(11,24): error C2039: "Enemy": no es un miembro de "kuznickiGameObjects"
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\GameObjects\Player.h(6): message : vea la declaración de 'kuznickiGameObjects'
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\System\RunGame.h(11,30): error C3646: 'enemy': especificador de invalidación desconocido
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\System\RunGame.h(11,35): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
-  Generando código...
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\GameObjects\Enemy.cpp(33): error C4716: 'kuznickiGameObjects::GetVelocity': debe devolver un valor
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\GameObjects\Enemy.cpp(23): error C4716: 'kuznickiGameObjects::GetPosition': debe devolver un valor
-D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\src\GameObjects\Enemy.cpp(43): error C4716: 'kuznickiGameObjects::GetAcceleration': debe devolver un valor
+﻿  RunGame.cpp
+  Desarrollo1-Final-Kuznicki.vcxproj -> D:\Users\ianco\Desktop\Image\2022\1ero\2do cuatri\Desarrollo1\Desarrollo1-Final-Kuznicki\Debug\Desarrollo1-Final-Kuznicki.exe

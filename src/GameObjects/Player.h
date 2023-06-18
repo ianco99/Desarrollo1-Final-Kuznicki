@@ -20,6 +20,8 @@ namespace kuznickiGameObjects
 		void Update();
 
 		void Reposition(float newX, float newY);
+
+		Gun GetGun();
 		void ShootGun();
 
 		void Draw();
