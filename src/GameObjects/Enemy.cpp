@@ -33,7 +33,6 @@ namespace kuznickiGameObjects
 
 	void Enemy::Move()
 	{
-		std::cout << "esto ocurre?";
 
 		this->position.x += direction.x * velocity.x * GetFrameTime();
 		this->position.y += direction.y * velocity.y * GetFrameTime();
