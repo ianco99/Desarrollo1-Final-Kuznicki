@@ -72,6 +72,10 @@ namespace kuznickiSystem
 	void RunGame::Update()
 	{
 		player.Update();
+
+		//Code to make an enemy track player
+		//enemies[0].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[0].GetPosition())));
+
 		enemies[0].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[0].GetPosition())));
 
 		for (int i = 0; i < maxEnemies; i++)
