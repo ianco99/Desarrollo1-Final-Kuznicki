@@ -25,8 +25,8 @@ namespace kuznickiSystem
 		InitWindow(1024, 768, "MyFinal");
 
 		player = Player(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f, 20, 20, WHITE);
-		currSystemStats.numberOfEnemies = 1.0f;
-		currSystemStats.spawnRate = 10.0f;
+		currSystemStats.numberOfEnemies = 5.0f;
+		currSystemStats.spawnRate = 3.0f;
 
 		SetupEnemies(enemies);
 
@@ -93,6 +93,7 @@ namespace kuznickiSystem
 				enemies[i].SetIsAlive(true);
 				enemies[i].Reposition({ -1.0f, -1.0f });
 				enemies[i].SetVelocity({ 400.0f, 400.0f });
+				break;
 			}
 		}
 	}
@@ -122,16 +123,19 @@ namespace kuznickiSystem
 	void RunGame::Update()
 	{
 		player.Update();
+		UpdateEnemies();
+	}
 
-		//Code to make an enemy track player
-		//enemies[0].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[0].GetPosition())));
-
-		enemies[0].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[0].GetPosition())));
-
+	void RunGame::UpdateEnemies()
+	{
 		for (int i = 0; i < maxEnemies; i++)
 		{
-			if (enemies[i].GetIsAlive())
+			if (enemies[i].GetIsAlive() == true)
 			{
+				//Code to make an enemy track player
+				//enemies[0].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[0].GetPosition())));
+
+				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 				enemies[i].Update(player);
 			}
 		}

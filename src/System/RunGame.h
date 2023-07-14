@@ -28,6 +28,7 @@ namespace kuznickiSystem
 
 		void Start();
 		void Update();
+		void UpdateEnemies();
 
 		void ManageEnemies();
 		void SpawnEnemy();
