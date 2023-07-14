@@ -15,6 +15,7 @@ namespace kuznickiSystem
 
 	RunGame::~RunGame()
 	{
+
 	}
 
 	void RunGame::Start()
