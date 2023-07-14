@@ -75,7 +75,7 @@ namespace kuznickiSystem
 
 		currSystemStats.numberToSpawn = currSystemStats.numberOfEnemies - count;
 
-		if (currSystemStats.currTimeToSpawn >= currSystemStats.spawnRate)
+		if (currSystemStats.currTimeToSpawn >= currSystemStats.spawnRate && currSystemStats.numberToSpawn > 0)
 		{
 			currSystemStats.currTimeToSpawn = 0;
 			SpawnEnemy();
@@ -132,9 +132,6 @@ namespace kuznickiSystem
 		{
 			if (enemies[i].GetIsAlive() == true)
 			{
-				//Code to make an enemy track player
-				//enemies[0].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[0].GetPosition())));
-
 				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 				enemies[i].Update(player);
 			}

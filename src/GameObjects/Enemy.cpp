@@ -33,16 +33,15 @@ namespace kuznickiGameObjects
 
 	void Enemy::Move()
 	{
-
 		this->position.x += direction.x * velocity.x * GetFrameTime();
 		this->position.y += direction.y * velocity.y * GetFrameTime();
 	}
 
 	void Enemy::CheckCollisions(Bullet bullet)
 	{
-		if (CheckCollisionCircleRec(position, radius, bullet.GetBody()))
+		if (CheckCollisionCircleRec(position, radius, bullet.GetBody()) && isAlive == true)
 		{
-			std::cout << "que onda";
+			isAlive = false;
 		}
 	}
 
