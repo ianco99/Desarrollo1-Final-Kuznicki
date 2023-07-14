@@ -2,10 +2,9 @@
 
 namespace kuznickiGameObjects
 {
-	Bullet::Bullet(float sizeX, float sizeY, int health, Color color)
+	Bullet::Bullet(float radius, int health, Color color)
 	{
-		this->body.width = sizeX;
-		this->body.height = sizeY;
+		this->radius = radius;
 
 		this->health = health;
 		
@@ -34,15 +33,15 @@ namespace kuznickiGameObjects
 
 	void Bullet::ChangePosition(Vector2 newPosition)
 	{
-		this->body.x = newPosition.x;
-		this->body.y = newPosition.y;
+		this->position.x = newPosition.x;
+		this->position.y = newPosition.y;
 	}
 
 	void Bullet::Move()
 	{
 		
-		this->body.x += direction.x * velocity.x * GetFrameTime();
-		this->body.y += direction.y * velocity.y * GetFrameTime();
+		this->position.x += direction.x * velocity.x * GetFrameTime();
+		this->position.y += direction.y * velocity.y * GetFrameTime();
 	}
 
 	void Bullet::RecieveDamage(int damage)
@@ -53,11 +52,6 @@ namespace kuznickiGameObjects
 	void Bullet::SetColor(Color color)
 	{
 		this->color = color;
-	}
-	
-	void Bullet::SetBody(Rectangle newBody)
-	{
-		this->body = newBody;
 	}
 
 	void Bullet::SetAngle(float newAngle)
@@ -70,9 +64,14 @@ namespace kuznickiGameObjects
 		return this->angle;
 	}
 
-	Rectangle Bullet::GetBody()
+	float Bullet::GetRadius()
 	{
-		return this->body;
+		return this->radius;
+	}
+
+	Vector2 Bullet::GetPosition()
+	{
+		return this->position;
 	}
 
 	Color Bullet::GetColor()

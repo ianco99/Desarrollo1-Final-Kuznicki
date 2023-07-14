@@ -8,7 +8,7 @@ namespace kuznickiGameObjects
 	{
 		for (int i = 0; i < maxBullets; i++)
 		{
-			bullets[i] = Bullet(20, 20, 1, RED);
+			bullets[i] = Bullet(8.0f, 1, RED);
 			bullets[i].SetIsAlive(false);
 		}
 
@@ -45,8 +45,6 @@ namespace kuznickiGameObjects
 
 	void Gun::Shoot()
 	{
-		//canShoot = false;
-
 		Vector2 direction = GetBulletDirection();
 
 		float rotationAngle = GetBulletRotation(direction);
@@ -112,11 +110,12 @@ namespace kuznickiGameObjects
 		{
 			if (bullets[i].GetIsAlive())
 			{
-				Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(bullets[i].GetBody().width), static_cast<float>(bullets[i].GetBody().height) };
-				Rectangle spriteDestination = { bullets[i].GetBody().x, bullets[i].GetBody().y, bullets[i].GetBody().width, bullets[i].GetBody().height };
-				Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+				//Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(bullets[i].GetRadius()), static_cast<float>(bullets[i].GetRadius()) };
+				//Rectangle spriteDestination = { bullets[i].GetPosition().x, bullets[i].GetPosition().y, bullets[i].GetRadius(), bullets[i].GetRadius() };
+				//Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-				DrawRectanglePro(bullets[i].GetBody(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
+				DrawCircleV(bullets[i].GetPosition(), bullets[i].GetRadius(), bullets[i].GetColor());
+				//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
 			}
 		}
 	}

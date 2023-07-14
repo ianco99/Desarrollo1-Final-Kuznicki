@@ -4,6 +4,14 @@
 
 namespace kuznickiGameObjects
 {
+	Enemy::Enemy(float radius, Color color)
+	{
+		this->radius = radius;
+		this->position = { -1.0f, -1.0f };
+		this->color = color;
+		this->isAlive = false;
+	}
+
 	Enemy::Enemy()
 	{
 
@@ -25,9 +33,9 @@ namespace kuznickiGameObjects
 
 			for (int i = 0; i < maxBullets; i++)
 			{
-				if (currGun.GetBulletByIndex(i).GetIsAlive())
+				if (currGun.GetBulletByIndex(i).GetIsAlive() == true)
 					CheckCollisions(currGun.GetBulletByIndex(i));
-			}
+			}			
 		}
 	}
 
@@ -39,8 +47,9 @@ namespace kuznickiGameObjects
 
 	void Enemy::CheckCollisions(Bullet bullet)
 	{
-		if (CheckCollisionCircleRec(position, radius, bullet.GetBody()) && isAlive == true)
+		if (CheckCollisionCircles(position, radius, bullet.GetPosition(), bullet.GetRadius()))
 		{
+			std::cout << "QUEE";
 			isAlive = false;
 		}
 	}
@@ -83,6 +92,11 @@ namespace kuznickiGameObjects
 	Vector2 Enemy::GetDirection()
 	{
 		return direction;
+	}
+
+	Color Enemy::GetColor()
+	{
+		return color;
 	}
 
 	bool Enemy::GetIsAlive()

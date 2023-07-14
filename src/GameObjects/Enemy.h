@@ -21,6 +21,7 @@ namespace kuznickiGameObjects
 
 	public:
 		Enemy();
+		Enemy(float radius, Color color);
 		~Enemy();
 
 		void Update(Player player);
@@ -38,6 +39,8 @@ namespace kuznickiGameObjects
 
 		void SetDirection(Vector2 direction);
 		Vector2 GetDirection();
+
+		Color GetColor();
 
 		void SetIsAlive(bool value);
 		bool GetIsAlive();

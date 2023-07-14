@@ -6,8 +6,9 @@ namespace kuznickiGameObjects
 	class Bullet
 	{
 	private:
-		Rectangle body = { 0,0,0,0 };
+		float radius;
 		float angle;
+		Vector2 position;
 
 		Vector2 velocity;	//Only positive values
 		Vector2 acceleration;	//In case I need the bullet to speed up overtime
@@ -20,7 +21,7 @@ namespace kuznickiGameObjects
 		bool isAlive = false;
 
 	public:
-		Bullet(float sizeX, float sizeY, int health, Color color);
+		Bullet(float radius, int health, Color color);
 		Bullet();
 		~Bullet();
 
@@ -33,11 +34,11 @@ namespace kuznickiGameObjects
 		void RecieveDamage(int damage);
 
 		void SetColor(Color color);
-		void SetBody(Rectangle newBody);
 		void SetAngle(float newAngle);
 		float GetAngle();
 
-		Rectangle GetBody();
+		float GetRadius();
+		Vector2 GetPosition();
 		Color GetColor();
 		void SetIsAlive(bool value);
 		bool GetIsAlive();

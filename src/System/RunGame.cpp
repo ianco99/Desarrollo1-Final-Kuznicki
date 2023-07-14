@@ -45,7 +45,7 @@ namespace kuznickiSystem
 			for (int i = 0; i < maxEnemies; i++)
 			{
 				if (enemies[i].GetIsAlive())
-					DrawCircleV(enemies[i].GetPosition(), 20, RAYWHITE);
+					DrawCircleV(enemies[i].GetPosition(), enemies[i].GetRadius(), enemies[i].GetColor());
 			}
 
 			EndDrawing();
@@ -56,9 +56,7 @@ namespace kuznickiSystem
 	{
 		for (int i = 0; i < maxEnemies; i++)
 		{
-			enemies[i] = Enemy();
-			enemies[i].SetIsAlive(false);
-			enemies[i].Reposition({ -1.0f, -1.0f });
+			enemies[i] = Enemy(20.0f, WHITE);
 			enemies[i].SetVelocity({ 400.0f, 400.0f });
 		}
 
@@ -122,8 +120,8 @@ namespace kuznickiSystem
 
 	void RunGame::Update()
 	{
-		player.Update();
 		UpdateEnemies();
+		player.Update();
 	}
 
 	void RunGame::UpdateEnemies()
@@ -132,8 +130,8 @@ namespace kuznickiSystem
 		{
 			if (enemies[i].GetIsAlive() == true)
 			{
-				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 				enemies[i].Update(player);
+				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 			}
 		}
 	}
