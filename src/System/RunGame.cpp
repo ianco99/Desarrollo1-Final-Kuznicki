@@ -8,6 +8,8 @@
 using namespace kuznickiGameObjects;
 namespace kuznickiSystem
 {
+	void SetupEnemies(Enemy enemies[]);
+
 	RunGame::RunGame()
 	{
 
@@ -23,13 +25,15 @@ namespace kuznickiSystem
 		InitWindow(1024, 768, "MyFinal");
 
 		player = Player(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f, 20, 20, WHITE);
-		enemies[0] = Enemy();
-		enemies[0].SetIsAlive(true);
-		enemies[0].Reposition({ -1.0f, -1.0f });
-		enemies[0].SetVelocity({ 400.0f, 400.0f });
+		currSystemStats.numberOfEnemies = 1.0f;
+		currSystemStats.spawnRate = 1.0f;
+
+		SetupEnemies(enemies);
 
 		while (true)
 		{
+			ManageEnemies(enemies);
+
 			TakeInput();
 
 			Update();
@@ -45,6 +49,33 @@ namespace kuznickiSystem
 			}
 
 			EndDrawing();
+		}
+	}
+
+	void SetupEnemies(Enemy enemies[])
+	{
+		for (int i = 0; i < maxEnemies; i++)
+		{
+			enemies[0] = Enemy();
+			enemies[0].SetIsAlive(false);
+			enemies[0].Reposition({ -1.0f, -1.0f });
+			enemies[0].SetVelocity({ 400.0f, 400.0f });
+		}
+
+	}
+
+	void RunGame::ManageEnemies()
+	{
+		int count = 0;
+		for (int i = 0; i < maxEnemies; i++)
+		{
+			if (enemies[i].GetIsAlive())
+				count++;
+		}
+
+		if (count < currSystemStats.numberOfEnemies)
+		{
+			int enemiesNeeded = currSystemStats.numberOfEnemies - count;
 		}
 	}
 
