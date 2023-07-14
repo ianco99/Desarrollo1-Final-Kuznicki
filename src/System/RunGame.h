@@ -11,6 +11,7 @@ namespace kuznickiSystem
 	{
 		int numberOfEnemies;
 		int numberToSpawn;
+		float currTimeToSpawn = 0;
 		float spawnRate; //Time in seconds
 	};
 
@@ -29,6 +30,7 @@ namespace kuznickiSystem
 		void Update();
 
 		void ManageEnemies();
+		void SpawnEnemy();
 		void TakeInput();
 	};
 }
