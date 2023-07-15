@@ -24,7 +24,7 @@ namespace kuznickiSystem
 	{
 		InitWindow(1024, 768, "MyFinal");
 
-		player = Player(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f, 20, 20, WHITE);
+		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 8.0f, 20, 20, WHITE);
 		currSystemStats.numberOfEnemies = 5.0f;
 		currSystemStats.spawnRate = 3.0f;
 
@@ -101,10 +101,10 @@ namespace kuznickiSystem
 		float speed = 450;
 		Rectangle newBody = player.GetBody();
 
-		if (IsKeyDown(KEY_W) && newBody.y > 0)
-			newBody.y -= speed * GetFrameTime();
-		if (IsKeyDown(KEY_S) && newBody.y + newBody.height < GetScreenHeight())
-			newBody.y += speed * GetFrameTime();
+		/*if (IsKeyDown(KEY_W) && newBody.y > 0)
+			newBody.y -= speed * GetFrameTime();*/
+		/*if (IsKeyDown(KEY_S) && newBody.y + newBody.height < GetScreenHeight())
+			newBody.y += speed * GetFrameTime();*/
 		if (IsKeyDown(KEY_A) && newBody.x > 0)
 			newBody.x -= speed * GetFrameTime();
 		if (IsKeyDown(KEY_D) && newBody.x + newBody.width < GetScreenWidth())
