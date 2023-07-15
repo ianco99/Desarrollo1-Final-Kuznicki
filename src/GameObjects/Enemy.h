@@ -29,6 +29,8 @@ namespace kuznickiGameObjects
 		void Move();
 		void CheckCollisions(Bullet& bullets);
 
+		void SpawnRandPosition();
+
 		void Reposition(Vector2 newPos);
 		Vector2 GetPosition();
 		void SetVelocity(Vector2 newVelocity);

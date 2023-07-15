@@ -89,7 +89,7 @@ namespace kuznickiSystem
 			if (enemies[i].GetIsAlive() == false)
 			{
 				enemies[i].SetIsAlive(true);
-				enemies[i].Reposition({ -1.0f, -1.0f });
+				enemies[i].SpawnRandPosition();
 				enemies[i].SetVelocity({ 400.0f, 400.0f });
 				break;
 			}

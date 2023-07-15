@@ -1,9 +1,10 @@
 #include <iostream>
-
 #include "Enemy.h"
 
 namespace kuznickiGameObjects
 {
+	enum class SpawnSites { Left, Right, Top };
+
 	Enemy::Enemy(float radius, Color color)
 	{
 		this->radius = radius;
@@ -55,6 +56,31 @@ namespace kuznickiGameObjects
 			if (bullet.GetIsAlive() == false)
 				std::cout << bullet.GetIsAlive();
 		}
+	}
+
+	void Enemy::SpawnRandPosition()
+	{
+		SpawnSites sites = (SpawnSites)(rand() % 3);
+		Vector2 spawnPos;
+
+		switch (sites)
+		{
+		case kuznickiGameObjects::SpawnSites::Left:
+			spawnPos.x = -10;
+			spawnPos.y = rand() % GetScreenHeight()/3 ;
+			break;
+		case kuznickiGameObjects::SpawnSites::Right:
+			spawnPos.x = GetScreenWidth() + 10;
+			spawnPos.y = rand() % GetScreenHeight()/3 ;
+			break;
+		case kuznickiGameObjects::SpawnSites::Top:
+			spawnPos.x = rand() % GetScreenWidth();
+			spawnPos.y = -10;
+			break;
+		default:
+			break;
+		}
+		Reposition(spawnPos);
 	}
 
 	void Enemy::Reposition(Vector2 newPos)
