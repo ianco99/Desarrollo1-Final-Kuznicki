@@ -28,9 +28,9 @@ namespace kuznickiGameObjects
 		body->y = newY;
 	}
 
-	Gun Player::GetGun()
+	Gun* Player::GetGun()
 	{
-		return gun;
+		return &gun;
 	}
 
 	void Player::ShootGun()

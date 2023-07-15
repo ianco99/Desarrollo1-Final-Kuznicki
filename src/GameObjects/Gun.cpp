@@ -59,7 +59,6 @@ namespace kuznickiGameObjects
 				bullets[i].ChangePosition({ myPlayer->x,myPlayer->y });
 				bullets[i].SetIsAlive(true);
 				break;
-				std::cout << "GODDD";
 			}
 		}
 	}
@@ -93,9 +92,10 @@ namespace kuznickiGameObjects
 		return rotationAngle;
 	}
 
-	Bullet Gun::GetBulletByIndex(int index)
+	Bullet* Gun::GetBulletByIndex(int index)
 	{
-		return bullets[index];
+		Bullet* bullet = &bullets[index];
+		return bullet;
 	}
 
 	int Gun::GetMaxBullets()
@@ -108,7 +108,7 @@ namespace kuznickiGameObjects
 
 		for (int i = 0; i < maxBullets; i++)
 		{
-			if (bullets[i].GetIsAlive())
+			if (bullets[i].GetIsAlive() == true)
 			{
 				//Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(bullets[i].GetRadius()), static_cast<float>(bullets[i].GetRadius()) };
 				//Rectangle spriteDestination = { bullets[i].GetPosition().x, bullets[i].GetPosition().y, bullets[i].GetRadius(), bullets[i].GetRadius() };

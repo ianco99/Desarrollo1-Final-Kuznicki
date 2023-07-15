@@ -22,20 +22,20 @@ namespace kuznickiGameObjects
 
 	}
 
-	void Enemy::Update(Player player)
+	void Enemy::Update(Player& player)
 	{
 		if (isAlive)
 		{
-			int maxBullets = player.GetGun().GetMaxBullets();
-			Gun currGun = player.GetGun();
+			Gun* currGun = player.GetGun();
+			int maxBullets = currGun->GetMaxBullets();
 
 			Move();
 
 			for (int i = 0; i < maxBullets; i++)
 			{
-				if (currGun.GetBulletByIndex(i).GetIsAlive() == true)
-					CheckCollisions(currGun.GetBulletByIndex(i));
-			}			
+				if (currGun->GetBulletByIndex(i)->GetIsAlive() == true)
+					CheckCollisions(*currGun->GetBulletByIndex(i));
+			}
 		}
 	}
 
@@ -45,12 +45,15 @@ namespace kuznickiGameObjects
 		this->position.y += direction.y * velocity.y * GetFrameTime();
 	}
 
-	void Enemy::CheckCollisions(Bullet bullet)
+	void Enemy::CheckCollisions(Bullet& bullet)
 	{
 		if (CheckCollisionCircles(position, radius, bullet.GetPosition(), bullet.GetRadius()))
 		{
-			std::cout << "QUEE";
 			isAlive = false;
+			bullet.SetIsAlive(false);
+
+			if (bullet.GetIsAlive() == false)
+				std::cout << bullet.GetIsAlive();
 		}
 	}
 

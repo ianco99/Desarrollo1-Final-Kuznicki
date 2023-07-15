@@ -24,10 +24,10 @@ namespace kuznickiGameObjects
 		Enemy(float radius, Color color);
 		~Enemy();
 
-		void Update(Player player);
+		void Update(Player& player);
 
 		void Move();
-		void CheckCollisions(Bullet bullets);
+		void CheckCollisions(Bullet& bullets);
 
 		void Reposition(Vector2 newPos);
 		Vector2 GetPosition();

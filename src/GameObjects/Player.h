@@ -21,7 +21,7 @@ namespace kuznickiGameObjects
 
 		void Reposition(float newX, float newY);
 
-		Gun GetGun();
+		Gun* GetGun();
 		void ShootGun();
 
 		void Draw();

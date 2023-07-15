@@ -28,7 +28,7 @@ namespace kuznickiGameObjects
 		Vector2 GetBulletDirection();
 		float GetBulletRotation(Vector2 distance);
 
-		Bullet GetBulletByIndex(int index);
+		Bullet* GetBulletByIndex(int index);
 		int GetMaxBullets();
 
 		void Draw();

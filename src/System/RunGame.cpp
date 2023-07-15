@@ -26,7 +26,7 @@ namespace kuznickiSystem
 
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 8.0f, 20, 20, WHITE);
 		currSystemStats.numberOfEnemies = 5.0f;
-		currSystemStats.spawnRate = 3.0f;
+		currSystemStats.spawnRate = 1.0f;
 
 		SetupEnemies(enemies);
 
