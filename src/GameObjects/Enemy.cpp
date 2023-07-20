@@ -67,19 +67,22 @@ namespace kuznickiGameObjects
 		{
 		case kuznickiGameObjects::SpawnSites::Left:
 			spawnPos.x = -10;
-			spawnPos.y = rand() % GetScreenHeight()/3 ;
+			spawnPos.y = rand() % GetScreenHeight() / 3;
 			break;
 		case kuznickiGameObjects::SpawnSites::Right:
 			spawnPos.x = GetScreenWidth() + 10;
-			spawnPos.y = rand() % GetScreenHeight()/3 ;
+			spawnPos.y = rand() % GetScreenHeight() / 3;
 			break;
 		case kuznickiGameObjects::SpawnSites::Top:
 			spawnPos.x = rand() % GetScreenWidth();
 			spawnPos.y = -10;
 			break;
 		default:
+			spawnPos.x = -10;
+			spawnPos.y = -10;
 			break;
 		}
+
 		Reposition(spawnPos);
 	}
 
