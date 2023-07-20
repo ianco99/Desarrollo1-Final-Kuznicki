@@ -1,19 +1,16 @@
 #pragma once
-
-class Menu
+#include "Button.h"
+namespace kuznickiSystem
 {
-private:
+	const int buttonQuantity = 4;
 
+	class Menu
+	{
+	private:
+		Button buttons[buttonQuantity];
 
-public:
-	Menu();
-	~Menu();
-};
-
-Menu::Menu()
-{
-}
-
-Menu::~Menu()
-{
+	public:
+		Menu();
+		~Menu();
+	};
 }
