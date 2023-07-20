@@ -9,7 +9,7 @@ namespace kuznickiSystem
 		Font font;
 		Rectangle body;
 		Color color;
-		char text[textLimit];
+		const char* text;
 		float fontSize;
 		float fontSpacing;
 	};

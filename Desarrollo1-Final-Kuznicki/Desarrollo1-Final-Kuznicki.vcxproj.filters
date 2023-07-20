@@ -34,6 +34,9 @@
     <ClCompile Include="..\src\GameObjects\Enemy.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\System\Menu.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\RunGame.h">
@@ -48,11 +51,14 @@
     <ClInclude Include="..\src\GameObjects\Bullet.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameObjects\Enemy.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Menu.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Button.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

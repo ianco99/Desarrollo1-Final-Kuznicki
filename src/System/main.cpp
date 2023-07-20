@@ -1,10 +1,12 @@
 #include <iostream>
-#include "RunGame.h"
+#include "Menu.h"
+
+bool wantsToQuit = false;
 
 int main()
 {
-	kuznickiSystem::RunGame runGame = kuznickiSystem::RunGame();
 	InitWindow(1024, 768, "MyFinal");
-	runGame.Start();
+	kuznickiSystem::Menu menu = kuznickiSystem::Menu();
+	menu.MenuLoop();
 	return 0;
 }
