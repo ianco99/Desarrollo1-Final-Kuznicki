@@ -12,5 +12,10 @@ namespace kuznickiSystem
 	public:
 		Menu();
 		~Menu();
+
+		void InitButtons();
+		void MenuLoop();
+		void CheckButtonColls();
+		void DrawMenu();
 	};
 }

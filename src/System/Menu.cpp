@@ -5,6 +5,7 @@ namespace kuznickiSystem
 
 	Menu::Menu()
 	{
+		InitButtons();
 	}
 
 	Menu::~Menu()
@@ -18,8 +19,20 @@ namespace kuznickiSystem
 
 	}
 
+	void Menu::MenuLoop()
+	{
+		while (!WindowShouldClose())
+		{
+			CheckButtonColls();
+			DrawMenu();
+		}
+	}
+
 	void Menu::DrawMenu()
 	{
-
+		for (int i = 0; i < buttonQuantity; i++)
+		{
+			//DrawRectangle();
+		}
 	}
 }
