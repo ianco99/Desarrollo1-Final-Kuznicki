@@ -8,14 +8,6 @@
 using namespace kuznickiGameObjects;
 namespace kuznickiSystem
 {
-	struct enemyConfigs
-	{
-		static const int defaultVelocityX = 150;
-		static const int defaultVelocityY = 150;
-
-		static const int defaultRadius = 20;
-	};
-
 	void SetupEnemies(Enemy enemies[]);
 
 	RunGame::RunGame()
@@ -128,6 +120,7 @@ namespace kuznickiSystem
 	{
 		UpdateEnemies();
 		player.Update();
+		UpdateDifficulty();
 	}
 
 	void RunGame::UpdateEnemies()
@@ -140,5 +133,10 @@ namespace kuznickiSystem
 				enemies[i].Update(player);
 			}
 		}
+	}
+
+	void RunGame::UpdateDifficulty()
+	{
+
 	}
 };

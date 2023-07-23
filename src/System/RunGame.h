@@ -7,6 +7,14 @@ namespace kuznickiSystem
 {
 	const int maxEnemies = 1500;
 
+	struct enemyConfigs
+	{
+		static const int defaultVelocityX = 150;
+		static const int defaultVelocityY = 150;
+
+		static const int defaultRadius = 20;
+	};
+
 	struct SystemStats
 	{
 		int numberOfEnemies;
@@ -29,6 +37,7 @@ namespace kuznickiSystem
 		void Start();
 		void Update();
 		void UpdateEnemies();
+		void UpdateDifficulty();
 
 		void ManageEnemies();
 		void SpawnEnemy();
