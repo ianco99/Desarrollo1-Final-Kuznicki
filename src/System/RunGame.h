@@ -19,6 +19,7 @@ namespace kuznickiSystem
 	{
 		int maxNumberOfEnemies;
 		float currentEnemyAdderCount;
+		float currentEnemyVelocity = enemyConfigs::defaultVelocityX;
 
 		int numberToSpawn;
 		float currTimeToSpawn = 0;

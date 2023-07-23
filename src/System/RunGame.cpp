@@ -134,6 +134,7 @@ namespace kuznickiSystem
 			{
 				//enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 				enemies[i].Update(player, score);
+				enemies[i].SetVelocity({ currSystemStats.currentEnemyVelocity,currSystemStats.currentEnemyVelocity });
 			}
 		}
 	}
@@ -149,7 +150,11 @@ namespace kuznickiSystem
 			currSystemStats.maxNumberOfEnemies += systemConstants.enemyAdderUnit;
 			currSystemStats.currentEnemyAdderCount -= systemConstants.enemyAdderUnit;
 		}
+
 		currSystemStats.currentEnemyAdderCount += systemConstants.spawnRateConstant * GetFrameTime();
+
+		if (currSystemStats.currentEnemyVelocity < 600.0f)
+			currSystemStats.currentEnemyVelocity += systemConstants.spawnRateConstant * GetFrameTime();
 	}
 
 	void RunGame::UpdateScore()
