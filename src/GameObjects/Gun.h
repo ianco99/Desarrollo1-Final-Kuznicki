@@ -12,6 +12,9 @@ namespace kuznickiGameObjects
 	private:
 		Rectangle* myPlayer;
 		Bullet bullets[maxBullets];
+
+		Texture sprite;
+
 		bool canShoot = false;
 		int currentBullets;
 		int maxBulletCount;

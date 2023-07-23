@@ -17,6 +17,8 @@ namespace kuznickiGameObjects
 
 		currentBullets = 1;
 		maxBulletCount = 1;
+
+		sprite = LoadTexture("../rsc/gun.png");
 	}
 
 	Gun::~Gun()
@@ -127,6 +129,12 @@ namespace kuznickiGameObjects
 
 	void Gun::Draw()
 	{
+		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
+		Rectangle spriteDestination = { myPlayer->x + myPlayer->width / 2,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
+		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
+		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
+		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 
 		for (int i = 0; i < maxBullets; i++)
 		{
