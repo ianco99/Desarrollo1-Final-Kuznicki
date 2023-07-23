@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "Button.h"
+#include <iostream>
 
 extern bool wantsToQuit;
 
@@ -7,6 +8,7 @@ namespace kuznickiSystem
 {
 	Menu::Menu()
 	{
+		menuState = MenuState::Menu;
 		InitButtons();
 	}
 
@@ -55,6 +57,11 @@ namespace kuznickiSystem
 			if (CheckCollisionPointRec(GetMousePosition(), buttons[i].body))
 			{
 				buttons[i].color = RED;
+				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && menuState != MenuState::Game)
+				{
+					menuState = MenuState::Game;
+					runGame.Start();
+				}
 			}
 			else
 			{
