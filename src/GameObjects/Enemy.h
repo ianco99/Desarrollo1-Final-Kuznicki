@@ -17,6 +17,7 @@ namespace kuznickiGameObjects
 
 		int damage;
 
+		float scoreToGive;
 		bool isAlive;
 
 	public:
@@ -24,10 +25,10 @@ namespace kuznickiGameObjects
 		Enemy(float radius, Color color);
 		~Enemy();
 
-		void Update(Player& player);
+		void Update(Player& player, float& score);
 
 		void Move();
-		void CheckCollisions(Bullet& bullets);
+		bool CheckCollisions(Bullet& bullets);
 
 		void SpawnRandPosition();
 

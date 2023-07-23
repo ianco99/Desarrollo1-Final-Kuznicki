@@ -11,6 +11,7 @@ namespace kuznickiGameObjects
 		this->position = { -1.0f, -1.0f };
 		this->color = color;
 		this->isAlive = false;
+		this->scoreToGive = 5.0f;
 	}
 
 	Enemy::Enemy()
@@ -23,7 +24,7 @@ namespace kuznickiGameObjects
 
 	}
 
-	void Enemy::Update(Player& player)
+	void Enemy::Update(Player& player, float& score)
 	{
 		if (isAlive)
 		{
@@ -35,7 +36,16 @@ namespace kuznickiGameObjects
 			for (int i = 0; i < maxBullets; i++)
 			{
 				if (currGun->GetBulletByIndex(i)->GetIsAlive() == true)
-					CheckCollisions(*currGun->GetBulletByIndex(i));
+				{
+					if (CheckCollisions(*currGun->GetBulletByIndex(i)))
+					{
+						Bullet* bullet = currGun->GetBulletByIndex(i);
+						bullet->SetIsAlive(false);
+						this->isAlive = false;
+
+						score += scoreToGive;
+					}
+				}
 			}
 		}
 	}
@@ -46,16 +56,14 @@ namespace kuznickiGameObjects
 		this->position.y += direction.y * velocity.y * GetFrameTime();
 	}
 
-	void Enemy::CheckCollisions(Bullet& bullet)
+	bool Enemy::CheckCollisions(Bullet& bullet)
 	{
 		if (CheckCollisionCircles(position, radius, bullet.GetPosition(), bullet.GetRadius()))
 		{
-			isAlive = false;
-			bullet.SetIsAlive(false);
-
-			if (bullet.GetIsAlive() == false)
-				std::cout << bullet.GetIsAlive();
+			return true;
+			
 		}
+		return false;
 	}
 
 	void Enemy::SpawnRandPosition()

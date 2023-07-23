@@ -12,7 +12,7 @@ namespace kuznickiSystem
 
 	RunGame::RunGame()
 	{
-
+		score = 0;
 	}
 
 	RunGame::~RunGame()
@@ -41,7 +41,7 @@ namespace kuznickiSystem
 			BeginDrawing();
 			ClearBackground(BLACK);
 			player.Draw();
-
+			DrawText(TextFormat("Score: %8i", static_cast<int>(RAYMATH_H::floor(score))), 0, 50, 48, WHITE);
 			for (int i = 0; i < maxEnemies; i++)
 			{
 				if (enemies[i].GetIsAlive())
@@ -121,6 +121,7 @@ namespace kuznickiSystem
 		UpdateEnemies();
 		player.Update();
 		UpdateDifficulty();
+		UpdateScore();
 	}
 
 	void RunGame::UpdateEnemies()
@@ -130,7 +131,7 @@ namespace kuznickiSystem
 			if (enemies[i].GetIsAlive() == true)
 			{
 				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
-				enemies[i].Update(player);
+				enemies[i].Update(player, score);
 			}
 		}
 	}
@@ -147,5 +148,10 @@ namespace kuznickiSystem
 			currSystemStats.currentEnemyAdderCount -= systemConstants.enemyAdderUnit;
 		}
 		currSystemStats.currentEnemyAdderCount += systemConstants.spawnRateConstant * GetFrameTime();
+	}
+
+	void RunGame::UpdateScore()
+	{
+		score += GetFrameTime();
 	}
 };
