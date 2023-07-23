@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "Player.h"
 #include <Enemy.h>
 //#include "Menu.h"
@@ -35,10 +36,10 @@ namespace kuznickiSystem
 
 	struct ArtAssetsPath
 	{
-		const std::string background0 = "parallax-demon-woods-bg";
-		const std::string background1 = "parallax-demon-woods-far-trees";
-		const std::string background2 = "parallax-demon-woods-mid-trees";
-		const std::string background3 = "parallax-demon-woods-close-trees";
+		const char background0[256] = "parallax-demon-woods-bg.png";
+		const char background1[256] = "parallax-demon-woods-far-trees.png";
+		const char background2[256] = "parallax-demon-woods-mid-trees.png";
+		const char background3[256] = "parallax-demon-woods-close-trees.png";
 	};
 
 	class RunGame
@@ -50,9 +51,16 @@ namespace kuznickiSystem
 
 		float score;
 		bool playing;
+
+		Texture2D background0;
+		Texture2D background1;
+		Texture2D background2;
+		Texture2D background3;
 	public:
 		RunGame();
 		~RunGame();
+
+		void LoadTextures();
 
 		void Start();
 		void Update();
