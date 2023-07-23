@@ -33,6 +33,14 @@ namespace kuznickiSystem
 		int enemyAdderUnit = 1;
 	};
 
+	struct ArtAssetsPath
+	{
+		const std::string background0 = "parallax-demon-woods-bg";
+		const std::string background1 = "parallax-demon-woods-far-trees";
+		const std::string background2 = "parallax-demon-woods-mid-trees";
+		const std::string background3 = "parallax-demon-woods-close-trees";
+	};
+
 	class RunGame
 	{
 	private:
@@ -52,6 +60,9 @@ namespace kuznickiSystem
 		void UpdateDifficulty();
 		void UpdateScore();
 		void CheckWinConditions();
+
+		void DrawFrame();
+		void DrawBackground();
 
 		void ManageEnemies();
 		void SpawnEnemy();

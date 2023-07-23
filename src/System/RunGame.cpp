@@ -39,19 +39,7 @@ namespace kuznickiSystem
 
 			CheckWinConditions();
 
-			BeginDrawing();
-			ClearBackground(BLACK);
-			player.Draw();
-			DrawText(TextFormat("Score: %8i", static_cast<int>(RAYMATH_H::floor(score))), 0, 50, 48, WHITE);
-			for (int i = 0; i < maxEnemies; i++)
-			{
-				if (enemies[i].GetIsAlive())
-				{
-					DrawCircleV(enemies[i].GetPosition(), enemies[i].GetRadius(), enemies[i].GetColor());
-				}
-			}
-
-			EndDrawing();
+			DrawFrame();
 		}
 	}
 
@@ -168,5 +156,30 @@ namespace kuznickiSystem
 		{
 			playing = false;
 		}
+	}
+
+	void RunGame::DrawFrame()
+	{
+		BeginDrawing();
+		ClearBackground(BLACK);
+
+		DrawBackground();
+
+		player.Draw();
+		DrawText(TextFormat("Score: %8i", static_cast<int>(RAYMATH_H::floor(score))), 0, 50, 48, WHITE);
+		for (int i = 0; i < maxEnemies; i++)
+		{
+			if (enemies[i].GetIsAlive())
+			{
+				DrawCircleV(enemies[i].GetPosition(), enemies[i].GetRadius(), enemies[i].GetColor());
+			}
+		}
+
+		EndDrawing();
+	}
+
+	void RunGame::DrawBackground()
+	{
+
 	}
 };
