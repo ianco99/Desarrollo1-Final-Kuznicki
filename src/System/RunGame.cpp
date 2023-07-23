@@ -22,8 +22,7 @@ namespace kuznickiSystem
 
 	void RunGame::Start()
 	{
-		bool playing = true;
-
+		playing = true;
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 8.0f, 20, 20, WHITE);
 		currSystemStats.maxNumberOfEnemies = 1.0f;
 		currSystemStats.spawnRate = 5.0f;
@@ -37,6 +36,8 @@ namespace kuznickiSystem
 			TakeInput();
 
 			Update();
+
+			CheckWinConditions();
 
 			BeginDrawing();
 			ClearBackground(BLACK);
@@ -154,5 +155,13 @@ namespace kuznickiSystem
 	void RunGame::UpdateScore()
 	{
 		score += GetFrameTime();
+	}
+
+	void RunGame::CheckWinConditions()
+	{
+		if (player.GetIsAlive() == false)
+		{
+			playing = false;
+		}
 	}
 };

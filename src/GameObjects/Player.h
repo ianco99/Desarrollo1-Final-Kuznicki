@@ -12,6 +12,7 @@ namespace kuznickiGameObjects
 		Color color;
 		Gun gun = Gun(body);
 
+		bool isAlive;
 
 	public:
 		Player(float posX, float posY, float sizeX, float sizeY, Color givenColor);
@@ -27,6 +28,9 @@ namespace kuznickiGameObjects
 		void Draw();
 
 		Rectangle GetBody();
+
+		bool GetIsAlive();
+		void SetIsAlive(bool value);
 	};
 
 }

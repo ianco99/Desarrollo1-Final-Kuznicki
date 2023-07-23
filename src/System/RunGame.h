@@ -34,11 +34,12 @@ namespace kuznickiSystem
 	class RunGame
 	{
 	private:
-		float score;
-		SystemStats currSystemStats;
-		kuznickiGameObjects::Player player = { 0,0,1,1, WHITE };
 		kuznickiGameObjects::Enemy enemies[maxEnemies];
+		kuznickiGameObjects::Player player = { 0,0,1,1, WHITE };
+		SystemStats currSystemStats;
 
+		float score;
+		bool playing;
 	public:
 		RunGame();
 		~RunGame();
@@ -48,6 +49,7 @@ namespace kuznickiSystem
 		void UpdateEnemies();
 		void UpdateDifficulty();
 		void UpdateScore();
+		void CheckWinConditions();
 
 		void ManageEnemies();
 		void SpawnEnemy();

@@ -68,6 +68,7 @@ namespace kuznickiSystem
 				buttons[i].color = WHITE;
 			}
 		}
+		menuState = MenuState::Menu;
 	}
 
 	void Menu::DrawMenu()

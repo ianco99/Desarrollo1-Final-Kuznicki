@@ -33,6 +33,8 @@ namespace kuznickiGameObjects
 
 			Move();
 
+			CheckPlayerCollision(player);
+
 			CheckBulletCollisions(player.GetGun(), player.GetGun()->GetMaxBullets(), score);
 
 			CheckOutOfBounds();
@@ -54,6 +56,14 @@ namespace kuznickiGameObjects
 					score += scoreToGive;
 				}
 			}
+		}
+	}
+
+	void Enemy::CheckPlayerCollision(Player& player)
+	{
+		if (CheckCollisionCircleRec(position, radius, player.GetBody()))
+		{
+			player.SetIsAlive(false);
 		}
 	}
 
@@ -133,7 +143,7 @@ namespace kuznickiGameObjects
 
 	void Enemy::SetAcceleration(Vector2 newAcceleration)
 	{
-
+		acceleration = newAcceleration;
 	}
 
 	Vector2 Enemy::GetAcceleration()

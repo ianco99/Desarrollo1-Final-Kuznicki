@@ -28,6 +28,7 @@ namespace kuznickiGameObjects
 		void Update(Player& player, float& score);
 
 		void Move();
+		void CheckPlayerCollision(Player& player);
 		void CheckBulletCollisions(Gun* currGun, int maxBullets, float& score);
 		bool CheckCollisions(Bullet& bullets);
 		void CheckOutOfBounds();

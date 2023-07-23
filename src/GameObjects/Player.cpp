@@ -50,4 +50,14 @@ namespace kuznickiGameObjects
 	{
 		return *body;
 	}
+
+	bool Player::GetIsAlive()
+	{
+		return isAlive;
+	}
+
+	void Player::SetIsAlive(bool value)
+	{
+		this->isAlive = value;
+	}
 }
