@@ -49,8 +49,8 @@ namespace kuznickiGameObjects
 			{
 				if (CheckCollisions(*currGun->GetBulletByIndex(i)))
 				{
-					Bullet* bullet = currGun->GetBulletByIndex(i);
-					bullet->SetIsAlive(false);
+					currGun->DestroyBulletByIndex(i);
+
 					this->isAlive = false;
 
 					score += scoreToGive;

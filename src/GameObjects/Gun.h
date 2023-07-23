@@ -13,6 +13,8 @@ namespace kuznickiGameObjects
 		Rectangle* myPlayer;
 		Bullet bullets[maxBullets];
 		bool canShoot = false;
+		int currentBullets;
+		int maxBulletCount;
 
 	public:
 		Gun(Rectangle* myPlayer);
@@ -29,6 +31,7 @@ namespace kuznickiGameObjects
 		float GetBulletRotation(Vector2 distance);
 
 		Bullet* GetBulletByIndex(int index);
+		void DestroyBulletByIndex(int index);
 		int GetMaxBullets();
 
 		void Draw();

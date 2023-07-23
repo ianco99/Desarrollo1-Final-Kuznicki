@@ -14,6 +14,9 @@ namespace kuznickiGameObjects
 
 		this->myPlayer = myPlayer;
 		canShoot = true;
+
+		currentBullets = 1;
+		maxBulletCount = 1;
 	}
 
 	Gun::~Gun()
@@ -26,7 +29,10 @@ namespace kuznickiGameObjects
 		for (int i = 0; i < maxBullets; i++)
 		{
 			if (bullets[i].GetIsAlive())
+			{
 				bullets[i].Move();
+				bullets[i].CheckOutOfBounds();
+			}
 		}
 	}
 
@@ -39,7 +45,18 @@ namespace kuznickiGameObjects
 	{
 		if (canShoot)
 		{
-			Shoot();
+			float bulletCount = 0;
+			for (int i = 0; i < maxBullets; i++)
+			{
+				if (bullets[i].GetIsAlive() == true)
+					bulletCount++;
+			}
+
+			if (bulletCount < maxBulletCount)
+			{
+				Shoot();
+				currentBullets++;
+			}
 		}
 	}
 
@@ -96,6 +113,11 @@ namespace kuznickiGameObjects
 	{
 		Bullet* bullet = &bullets[index];
 		return bullet;
+	}
+
+	void Gun::DestroyBulletByIndex(int index)
+	{
+		bullets[index].SetIsAlive(false);
 	}
 
 	int Gun::GetMaxBullets()

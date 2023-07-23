@@ -30,6 +30,7 @@ namespace kuznickiGameObjects
 		void ChangePosition(Vector2 velocity);
 
 		void Move();
+		void CheckOutOfBounds();
 
 		void RecieveDamage(int damage);
 

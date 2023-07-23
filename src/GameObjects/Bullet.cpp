@@ -44,6 +44,17 @@ namespace kuznickiGameObjects
 		this->position.y += direction.y * velocity.y * GetFrameTime();
 	}
 
+	void Bullet::CheckOutOfBounds()
+	{
+		if (position.x - radius > GetScreenWidth() + 15 ||
+			position.x + radius < 0 - 15 ||
+			position.y + radius > GetScreenHeight() ||
+			position.y + radius < 0)
+		{
+			isAlive = false;
+		}
+	}
+
 	void Bullet::RecieveDamage(int damage)
 	{
 		health -= damage;
