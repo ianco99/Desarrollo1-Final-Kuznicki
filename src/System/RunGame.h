@@ -28,7 +28,8 @@ namespace kuznickiSystem
 
 	struct SystemConstants
 	{
-		const float spawnRateConstant = 0.05f;
+		const float spawnRate = 0.05f;
+		const float enemyVelocityAdder = 0.5f;
 		int enemyAdderUnit = 1;
 	};
 

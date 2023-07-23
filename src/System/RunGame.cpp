@@ -143,7 +143,7 @@ namespace kuznickiSystem
 	{
 		SystemConstants systemConstants;
 
-		currSystemStats.spawnRate -= systemConstants.spawnRateConstant * GetFrameTime();
+		currSystemStats.spawnRate -= systemConstants.spawnRate * GetFrameTime();
 
 		if (currSystemStats.currentEnemyAdderCount >= systemConstants.enemyAdderUnit)
 		{
@@ -151,10 +151,10 @@ namespace kuznickiSystem
 			currSystemStats.currentEnemyAdderCount -= systemConstants.enemyAdderUnit;
 		}
 
-		currSystemStats.currentEnemyAdderCount += systemConstants.spawnRateConstant * GetFrameTime();
+		currSystemStats.currentEnemyAdderCount += systemConstants.spawnRate * GetFrameTime();
 
 		if (currSystemStats.currentEnemyVelocity < 600.0f)
-			currSystemStats.currentEnemyVelocity += systemConstants.spawnRateConstant * GetFrameTime();
+			currSystemStats.currentEnemyVelocity += systemConstants.enemyVelocityAdder * GetFrameTime();
 	}
 
 	void RunGame::UpdateScore()
