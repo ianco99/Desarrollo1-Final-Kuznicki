@@ -94,7 +94,7 @@ namespace kuznickiSystem
 			{
 				enemies[i].SetIsAlive(true);
 				enemies[i].SpawnRandPosition();
-				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
+				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x + player.GetBody().width / 2, player.GetBody().y + player.GetBody().height / 2 }, enemies[i].GetPosition())));
 				enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
 				break;
 			}
