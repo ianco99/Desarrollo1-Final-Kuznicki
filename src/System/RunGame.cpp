@@ -8,6 +8,14 @@
 using namespace kuznickiGameObjects;
 namespace kuznickiSystem
 {
+	struct enemyConfigs
+	{
+		static const int defaultVelocityX = 150;
+		static const int defaultVelocityY = 150;
+
+		static const int defaultRadius = 20;
+	};
+
 	void SetupEnemies(Enemy enemies[]);
 
 	RunGame::RunGame()
@@ -25,8 +33,8 @@ namespace kuznickiSystem
 		bool playing = true;
 
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 8.0f, 20, 20, WHITE);
-		currSystemStats.numberOfEnemies = 5.0f;
-		currSystemStats.spawnRate = 1.0f;
+		currSystemStats.numberOfEnemies = 1.0f;
+		currSystemStats.spawnRate = 5.0f;
 
 		SetupEnemies(enemies);
 
@@ -45,7 +53,9 @@ namespace kuznickiSystem
 			for (int i = 0; i < maxEnemies; i++)
 			{
 				if (enemies[i].GetIsAlive())
+				{
 					DrawCircleV(enemies[i].GetPosition(), enemies[i].GetRadius(), enemies[i].GetColor());
+				}
 			}
 
 			EndDrawing();
@@ -56,8 +66,8 @@ namespace kuznickiSystem
 	{
 		for (int i = 0; i < maxEnemies; i++)
 		{
-			enemies[i] = Enemy(20.0f, WHITE);
-			enemies[i].SetVelocity({ 400.0f, 400.0f });
+			enemies[i] = Enemy(enemyConfigs::defaultRadius, WHITE);
+			enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
 		}
 
 	}
@@ -90,7 +100,7 @@ namespace kuznickiSystem
 			{
 				enemies[i].SetIsAlive(true);
 				enemies[i].SpawnRandPosition();
-				enemies[i].SetVelocity({ 400.0f, 400.0f });
+				enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
 				break;
 			}
 		}
@@ -126,8 +136,8 @@ namespace kuznickiSystem
 		{
 			if (enemies[i].GetIsAlive() == true)
 			{
-				enemies[i].Update(player);
 				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
+				enemies[i].Update(player);
 			}
 		}
 	}
