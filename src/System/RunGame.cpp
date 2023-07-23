@@ -92,6 +92,7 @@ namespace kuznickiSystem
 			{
 				enemies[i].SetIsAlive(true);
 				enemies[i].SpawnRandPosition();
+				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 				enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
 				break;
 			}
@@ -130,7 +131,7 @@ namespace kuznickiSystem
 		{
 			if (enemies[i].GetIsAlive() == true)
 			{
-				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
+				//enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 				enemies[i].Update(player, score);
 			}
 		}
