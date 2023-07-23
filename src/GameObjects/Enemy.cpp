@@ -33,20 +33,37 @@ namespace kuznickiGameObjects
 
 			Move();
 
-			for (int i = 0; i < maxBullets; i++)
-			{
-				if (currGun->GetBulletByIndex(i)->GetIsAlive() == true)
-				{
-					if (CheckCollisions(*currGun->GetBulletByIndex(i)))
-					{
-						Bullet* bullet = currGun->GetBulletByIndex(i);
-						bullet->SetIsAlive(false);
-						this->isAlive = false;
+			CheckBulletCollisions(player.GetGun(), player.GetGun()->GetMaxBullets(), score);
 
-						score += scoreToGive;
-					}
+			CheckOutOfBounds();
+		}
+	}
+
+	void Enemy::CheckBulletCollisions(Gun* currGun, int maxBullets, float& score)
+	{
+		for (int i = 0; i < maxBullets; i++)
+		{
+			if (currGun->GetBulletByIndex(i)->GetIsAlive() == true)
+			{
+				if (CheckCollisions(*currGun->GetBulletByIndex(i)))
+				{
+					Bullet* bullet = currGun->GetBulletByIndex(i);
+					bullet->SetIsAlive(false);
+					this->isAlive = false;
+
+					score += scoreToGive;
 				}
 			}
+		}
+	}
+
+	void Enemy::CheckOutOfBounds()
+	{
+		if (position.x - radius > GetScreenWidth() + 15 ||
+			position.x + radius < 0 - 15 ||
+			position.y + radius > GetScreenHeight())
+		{
+			isAlive = false;
 		}
 	}
 
