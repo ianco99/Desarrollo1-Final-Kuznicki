@@ -14,7 +14,7 @@ namespace kuznickiGameObjects
 
 		Texture2D sprite;
 
-		bool isAlive;
+		bool isAlive = true;
 
 	public:
 		Player(float posX, float posY, float sizeX, float sizeY, Color givenColor);

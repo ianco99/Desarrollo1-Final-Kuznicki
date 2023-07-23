@@ -50,7 +50,7 @@ namespace kuznickiSystem
 		SystemStats currSystemStats;
 
 		float score;
-		bool playing;
+		bool playing = true;
 
 		Texture2D background0;
 		Texture2D background1;

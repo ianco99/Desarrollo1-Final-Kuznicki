@@ -75,7 +75,7 @@ namespace kuznickiGameObjects
 				bullets[i].SetAngle(rotationAngle);
 				bullets[i].ChangeDirection(Vector2Normalize(direction));
 				bullets[i].ChangeVelocity({ 500,500 });
-				bullets[i].ChangePosition({ myPlayer->x,myPlayer->y });
+				bullets[i].ChangePosition({ myPlayer->x + myPlayer->width + sprite.width,myPlayer->y + myPlayer->height / 2 });
 				bullets[i].SetIsAlive(true);
 				break;
 			}
@@ -130,7 +130,7 @@ namespace kuznickiGameObjects
 	void Gun::Draw()
 	{
 		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
-		Rectangle spriteDestination = { myPlayer->x + myPlayer->width / 2,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
+		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
