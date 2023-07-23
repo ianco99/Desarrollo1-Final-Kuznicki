@@ -12,6 +12,8 @@ namespace kuznickiGameObjects
 		Color color;
 		Gun gun = Gun(body);
 
+		Texture2D sprite;
+
 		bool isAlive;
 
 	public:

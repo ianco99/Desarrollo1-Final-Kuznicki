@@ -36,7 +36,7 @@ namespace kuznickiSystem
 	void RunGame::Start()
 	{
 		playing = true;
-		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 8.0f, 20, 20, WHITE);
+		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
 		currSystemStats.maxNumberOfEnemies = 1.0f;
 		currSystemStats.spawnRate = 5.0f;
 

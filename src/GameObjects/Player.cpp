@@ -10,6 +10,8 @@ namespace kuznickiGameObjects
 		this->color = givenColor;
 
 		this->gun = Gun(this->body);
+
+		sprite = LoadTexture("../rsc/adventurer-idle-00.png");
 	}
 
 	Player::~Player()
@@ -41,7 +43,13 @@ namespace kuznickiGameObjects
 
 	void Player::Draw()
 	{
-		DrawRectangleRec(*body, color);
+		//DrawRectangleRec(*body, color);
+		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
+		Rectangle spriteDestination = { body->x + body->width / 2,body->y + body->height / 2, sprite.width * 3.8f, sprite.height * 3.5f};
+		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
+		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
+		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 
 		gun.Draw();
 	}
