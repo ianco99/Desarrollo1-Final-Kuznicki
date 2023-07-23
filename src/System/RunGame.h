@@ -17,10 +17,18 @@ namespace kuznickiSystem
 
 	struct SystemStats
 	{
-		int numberOfEnemies;
+		int maxNumberOfEnemies;
+		float currentEnemyAdderCount;
+
 		int numberToSpawn;
 		float currTimeToSpawn = 0;
 		float spawnRate; //Time in seconds
+	};
+
+	struct SystemConstants
+	{
+		const float spawnRateConstant = 0.05f;
+		int enemyAdderUnit = 1;
 	};
 
 	class RunGame

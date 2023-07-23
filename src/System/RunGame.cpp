@@ -25,7 +25,7 @@ namespace kuznickiSystem
 		bool playing = true;
 
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 8.0f, 20, 20, WHITE);
-		currSystemStats.numberOfEnemies = 1.0f;
+		currSystemStats.maxNumberOfEnemies = 1.0f;
 		currSystemStats.spawnRate = 5.0f;
 
 		SetupEnemies(enemies);
@@ -73,7 +73,7 @@ namespace kuznickiSystem
 				count++;
 		}
 
-		currSystemStats.numberToSpawn = currSystemStats.numberOfEnemies - count;
+		currSystemStats.numberToSpawn = currSystemStats.maxNumberOfEnemies - count;
 
 		if (currSystemStats.currTimeToSpawn >= currSystemStats.spawnRate && currSystemStats.numberToSpawn > 0)
 		{
@@ -137,6 +137,15 @@ namespace kuznickiSystem
 
 	void RunGame::UpdateDifficulty()
 	{
+		SystemConstants systemConstants;
 
+		currSystemStats.spawnRate -= systemConstants.spawnRateConstant * GetFrameTime();
+
+		if (currSystemStats.currentEnemyAdderCount >= systemConstants.enemyAdderUnit)
+		{
+			currSystemStats.maxNumberOfEnemies += systemConstants.enemyAdderUnit;
+			currSystemStats.currentEnemyAdderCount -= systemConstants.enemyAdderUnit;
+		}
+		currSystemStats.currentEnemyAdderCount += systemConstants.spawnRateConstant * GetFrameTime();
 	}
 };
