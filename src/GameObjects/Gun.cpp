@@ -192,12 +192,7 @@ namespace kuznickiGameObjects
 		{
 			if (bullets[i].GetIsAlive() == true)
 			{
-				//Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(bullets[i].GetRadius()), static_cast<float>(bullets[i].GetRadius()) };
-				//Rectangle spriteDestination = { bullets[i].GetPosition().x, bullets[i].GetPosition().y, bullets[i].GetRadius(), bullets[i].GetRadius() };
-				//Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
-
 				DrawCircleV(bullets[i].GetPosition(), bullets[i].GetRadius(), bullets[i].GetColor());
-				//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
 			}
 		}
 	}
