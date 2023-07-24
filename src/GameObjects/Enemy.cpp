@@ -12,6 +12,8 @@ namespace kuznickiGameObjects
 		this->color = color;
 		this->isAlive = false;
 		this->scoreToGive = 5.0f;
+
+		sprite = LoadTexture("../rsc/enemy.png");
 	}
 
 	Enemy::Enemy()
@@ -184,5 +186,16 @@ namespace kuznickiGameObjects
 	void Enemy::SetRadius(float newRadius)
 	{
 		radius = newRadius;
+	}
+
+	void Enemy::DrawEnemy()
+	{
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(sprite.width), static_cast<float>(sprite.height) };
+		Rectangle spriteDestination = { position.x, position.y, radius * 2.0f, radius * 2.25f };
+		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
+		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, color);
+		//DrawCircleV(position, radius, color);
+
 	}
 }

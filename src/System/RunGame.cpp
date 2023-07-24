@@ -185,7 +185,7 @@ namespace kuznickiSystem
 		{
 			if (enemies[i].GetIsAlive())
 			{
-				DrawCircleV(enemies[i].GetPosition(), enemies[i].GetRadius(), enemies[i].GetColor());
+				enemies[i].DrawEnemy();
 			}
 		}
 

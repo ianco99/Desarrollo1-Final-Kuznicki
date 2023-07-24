@@ -105,7 +105,7 @@ namespace kuznickiGameObjects
 			{
 				bullets[i].SetAngle(rotationAngle);
 				bullets[i].ChangeDirection(Vector2Normalize(direction));
-				bullets[i].ChangeVelocity({ 500,500 });
+				bullets[i].ChangeVelocity({ 700,700 });
 				bullets[i].ChangePosition({ myPlayer->x + myPlayer->width + sprite.width,myPlayer->y + myPlayer->height / 2 });
 				bullets[i].SetIsAlive(true);
 				break;

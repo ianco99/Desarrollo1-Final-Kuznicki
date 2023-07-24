@@ -15,6 +15,8 @@ namespace kuznickiGameObjects
 
 		Color color;
 
+		Texture2D sprite;
+
 		int damage;
 
 		float scoreToGive;
@@ -53,5 +55,7 @@ namespace kuznickiGameObjects
 
 		float GetRadius();
 		void SetRadius(float newRadius);
+
+		void DrawEnemy();
 	};
 }
