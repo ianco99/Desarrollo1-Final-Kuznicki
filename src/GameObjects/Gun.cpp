@@ -175,6 +175,13 @@ namespace kuznickiGameObjects
 		return bulletCount;
 	}
 
+	Vector2 Gun::GetPosition()
+	{
+		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
+		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+		return { spriteDestination.x + spriteOrigin.x / 2, spriteDestination.y + spriteOrigin.y / 2 };
+	}
+
 	void Gun::Draw()
 	{
 		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };

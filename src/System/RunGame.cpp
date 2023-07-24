@@ -191,6 +191,8 @@ namespace kuznickiSystem
 
 		DrawUI();
 
+		DrawLine(player.GetGun()->GetPosition().x, player.GetGun()->GetPosition().y, GetMouseX(), GetMouseY(), RED);
+
 		EndDrawing();
 	}
 

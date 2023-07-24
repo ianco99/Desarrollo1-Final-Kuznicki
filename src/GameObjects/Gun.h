@@ -42,6 +42,7 @@ namespace kuznickiGameObjects
 		int GetMaxBullets();
 		int GetMaxBulletCount();
 		int GetCurrentBulletCount();
+		Vector2 GetPosition();
 
 		void Draw();
 	};
