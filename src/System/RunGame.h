@@ -10,8 +10,8 @@ namespace kuznickiSystem
 
 	struct enemyConfigs
 	{
-		static const int defaultVelocityX = 150;
-		static const int defaultVelocityY = 150;
+		static const int defaultVelocityX = 250;
+		static const int defaultVelocityY = 250;
 
 		static const int defaultRadius = 20;
 	};

@@ -38,8 +38,8 @@ namespace kuznickiSystem
 	{
 		playing = true;
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
-		currSystemStats.maxNumberOfEnemies = 1.0f;
-		currSystemStats.spawnRate = 5.0f;
+		currSystemStats.maxNumberOfEnemies = 2.0f;
+		currSystemStats.spawnRate = 3.0f;	
 
 		SetupEnemies(enemies);
 
