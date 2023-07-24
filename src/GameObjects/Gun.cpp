@@ -30,7 +30,6 @@ namespace kuznickiGameObjects
 	void Gun::Update()
 	{
 		position = { myPlayer->x + myPlayer->width + sprite.width * 3.8f, myPlayer->y + myPlayer->height / 2 + sprite.height * 3.5f };
-
 		PointGun();
 		for (int i = 0; i < maxBullets; i++)
 		{
@@ -162,7 +161,7 @@ namespace kuznickiGameObjects
 	void Gun::Draw()
 	{
 		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
-		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, myPlayer->x + myPlayer->width - position.x, myPlayer->y + myPlayer->height / 2 - position.y};
+		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f};
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());

@@ -9,7 +9,7 @@ namespace kuznickiGameObjects
 		this->body = new Rectangle{ posX, posY, sizeX, sizeY };
 		this->color = givenColor;
 
-		this->gun = Gun(new Rectangle{ posX, posY, sizeX, sizeY });
+		this->gun = Gun(body);
 
 		sprite = LoadTexture("../rsc/adventurer-idle-00.png");
 	}
