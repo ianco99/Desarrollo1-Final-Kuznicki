@@ -15,6 +15,9 @@ namespace kuznickiGameObjects
 
 		Texture sprite;
 
+		Vector2 position;
+		float angle;
+
 		bool canShoot = false;
 		int currentBullets;
 		int maxBulletCount;
@@ -24,6 +27,7 @@ namespace kuznickiGameObjects
 		~Gun();
 
 		void Update();
+		void PointGun();
 
 		void ToggleCanShoot(bool value);
 

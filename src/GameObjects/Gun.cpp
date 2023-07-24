@@ -19,6 +19,7 @@ namespace kuznickiGameObjects
 		maxBulletCount = 1;
 
 		sprite = LoadTexture("../rsc/gun.png");
+
 	}
 
 	Gun::~Gun()
@@ -28,6 +29,9 @@ namespace kuznickiGameObjects
 
 	void Gun::Update()
 	{
+		position = { myPlayer->x + myPlayer->width + sprite.width * 3.8f, myPlayer->y + myPlayer->height / 2 + sprite.height * 3.5f };
+
+		PointGun();
 		for (int i = 0; i < maxBullets; i++)
 		{
 			if (bullets[i].GetIsAlive())
@@ -36,6 +40,34 @@ namespace kuznickiGameObjects
 				bullets[i].CheckOutOfBounds();
 			}
 		}
+	}
+
+	void Gun::PointGun()
+	{
+		Vector2 pointTo = GetMousePosition();
+
+		Vector2 playerPos = { position.x , position.y};
+
+		Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
+
+		double angle = atan(distance.y / distance.x);
+
+		angle = angle * 180 / PI;
+
+		if (distance.x > 0 && distance.y < 0) //Quad 4
+		{
+			angle += 360;
+		}
+		else if (distance.x < 0 && distance.y < 0) //Quad 3
+		{
+			angle += 180;
+		}
+		else if (distance.x < 0 && distance.y > 0) //Quad 2
+		{
+			angle += 180;
+		}
+
+		this->angle = static_cast<float>(angle);
 	}
 
 	void Gun::ToggleCanShoot(bool value)
@@ -134,7 +166,7 @@ namespace kuznickiGameObjects
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
-		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, angle, WHITE);
 
 		for (int i = 0; i < maxBullets; i++)
 		{
