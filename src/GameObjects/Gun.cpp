@@ -45,7 +45,7 @@ namespace kuznickiGameObjects
 	{
 		Vector2 pointTo = GetMousePosition();
 
-		Vector2 playerPos = { position.x , position.y};
+		Vector2 playerPos = { position.x , position.y };
 
 		Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
 
@@ -177,15 +177,13 @@ namespace kuznickiGameObjects
 
 	Vector2 Gun::GetPosition()
 	{
-		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
-		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
-		return { spriteDestination.x + spriteOrigin.x / 2, spriteDestination.y + spriteOrigin.y / 2 };
+		return{ myPlayer->x + myPlayer->width + sprite.width, myPlayer->y + myPlayer->height / 2.0f};
 	}
 
 	void Gun::Draw()
 	{
 		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
-		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f};
+		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, angle, WHITE);

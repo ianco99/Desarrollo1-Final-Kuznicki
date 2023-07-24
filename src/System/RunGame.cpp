@@ -23,15 +23,11 @@ namespace kuznickiSystem
 
 	void RunGame::LoadTextures()
 	{
-		ArtAssetsPath paths;
 		ground = LoadTexture("../rsc/ground.png");
 		background0 = LoadTexture("../rsc/parallax-demon-woods-bg.png");
 		background1 = LoadTexture("../rsc/parallax-demon-woods-far-trees.png");
 		background2 = LoadTexture("../rsc/parallax-demon-woods-mid-trees.png");
 		background3 = LoadTexture("../rsc/parallax-demon-woods-close-trees.png");
-		/*background1 = paths.background1;
-		background2 = paths.background2;
-		background3 = paths.background3;*/
 	}
 
 	void RunGame::Start()
@@ -43,7 +39,7 @@ namespace kuznickiSystem
 
 		SetupEnemies(enemies);
 
-		while (playing)
+		while (playing && !WindowShouldClose())
 		{
 			ManageEnemies();
 
@@ -202,7 +198,6 @@ namespace kuznickiSystem
 		Rectangle spriteDestination = { GetScreenWidth()/2,GetScreenHeight()/3.2f, GetScreenWidth(), GetScreenHeight()};
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
 		DrawTexturePro(background0, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 		DrawTexturePro(background1, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 		DrawTexturePro(background2, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);

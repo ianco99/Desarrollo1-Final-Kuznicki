@@ -195,7 +195,5 @@ namespace kuznickiGameObjects
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, color);
-		//DrawCircleV(position, radius, color);
-
 	}
 }

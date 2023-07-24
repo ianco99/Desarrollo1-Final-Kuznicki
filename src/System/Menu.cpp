@@ -38,7 +38,7 @@ namespace kuznickiSystem
 
 	void Menu::MenuLoop()
 	{
-		while (!wantsToQuit)
+		while (!wantsToQuit && !WindowShouldClose())
 		{
 			CheckButtonColls();
 			DrawMenu();

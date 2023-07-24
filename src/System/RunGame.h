@@ -34,14 +34,6 @@ namespace kuznickiSystem
 		int enemyAdderUnit = 1;
 	};
 
-	struct ArtAssetsPath
-	{
-		const char background0[256] = "parallax-demon-woods-bg.png";
-		const char background1[256] = "parallax-demon-woods-far-trees.png";
-		const char background2[256] = "parallax-demon-woods-mid-trees.png";
-		const char background3[256] = "parallax-demon-woods-close-trees.png";
-	};
-
 	class RunGame
 	{
 	private:
