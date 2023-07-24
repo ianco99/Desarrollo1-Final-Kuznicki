@@ -134,7 +134,6 @@ namespace kuznickiSystem
 		{
 			if (enemies[i].GetIsAlive() == true)
 			{
-				//enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x, player.GetBody().y }, enemies[i].GetPosition())));
 				enemies[i].Update(player, score);
 				enemies[i].SetVelocity({ currSystemStats.currentEnemyVelocity,currSystemStats.currentEnemyVelocity });
 			}
@@ -190,6 +189,7 @@ namespace kuznickiSystem
 			}
 		}
 
+		DrawUI();
 
 		EndDrawing();
 	}
@@ -214,5 +214,10 @@ namespace kuznickiSystem
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		DrawTexturePro(ground, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+	}
+
+	void RunGame::DrawUI()
+	{
+		DrawText(TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(),player.GetGun()->GetMaxBulletCount()), 0, GetScreenHeight() / 1.2f, 46, WHITE);
 	}
 };

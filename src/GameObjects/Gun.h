@@ -40,6 +40,8 @@ namespace kuznickiGameObjects
 		Bullet* GetBulletByIndex(int index);
 		void DestroyBulletByIndex(int index);
 		int GetMaxBullets();
+		int GetMaxBulletCount();
+		int GetCurrentBulletCount();
 
 		void Draw();
 	};

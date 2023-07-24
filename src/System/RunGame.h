@@ -74,6 +74,7 @@ namespace kuznickiSystem
 		void DrawFrame();
 		void DrawBackground();
 		void DrawGround();
+		void DrawUI();
 
 		void ManageEnemies();
 		void SpawnEnemy();

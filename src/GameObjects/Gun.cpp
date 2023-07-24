@@ -158,6 +158,23 @@ namespace kuznickiGameObjects
 		return maxBullets;
 	}
 
+	int Gun::GetMaxBulletCount()
+	{
+		return maxBulletCount;
+	}
+
+	int Gun::GetCurrentBulletCount()
+	{
+		float bulletCount = maxBulletCount;
+		for (int i = 0; i < maxBullets; i++)
+		{
+			if (bullets[i].GetIsAlive() == true)
+				bulletCount--;
+		}
+
+		return bulletCount;
+	}
+
 	void Gun::Draw()
 	{
 		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
