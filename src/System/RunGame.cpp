@@ -24,6 +24,7 @@ namespace kuznickiSystem
 	void RunGame::LoadTextures()
 	{
 		ArtAssetsPath paths;
+		ground = LoadTexture("../rsc/ground.png");
 		background0 = LoadTexture("../rsc/parallax-demon-woods-bg.png");
 		background1 = LoadTexture("../rsc/parallax-demon-woods-far-trees.png");
 		background2 = LoadTexture("../rsc/parallax-demon-woods-mid-trees.png");
@@ -177,6 +178,7 @@ namespace kuznickiSystem
 		ClearBackground(BLACK);
 
 		DrawBackground();
+		DrawGround();
 
 		player.Draw();
 		DrawText(TextFormat("Score: %8i", static_cast<int>(RAYMATH_H::floor(score))), 0, 50, 48, WHITE);
@@ -187,6 +189,7 @@ namespace kuznickiSystem
 				DrawCircleV(enemies[i].GetPosition(), enemies[i].GetRadius(), enemies[i].GetColor());
 			}
 		}
+
 
 		EndDrawing();
 	}
@@ -202,5 +205,14 @@ namespace kuznickiSystem
 		DrawTexturePro(background1, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 		DrawTexturePro(background2, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 		DrawTexturePro(background3, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+	}
+
+	void RunGame::DrawGround()
+	{
+		Rectangle spriteSource = { 0.0f,0.0f, ground.width, ground.height };
+		Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.4f, GetScreenWidth(), GetScreenHeight() * 1.5f };
+		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
+		DrawTexturePro(ground, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 	}
 };

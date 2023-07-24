@@ -164,7 +164,6 @@ namespace kuznickiGameObjects
 		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f};
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
 		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, angle, WHITE);
 
 		for (int i = 0; i < maxBullets; i++)

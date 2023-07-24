@@ -52,6 +52,8 @@ namespace kuznickiSystem
 		float score;
 		bool playing = true;
 
+		Texture2D ground;
+
 		Texture2D background0;
 		Texture2D background1;
 		Texture2D background2;
@@ -71,6 +73,7 @@ namespace kuznickiSystem
 
 		void DrawFrame();
 		void DrawBackground();
+		void DrawGround();
 
 		void ManageEnemies();
 		void SpawnEnemy();
