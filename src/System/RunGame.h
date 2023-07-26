@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 #include "Player.h"
-#include <Enemy.h>
-//#include "Menu.h"
+#include "Enemy.h"
+#include "Button.h"
 
 namespace kuznickiSystem
 {
@@ -50,6 +50,9 @@ namespace kuznickiSystem
 
 		GameState gameState;
 
+		Button pauseButtons[2];
+		Rectangle pauseBox;
+
 		float score;
 		bool inGame = true;
 
@@ -64,6 +67,7 @@ namespace kuznickiSystem
 		~RunGame();
 
 		void LoadTextures();
+		void LoadButtons();
 
 		void Start();
 		void Update();

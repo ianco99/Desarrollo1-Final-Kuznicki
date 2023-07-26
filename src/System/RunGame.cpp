@@ -13,7 +13,10 @@ namespace kuznickiSystem
 	RunGame::RunGame()
 	{
 		score = 0;
+		pauseBox = { GetScreenWidth() / 2.0f - GetScreenWidth() / 4.0f, GetScreenHeight() / 4.0f, GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+
 		LoadTextures();
+		LoadButtons();
 	}
 
 	RunGame::~RunGame()
@@ -28,6 +31,23 @@ namespace kuznickiSystem
 		background1 = LoadTexture("../rsc/parallax-demon-woods-far-trees.png");
 		background2 = LoadTexture("../rsc/parallax-demon-woods-mid-trees.png");
 		background3 = LoadTexture("../rsc/parallax-demon-woods-close-trees.png");
+	}
+	
+	void RunGame::LoadButtons()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			pauseButtons[i].body.width = static_cast<float>(pauseBox.width) / 3;
+			pauseButtons[i].body.height = static_cast<float>(pauseBox.height) / 6;
+			pauseButtons[i].body.x = static_cast<float>((pauseBox.x + pauseBox.width / 2)) - pauseButtons[i].body.width / 2;
+			pauseButtons[i].body.y = static_cast<float>((pauseBox.y) * (i * 0.5f) + pauseBox.height/1.4f);
+
+			pauseButtons[i].color = WHITE;
+			pauseButtons[i].fontSize = 24;
+		}
+
+		pauseButtons[0].text = "CONTINUE";
+		pauseButtons[1].text = "GO TO MENU";
 	}
 
 	void RunGame::Start()
@@ -55,8 +75,17 @@ namespace kuznickiSystem
 			}
 			if (gameState == GameState::Pause)
 			{
+				Color pauseBoxColor = { 218,94,83,255 };
 				BeginDrawing();
-				DrawText("PAUSA", GetScreenWidth() / 2, GetScreenHeight() / 2, 42, WHITE);
+				DrawRectangleRec(pauseBox, pauseBoxColor);
+				DrawText("PAUSE", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "PAUSE", 42, 1).x/2, GetScreenHeight() / 4, 42, WHITE);
+
+				for (int i = 0; i < 2; i++)
+				{
+					DrawRectangleRec(pauseButtons[i].body, pauseButtons[i].color);
+					DrawText(pauseButtons[i].text, pauseButtons[i].body.x + pauseButtons[i].body.width/2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).x / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).y / 2, pauseButtons[i].fontSize, BLACK);
+				}
+
 				EndDrawing();
 			}
 		}
