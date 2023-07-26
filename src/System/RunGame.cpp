@@ -50,7 +50,20 @@ namespace kuznickiSystem
 			CheckWinConditions();
 
 			DrawFrame();
+
+			if (IsKeyDown(KEY_ESCAPE))
+			{
+				while (true)
+				{
+					BeginDrawing();
+					DrawText("PAUSA", GetScreenWidth() / 2, GetScreenHeight() / 2, 42, WHITE);
+					EndDrawing();
+				}
+
+			}
 		}
+
+		
 	}
 
 	void SetupEnemies(Enemy enemies[])
