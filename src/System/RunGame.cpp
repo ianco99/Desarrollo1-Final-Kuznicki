@@ -32,36 +32,35 @@ namespace kuznickiSystem
 
 	void RunGame::Start()
 	{
-		playing = true;
+		inGame = true;
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
 		currSystemStats.maxNumberOfEnemies = 2.0f;
 		currSystemStats.spawnRate = 3.0f;	
 
 		SetupEnemies(enemies);
 
-		while (playing && !WindowShouldClose())
+		while (inGame)
 		{
-			ManageEnemies();
-
-			TakeInput();
-
-			Update();
-
-			CheckWinConditions();
-
-			DrawFrame();
-
-			if (IsKeyDown(KEY_ESCAPE))
+			if(gameState == GameState::Playing)
 			{
-				while (true)
-				{
-					BeginDrawing();
-					DrawText("PAUSA", GetScreenWidth() / 2, GetScreenHeight() / 2, 42, WHITE);
-					EndDrawing();
-				}
+				ManageEnemies();
 
+				TakeInput();
+
+				Update();
+
+				CheckGameStateConditions();
+
+				DrawFrame();
+			}
+			if (gameState == GameState::Pause)
+			{
+				BeginDrawing();
+				DrawText("PAUSA", GetScreenWidth() / 2, GetScreenHeight() / 2, 42, WHITE);
+				EndDrawing();
 			}
 		}
+		
 
 		
 	}
@@ -172,11 +171,15 @@ namespace kuznickiSystem
 		score += GetFrameTime();
 	}
 
-	void RunGame::CheckWinConditions()
+	void RunGame::CheckGameStateConditions()
 	{
 		if (player.GetIsAlive() == false)
 		{
-			playing = false;
+			gameState = GameState::Lost;
+		}
+		else if (IsKeyDown(KEY_ESCAPE))
+		{
+			gameState = GameState::Pause;
 		}
 	}
 

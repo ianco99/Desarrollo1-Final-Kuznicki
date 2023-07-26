@@ -8,6 +8,13 @@ namespace kuznickiSystem
 {
 	const int maxEnemies = 1500;
 
+	enum class GameState
+	{
+		Playing,
+		Pause,
+		Lost
+	};
+
 	struct enemyConfigs
 	{
 		static const int defaultVelocityX = 250;
@@ -41,8 +48,10 @@ namespace kuznickiSystem
 		kuznickiGameObjects::Player player = { 0,0,1,1, WHITE };
 		SystemStats currSystemStats;
 
+		GameState gameState;
+
 		float score;
-		bool playing = true;
+		bool inGame = true;
 
 		Texture2D ground;
 
@@ -61,7 +70,7 @@ namespace kuznickiSystem
 		void UpdateEnemies();
 		void UpdateDifficulty();
 		void UpdateScore();
-		void CheckWinConditions();
+		void CheckGameStateConditions();
 
 		void DrawFrame();
 		void DrawBackground();
