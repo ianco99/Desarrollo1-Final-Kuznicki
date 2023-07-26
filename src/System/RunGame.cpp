@@ -76,7 +76,11 @@ namespace kuznickiSystem
 			if (gameState == GameState::Pause)
 			{
 				Color pauseBoxColor = { 218,94,83,255 };
+
+				CheckButtonColls();
+
 				BeginDrawing();
+
 				DrawRectangleRec(pauseBox, pauseBoxColor);
 				DrawText("PAUSE", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "PAUSE", 42, 1).x/2, GetScreenHeight() / 4, 42, WHITE);
 
@@ -92,6 +96,25 @@ namespace kuznickiSystem
 		
 
 		
+	}
+
+	void RunGame::CheckButtonColls()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			if (CheckCollisionPointRec(GetMousePosition(), pauseButtons[i].body))
+			{
+				pauseButtons[i].color = RED;
+				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+				{
+					gameState = GameState::Playing;
+				}
+			}
+			else
+			{
+				pauseButtons[i].color = WHITE;
+			}
+		}
 	}
 
 	void SetupEnemies(Enemy enemies[])

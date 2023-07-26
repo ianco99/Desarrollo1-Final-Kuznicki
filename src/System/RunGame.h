@@ -75,6 +75,7 @@ namespace kuznickiSystem
 		void UpdateDifficulty();
 		void UpdateScore();
 		void CheckGameStateConditions();
+		void CheckButtonColls(); 
 
 		void DrawFrame();
 		void DrawBackground();
