@@ -63,6 +63,7 @@ namespace kuznickiSystem
 		Texture2D background1;
 		Texture2D background2;
 		Texture2D background3;
+		Texture2D enemySprite;
 	public:
 		RunGame();
 		~RunGame();

@@ -15,7 +15,7 @@ namespace kuznickiGameObjects
 
 		Color color;
 
-		Texture2D sprite;
+		Texture2D* sprite;
 
 		int damage = 1;
 
@@ -24,7 +24,7 @@ namespace kuznickiGameObjects
 
 	public:
 		Enemy();
-		Enemy(float radius, Color color);
+		Enemy(float radius, Color color, Texture2D* sprite);
 		~Enemy();
 
 		void Update(Player& player, float& score);

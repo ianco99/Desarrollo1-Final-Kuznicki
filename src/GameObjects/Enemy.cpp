@@ -5,7 +5,7 @@ namespace kuznickiGameObjects
 {
 	enum class SpawnSites { Left, Right, Top };
 
-	Enemy::Enemy(float radius, Color color)
+	Enemy::Enemy(float radius, Color color, Texture2D* sprite)
 	{
 		this->radius = radius;
 		this->position = { -1.0f, -1.0f };
@@ -13,7 +13,7 @@ namespace kuznickiGameObjects
 		this->isAlive = false;
 		this->scoreToGive = 5.0f;
 
-		sprite = LoadTexture("../rsc/enemy.png");
+		this->sprite = sprite;
 	}
 
 	Enemy::Enemy()
@@ -191,10 +191,10 @@ namespace kuznickiGameObjects
 
 	void Enemy::DrawEnemy()
 	{
-		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(sprite.width), static_cast<float>(sprite.height) };
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(sprite->width), static_cast<float>(sprite->height) };
 		Rectangle spriteDestination = { position.x, position.y, radius * 2.0f, radius * 2.25f };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, color);
+		DrawTexturePro(*sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, color);
 	}
 }

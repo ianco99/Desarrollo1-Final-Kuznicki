@@ -8,7 +8,7 @@
 using namespace kuznickiGameObjects;
 namespace kuznickiSystem
 {
-	void SetupEnemies(Enemy enemies[]);
+	void SetupEnemies(Enemy enemies[], Texture2D* enemySprite);
 
 	RunGame::RunGame()
 	{
@@ -21,7 +21,13 @@ namespace kuznickiSystem
 
 	RunGame::~RunGame()
 	{
+		UnloadTexture(ground);
+		UnloadTexture(background0);
+		UnloadTexture(background1);
+		UnloadTexture(background2);
+		UnloadTexture(background3);
 
+		UnloadTexture(enemySprite);
 	}
 
 	void RunGame::LoadTextures()
@@ -31,6 +37,8 @@ namespace kuznickiSystem
 		background1 = LoadTexture("../rsc/parallax-demon-woods-far-trees.png");
 		background2 = LoadTexture("../rsc/parallax-demon-woods-mid-trees.png");
 		background3 = LoadTexture("../rsc/parallax-demon-woods-close-trees.png");
+
+		enemySprite = LoadTexture("../rsc/enemy.png");
 	}
 	
 	void RunGame::LoadButtons()
@@ -54,7 +62,7 @@ namespace kuznickiSystem
 	{
 		Init();
 		
-		SetupEnemies(enemies);
+		SetupEnemies(enemies, &enemySprite);
 
 		while (inGame)
 		{
@@ -143,11 +151,11 @@ namespace kuznickiSystem
 		}
 	}
 
-	void SetupEnemies(Enemy enemies[])
+	void SetupEnemies(Enemy enemies[], Texture2D* enemySprite)
 	{
 		for (int i = 0; i < maxEnemies; i++)
 		{
-			enemies[i] = Enemy(enemyConfigs::defaultRadius, WHITE);
+			enemies[i] = Enemy(enemyConfigs::defaultRadius, WHITE, enemySprite);
 			enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
 		}
 
