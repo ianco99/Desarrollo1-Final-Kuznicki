@@ -8,13 +8,13 @@ namespace kuznickiSystem
 	{
 		Menu,
 		Game,
-		Configurations,
+		Instructions,
 		Credits,
 		Quit
 	};
 
-	const int buttonQuantity = 4;
-	const int backgroundQuantity = 6;
+			const int buttonQuantity = 4;
+		const int backgroundQuantity = 6;
 
 	class Menu
 	{
@@ -27,11 +27,11 @@ namespace kuznickiSystem
 		Menu();
 		~Menu();
 
-		void InitButtons();
-		void InitBackground();
-		void MenuLoop();
-		void CheckButtonColls();
-		void DrawMenu();
+		virtual void InitButtons() = 0;
+		virtual void InitBackground() = 0;
+		virtual void MenuLoop() = 0;
+		virtual void CheckButtonColls() = 0;
+		virtual void DrawMenu() = 0;
 	};
 
 }

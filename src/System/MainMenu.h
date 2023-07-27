@@ -7,7 +7,7 @@ namespace kuznickiSystem
 	class MainMenu : Menu
 	{
 	private:
-
+		InstructionsMenu instructionsMenu;
 		RunGame runGame;
 		MenuState menuState;
 		bool closeApp = false;
@@ -16,11 +16,11 @@ namespace kuznickiSystem
 		MainMenu();
 		~MainMenu();
 
-		void InitButtons();
-		void InitBackground();
-		void MenuLoop();
-		void CheckButtonColls();
-		void DrawMenu();
+		void InitButtons() override;
+		void InitBackground() override;
+		void MenuLoop() override;
+		void CheckButtonColls() override;
+		void DrawMenu() override;
 
 	};
 }

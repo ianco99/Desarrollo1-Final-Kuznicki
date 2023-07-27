@@ -1,10 +1,21 @@
 #pragma once
+#include "Menu.h"
 
-class InstructionsMenu
+namespace kuznickiSystem
 {
-private:
+	class InstructionsMenu : Menu
+	{
+	private:
 
-public:
-	InstructionsMenu();
-	~InstructionsMenu();
-};
+	public:
+		InstructionsMenu();
+		~InstructionsMenu();
+
+		void InitButtons() override;
+		void InitBackground() override;
+		void MenuLoop() override;
+		void CheckButtonColls() override;
+		void DrawMenu() override;
+	};
+}
+

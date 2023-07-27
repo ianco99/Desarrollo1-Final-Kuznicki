@@ -55,8 +55,24 @@ namespace kuznickiSystem
 	{
 		while (!WindowShouldClose() && !closeApp)
 		{
-			CheckButtonColls();
-			DrawMenu();
+			switch (menuState)
+			{
+			case kuznickiSystem::MenuState::Menu:
+				CheckButtonColls();
+				DrawMenu();
+				break;
+			case kuznickiSystem::MenuState::Game:
+
+				break;
+			case kuznickiSystem::MenuState::Instructions:
+				instructionsMenu.MenuLoop();
+				break;
+			case kuznickiSystem::MenuState::Credits:
+				break;
+			default:
+				break;
+			}
+
 
 			if (IsKeyPressed(KEY_ESCAPE))
 				closeApp = true;
@@ -84,6 +100,7 @@ namespace kuznickiSystem
 
 						break;
 					case 1:
+						menuState = MenuState::Instructions;
 						break;
 					case 2:
 						break;
