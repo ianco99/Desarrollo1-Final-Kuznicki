@@ -71,6 +71,7 @@ namespace kuznickiSystem
 		void LoadButtons();
 
 		void Start(bool& closeApp);
+		void Init();
 		void Update();
 		void UpdateEnemies();
 		void UpdateDifficulty();

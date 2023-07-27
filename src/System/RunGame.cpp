@@ -52,11 +52,8 @@ namespace kuznickiSystem
 
 	void RunGame::Start(bool& closeApp)
 	{
-		inGame = true;
-		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
-		currSystemStats.maxNumberOfEnemies = 2.0f;
-		currSystemStats.spawnRate = 3.0f;	
-
+		Init();
+		
 		SetupEnemies(enemies);
 
 		while (inGame)
@@ -108,6 +105,17 @@ namespace kuznickiSystem
 		
 	}
 
+	void RunGame::Init()
+	{
+		
+		inGame = true;
+		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
+		currSystemStats.maxNumberOfEnemies = 2.0f;
+		currSystemStats.spawnRate = 3.0f;
+
+		gameState = GameState::Playing;
+	}
+
 	void RunGame::CheckButtonColls()
 	{
 		for (int i = 0; i < 2; i++)
@@ -115,9 +123,20 @@ namespace kuznickiSystem
 			if (CheckCollisionPointRec(GetMousePosition(), pauseButtons[i].body))
 			{
 				pauseButtons[i].color = RED;
+				
 				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 				{
-					gameState = GameState::Playing;
+					switch (i)
+					{
+					case 0:
+						gameState = GameState::Playing;
+						break;
+					case 1:
+						gameState = GameState::Lost;
+						break;
+					default:
+						break;
+					}
 				}
 			}
 			else
