@@ -21,6 +21,18 @@ namespace kuznickiGameObjects
 
 	void Player::Update()
 	{
+		if (showingDamage == true)
+		{
+			damageColorCurrentTimer += GetFrameTime();
+			color = RED;
+
+			if (damageColorCurrentTimer >= damageColorMaxTimer)
+			{
+				color = WHITE;
+				showingDamage = false;
+			}
+		}
+
 		this->gun.Update();
 	}
 
@@ -45,11 +57,11 @@ namespace kuznickiGameObjects
 	{
 		//DrawRectangleRec(*body, color);
 		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
-		Rectangle spriteDestination = { body->x + body->width / 2,body->y + body->height / 2, sprite.width * 3.8f, sprite.height * 3.5f};
+		Rectangle spriteDestination = { body->x + body->width / 2,body->y + body->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
-		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, color);
 
 		gun.Draw();
 	}
@@ -57,6 +69,24 @@ namespace kuznickiGameObjects
 	Rectangle Player::GetBody()
 	{
 		return *body;
+	}
+
+	void Player::Damage(int damage)
+	{
+		this->lives -= damage;
+
+		StartDamageTimer();
+
+		if (lives <= 0)
+		{
+			isAlive = false;
+		}
+	}
+
+	void Player::StartDamageTimer()
+	{
+		damageColorCurrentTimer = 0;
+		showingDamage = true;
 	}
 
 	bool Player::GetIsAlive()

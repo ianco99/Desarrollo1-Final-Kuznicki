@@ -17,7 +17,7 @@ namespace kuznickiGameObjects
 
 		Texture2D sprite;
 
-		int damage;
+		int damage = 1;
 
 		float scoreToGive;
 		bool isAlive;
