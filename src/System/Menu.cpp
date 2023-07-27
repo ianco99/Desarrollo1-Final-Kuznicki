@@ -40,6 +40,9 @@ namespace kuznickiSystem
 		{
 			CheckButtonColls();
 			DrawMenu();
+
+			if (IsKeyPressed(KEY_ESCAPE))
+				closeApp = true;
 		}
 	}
 
