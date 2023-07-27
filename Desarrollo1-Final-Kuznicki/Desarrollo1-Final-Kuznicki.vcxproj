@@ -109,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\include;$(SolutionDir)src\GameObjects;$(SolutionDir)rsc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\include;$(SolutionDir)src\GameObjects;$(SolutionDir);$(SolutionDir)rsc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -165,6 +165,7 @@
     <ClInclude Include="..\src\GameObjects\Enemy.h" />
     <ClInclude Include="..\src\GameObjects\Gun.h" />
     <ClInclude Include="..\src\GameObjects\Player.h" />
+    <ClInclude Include="..\src\System\BackgroundImage.h" />
     <ClInclude Include="..\src\System\Button.h" />
     <ClInclude Include="..\src\System\Menu.h" />
     <ClInclude Include="..\src\System\RunGame.h" />

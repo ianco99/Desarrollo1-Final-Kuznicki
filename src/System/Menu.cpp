@@ -8,6 +8,8 @@ namespace kuznickiSystem
 	{
 		menuState = MenuState::Menu;
 		InitButtons();
+
+		InitBackground();
 	}
 
 	Menu::~Menu()
@@ -32,6 +34,23 @@ namespace kuznickiSystem
 		buttons[2].text = "CREDITS";
 		buttons[3].text = "QUIT";
 
+	}
+
+	void Menu::InitBackground()
+	{
+		for (int i = 0; i < backgroundQuantity; i++)
+		{
+			backgrounds[i].speedX = 200 * (i + 1);
+			backgrounds[i].body = { 0,0,static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) };
+			backgrounds[i].color = WHITE;
+			backgrounds[i].layer = i;
+		}
+		backgrounds[0].sprite = LoadTexture("../rsc/menuBackground0.png");
+		backgrounds[1].sprite = LoadTexture("../rsc/menuBackground1.png");
+		backgrounds[2].sprite = LoadTexture("../rsc/menuBackground2.png");
+		backgrounds[3].sprite = LoadTexture("../rsc/menuBackground3.png");
+		backgrounds[4].sprite = LoadTexture("../rsc/menuBackground4.png");
+		backgrounds[5].sprite = LoadTexture("../rsc/menuBackground5.png");
 	}
 
 	void Menu::MenuLoop()
@@ -71,7 +90,33 @@ namespace kuznickiSystem
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
-		
+
+		int lastLayer = 1000;
+		int smallestLayer = 0;
+		int currentLayer = lastLayer;
+		BackgroundImage imageToDraw;
+
+		for (int i = 0; i < backgroundQuantity; i++)
+		{
+			currentLayer = lastLayer;
+			for (int j = 0; j < backgroundQuantity; j++)
+			{
+				if (backgrounds[j].layer < currentLayer && backgrounds[j].layer > smallestLayer)
+				{
+					currentLayer = backgrounds[j].layer;
+					imageToDraw = backgrounds[i];
+				}
+			}
+
+			Rectangle spriteSource = { 0.0f,0.0f, imageToDraw.sprite.width, imageToDraw.sprite.height };
+			Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight() };
+			Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
+			DrawTexturePro(imageToDraw.sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+
+			smallestLayer = imageToDraw.layer;
+		}
+
 		for (int i = 0; i < buttonQuantity; i++)
 		{
 			DrawRectangleRec(buttons[i].body, buttons[i].color);
