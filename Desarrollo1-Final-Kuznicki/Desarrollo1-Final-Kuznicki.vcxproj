@@ -156,7 +156,9 @@
     <ClCompile Include="..\src\GameObjects\Player.cpp" />
     <ClCompile Include="..\src\Managers\GameManager.cpp" />
     <ClCompile Include="..\src\Managers\PlayerManager.cpp" />
+    <ClCompile Include="..\src\System\InstructionsMenu.cpp" />
     <ClCompile Include="..\src\System\main.cpp" />
+    <ClCompile Include="..\src\System\MainMenu.cpp" />
     <ClCompile Include="..\src\System\Menu.cpp" />
     <ClCompile Include="..\src\System\RunGame.cpp" />
   </ItemGroup>
@@ -167,6 +169,8 @@
     <ClInclude Include="..\src\GameObjects\Player.h" />
     <ClInclude Include="..\src\System\BackgroundImage.h" />
     <ClInclude Include="..\src\System\Button.h" />
+    <ClInclude Include="..\src\System\InstructionsMenu.h" />
+    <ClInclude Include="..\src\System\MainMenu.h" />
     <ClInclude Include="..\src\System\Menu.h" />
     <ClInclude Include="..\src\System\RunGame.h" />
   </ItemGroup>

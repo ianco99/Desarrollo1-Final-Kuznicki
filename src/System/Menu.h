@@ -18,14 +18,10 @@ namespace kuznickiSystem
 
 	class Menu
 	{
-	private:
-		RunGame runGame;
+	protected:
+
 		Button buttons[buttonQuantity];
-		MenuState menuState;
-
 		BackgroundImage backgrounds[backgroundQuantity];
-
-		bool closeApp = false;
 
 	public:
 		Menu();
@@ -37,4 +33,5 @@ namespace kuznickiSystem
 		void CheckButtonColls();
 		void DrawMenu();
 	};
+
 }

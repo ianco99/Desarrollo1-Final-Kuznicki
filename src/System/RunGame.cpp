@@ -100,9 +100,6 @@ namespace kuznickiSystem
 				closeApp = true;
 			}
 		}
-		
-
-		
 	}
 
 	void RunGame::Init()
