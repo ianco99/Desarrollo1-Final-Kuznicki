@@ -27,7 +27,7 @@ namespace kuznickiSystem
 			buttons[i].body.y = static_cast<float>((GetScreenHeight() / 8) * (i * 1.5f) + GetScreenHeight() / 3) - buttons[i].body.height / 2;
 
 			buttons[i].color = WHITE;
-			buttons[i].fontSize = 12;
+			buttons[i].fontSize = 24;
 		}
 		buttons[0].text = "PLAY (1P)";
 		buttons[1].text = "PLAY (2P)";
@@ -120,8 +120,9 @@ namespace kuznickiSystem
 		for (int i = 0; i < buttonQuantity; i++)
 		{
 			DrawRectangleRec(buttons[i].body, buttons[i].color);
-			DrawText(buttons[i].text, buttons[i].body.x + 5, buttons[i].body.y + 5, buttons[i].fontSize, BLACK);
+			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2, buttons[i].body.y + buttons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2, buttons[i].fontSize, BLACK);
 		}
+
 		EndDrawing();
 	}
 }
