@@ -2,8 +2,6 @@
 #include "Button.h"
 #include <iostream>
 
-extern bool wantsToQuit;
-
 namespace kuznickiSystem
 {
 	Menu::Menu()
@@ -38,15 +36,10 @@ namespace kuznickiSystem
 
 	void Menu::MenuLoop()
 	{
-		while (!wantsToQuit && !WindowShouldClose())
+		while (!WindowShouldClose() && !closeApp)
 		{
 			CheckButtonColls();
 			DrawMenu();
-
-			if (IsKeyDown(KEY_C))
-			{
-				wantsToQuit = true;
-			}
 		}
 	}
 
@@ -60,7 +53,7 @@ namespace kuznickiSystem
 				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && menuState != MenuState::Game)
 				{
 					menuState = MenuState::Game;
-					runGame.Start();
+					runGame.Start(closeApp);
 				}
 			}
 			else

@@ -50,7 +50,7 @@ namespace kuznickiSystem
 		pauseButtons[1].text = "GO TO MENU";
 	}
 
-	void RunGame::Start()
+	void RunGame::Start(bool& closeApp)
 	{
 		inGame = true;
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
@@ -91,6 +91,16 @@ namespace kuznickiSystem
 				}
 
 				EndDrawing();
+			}
+			if (gameState == GameState::Lost)
+			{
+				inGame = false;
+			}
+
+			if (WindowShouldClose())
+			{
+				inGame = false;
+				closeApp = true;
 			}
 		}
 		
@@ -214,7 +224,7 @@ namespace kuznickiSystem
 
 		currSystemStats.currentEnemyAdderCount += systemConstants.spawnRate * GetFrameTime();
 
-		if (currSystemStats.currentEnemyVelocity < 600.0f)
+		if (currSystemStats.currentEnemyVelocity < systemConstants.enemyVelocityCap)
 			currSystemStats.currentEnemyVelocity += systemConstants.enemyVelocityAdder * GetFrameTime();
 	}
 
@@ -233,6 +243,8 @@ namespace kuznickiSystem
 		{
 			gameState = GameState::Pause;
 		}
+
+		
 	}
 
 	void RunGame::DrawFrame()

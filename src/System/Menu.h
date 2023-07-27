@@ -20,6 +20,8 @@ namespace kuznickiSystem
 		Button buttons[buttonQuantity];
 		MenuState menuState;
 
+		bool closeApp = false;
+
 	public:
 		Menu();
 		~Menu();

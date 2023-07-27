@@ -37,7 +37,8 @@ namespace kuznickiSystem
 	struct SystemConstants
 	{
 		const float spawnRate = 0.05f;
-		const float enemyVelocityAdder = 0.5f;
+		const float enemyVelocityAdder = 0.18f;
+		const float enemyVelocityCap = 600.0f;
 		int enemyAdderUnit = 1;
 	};
 
@@ -69,7 +70,7 @@ namespace kuznickiSystem
 		void LoadTextures();
 		void LoadButtons();
 
-		void Start();
+		void Start(bool& closeApp);
 		void Update();
 		void UpdateEnemies();
 		void UpdateDifficulty();
