@@ -21,7 +21,7 @@ namespace kuznickiSystem
 	{
 		for (int i = 0; i < buttonQuantity; i++)
 		{
-			buttons[i].body.width = static_cast<float>(GetScreenWidth()) / 6;
+			buttons[i].body.width = static_cast<float>(GetScreenWidth()) / 4;
 			buttons[i].body.height = static_cast<float>(GetScreenHeight()) / 12;
 			buttons[i].body.x = static_cast<float>((GetScreenWidth() / 2)) - buttons[i].body.width / 2;
 			buttons[i].body.y = static_cast<float>((GetScreenHeight() / 8) * (i * 1.5f) + GetScreenHeight() / 3) - buttons[i].body.height / 2;
@@ -30,7 +30,7 @@ namespace kuznickiSystem
 			buttons[i].fontSize = 24;
 		}
 		buttons[0].text = "PLAY (1P)";
-		buttons[1].text = "PLAY (2P)";
+		buttons[1].text = "INSTRUCTIONS";
 		buttons[2].text = "CREDITS";
 		buttons[3].text = "QUIT";
 
@@ -72,10 +72,30 @@ namespace kuznickiSystem
 			if (CheckCollisionPointRec(GetMousePosition(), buttons[i].body))
 			{
 				buttons[i].color = RED;
-				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && menuState != MenuState::Game)
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 				{
-					menuState = MenuState::Game;
-					runGame.Start(closeApp);
+					switch (i)
+					{
+					case 0:
+						if (menuState != MenuState::Game)
+						{
+							menuState = MenuState::Game;
+							runGame.Start(closeApp);
+						}
+						menuState = MenuState::Menu;
+
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						closeApp = true;
+						break;
+					default:
+						break;
+					}
+
 				}
 			}
 			else
@@ -83,7 +103,6 @@ namespace kuznickiSystem
 				buttons[i].color = WHITE;
 			}
 		}
-		menuState = MenuState::Menu;
 	}
 
 	void Menu::DrawMenu()
