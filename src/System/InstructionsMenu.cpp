@@ -63,13 +63,25 @@ namespace kuznickiSystem
 	void InstructionsMenu::DrawMenu()
 	{
 		const char* myText0 = "In FEARLESS, your objective is to survive the longest.";
-		const char* myText1 = "In FEARLESS, your objective is to survive the longest.";
-		const char* myText2 = "In FEARLESS, your objective is to survive the longest.";
-		const char* myText3 = "In FEARLESS, your objective is to survive the longest.";
+		const char* myText1 = "You will be equiped with a WEAPON which can only fire one bullet at a time.";
+		const char* myText2 = "SHOOT or DODGE enemies to survive.";
+		const char* myText3 = "Your character can recieve up to three hits. After that, you lose.";
 
-		Vector2 textMeasure = MeasureTextEx(GetFontDefault(), myText0, 24, 1);
-		Vector2 position = { instructionsBounds.x + instructionsBounds.width / 2.0f - textMeasure.x/2, instructionsBounds.y + instructionsBounds.height / 2.0f - textMeasure.y / 2 };
-		DrawTextEx(GetFontDefault(), myText0, position, 24, 1, WHITE);
+		const char* texts[4];
+
+		texts[0] = myText0;
+		texts[1] = myText1;
+		texts[2] = myText2;
+		texts[3] = myText3;
+
+		for (int i = 0; i < 4; i++)
+		{
+			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], 24, 1);
+			Vector2 position = { instructionsBounds.x + instructionsBounds.width / 2.0f - textMeasure.x / 2, instructionsBounds.y - textMeasure.y / 2 + (i+1) * instructionsBounds.height/8.0f};
+			DrawTextEx(GetFontDefault(), texts[i], position, 24, 1, WHITE);
+		}
+
+		
 
 		DrawRectangleLinesEx(instructionsBounds, 2,GREEN);
 		for (int i = 0; i < buttonQuantity; i++)
