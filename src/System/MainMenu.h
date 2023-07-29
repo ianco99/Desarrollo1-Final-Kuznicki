@@ -21,6 +21,7 @@ namespace kuznickiSystem
 		void MenuLoop() override;
 		void CheckButtonColls() override;
 		void DrawMenu() override;
+		void DrawBackground();
 
 	};
 }

@@ -65,7 +65,12 @@ namespace kuznickiSystem
 
 				break;
 			case kuznickiSystem::MenuState::Instructions:
-				instructionsMenu.MenuLoop();
+				instructionsMenu.CheckButtonColls(menuState);
+
+				BeginDrawing();
+				DrawBackground();
+				instructionsMenu.DrawMenu();
+				EndDrawing();
 				break;
 			case kuznickiSystem::MenuState::Credits:
 				break;
@@ -124,7 +129,20 @@ namespace kuznickiSystem
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
+		DrawBackground();
 
+		for (int i = 0; i < buttonQuantity; i++)
+		{
+			DrawRectangleRec(buttons[i].body, buttons[i].color);
+			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2, buttons[i].body.y + buttons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2, buttons[i].fontSize, BLACK);
+		}
+
+		EndDrawing();
+
+	}
+
+	void MainMenu::DrawBackground()
+	{
 		int lastLayer = 1000;
 		int smallestLayer = 0;
 		int currentLayer = lastLayer;
@@ -150,13 +168,5 @@ namespace kuznickiSystem
 
 			smallestLayer = imageToDraw.layer;
 		}
-
-		for (int i = 0; i < buttonQuantity; i++)
-		{
-			DrawRectangleRec(buttons[i].body, buttons[i].color);
-			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2, buttons[i].body.y + buttons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2, buttons[i].fontSize, BLACK);
-		}
-
-		EndDrawing();
 	}
 }
