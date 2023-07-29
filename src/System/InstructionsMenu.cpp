@@ -4,6 +4,7 @@ namespace kuznickiSystem
 {
 	InstructionsMenu::InstructionsMenu()
 	{
+		instructionsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 12.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
 		InitButtons();
 	}
 
@@ -61,6 +62,16 @@ namespace kuznickiSystem
 
 	void InstructionsMenu::DrawMenu()
 	{
+		const char* myText0 = "In FEARLESS, your objective is to survive the longest.";
+		const char* myText1 = "In FEARLESS, your objective is to survive the longest.";
+		const char* myText2 = "In FEARLESS, your objective is to survive the longest.";
+		const char* myText3 = "In FEARLESS, your objective is to survive the longest.";
+
+		Vector2 textMeasure = MeasureTextEx(GetFontDefault(), myText0, 24, 1);
+		Vector2 position = { instructionsBounds.x + instructionsBounds.width / 2.0f - textMeasure.x/2, instructionsBounds.y + instructionsBounds.height / 2.0f - textMeasure.y / 2 };
+		DrawTextEx(GetFontDefault(), myText0, position, 24, 1, WHITE);
+
+		DrawRectangleLinesEx(instructionsBounds, 2,GREEN);
 		for (int i = 0; i < buttonQuantity; i++)
 		{
 			DrawRectangleRec(buttons[i].body, buttons[i].color);

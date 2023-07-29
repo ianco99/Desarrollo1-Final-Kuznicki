@@ -6,6 +6,7 @@ namespace kuznickiSystem
 	class InstructionsMenu : Menu
 	{
 	private:
+		Rectangle instructionsBounds;
 
 	public:
 		InstructionsMenu();
