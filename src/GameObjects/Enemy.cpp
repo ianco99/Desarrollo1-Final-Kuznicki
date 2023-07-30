@@ -66,7 +66,10 @@ namespace kuznickiGameObjects
 		if (CheckCollisionCircleRec(position, radius, player.GetBody()))
 		{
 			player.Damage(damage);
-			SetIsAlive(false);
+			if (player.GetIsAlive())
+			{
+				SetIsAlive(false);
+			}
 		}
 	}
 
@@ -91,7 +94,7 @@ namespace kuznickiGameObjects
 		if (CheckCollisionCircles(position, radius, bullet.GetPosition(), bullet.GetRadius()))
 		{
 			return true;
-			
+
 		}
 		return false;
 	}

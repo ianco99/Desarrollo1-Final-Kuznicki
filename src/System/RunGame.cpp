@@ -80,7 +80,7 @@ namespace kuznickiSystem
 			}
 			if (gameState == GameState::Pause)
 			{
-				Color pauseBoxColor = { 218,94,83,255 };
+				Color pauseBoxColor = { 255,180,209,255 };
 
 				CheckButtonColls();
 
@@ -99,11 +99,25 @@ namespace kuznickiSystem
 			}
 			if (gameState == GameState::Lost)
 			{
+				const char* lostText = "YOU DIED";
+				Vector2 lostTextMeasured = MeasureTextEx(GetFontDefault(),lostText, 72, 1);
+				Vector2 lostTextPosition = { GetScreenWidth() / 2 - lostTextMeasured.x / 2, GetScreenHeight() / 8.0f };
+				Color pauseBoxColor = { 255,0,0,255 };
+
 				BeginDrawing();
 				DrawBackground();
 				DrawGround();
 				player.Draw();
+				for (int i = 0; i < maxEnemies; i++)
+				{
+					if (enemies[i].GetIsAlive())
+					{
+						enemies[i].DrawEnemy();
+					}
+				}
+				DrawTextEx(GetFontDefault(), lostText, lostTextPosition, 72, 1, pauseBoxColor);
 				EndDrawing();
+
 
 				if (IsKeyPressed(KEY_C))
 				{

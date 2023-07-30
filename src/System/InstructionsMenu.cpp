@@ -90,7 +90,6 @@ namespace kuznickiSystem
 
 		DrawTextures();
 
-		DrawRectangleLinesEx(instructionsBounds, 2,GREEN);
 		for (int i = 0; i < buttonQuantity; i++)
 		{
 			DrawRectangleRec(buttons[i].body, buttons[i].color);
