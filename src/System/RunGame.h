@@ -51,6 +51,7 @@ namespace kuznickiSystem
 
 		GameState gameState;
 
+		Button deathButton;
 		Button pauseButtons[2];
 		Rectangle pauseBox;
 

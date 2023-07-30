@@ -54,6 +54,9 @@ namespace kuznickiSystem
 			pauseButtons[i].fontSize = 24;
 		}
 
+		deathButton = pauseButtons[0];
+		deathButton.text = "GO TO MENU";
+
 		pauseButtons[0].text = "CONTINUE";
 		pauseButtons[1].text = "GO TO MENU";
 	}
@@ -86,6 +89,7 @@ namespace kuznickiSystem
 
 				BeginDrawing();
 
+				CheckButtonColls();
 				DrawRectangleRec(pauseBox, pauseBoxColor);
 				DrawText("PAUSE", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "PAUSE", 42, 1).x / 2, GetScreenHeight() / 4, 42, WHITE);
 
@@ -100,7 +104,7 @@ namespace kuznickiSystem
 			if (gameState == GameState::Lost)
 			{
 				const char* lostText = "YOU DIED";
-				Vector2 lostTextMeasured = MeasureTextEx(GetFontDefault(),lostText, 72, 1);
+				Vector2 lostTextMeasured = MeasureTextEx(GetFontDefault(), lostText, 72, 1);
 				Vector2 lostTextPosition = { GetScreenWidth() / 2 - lostTextMeasured.x / 2, GetScreenHeight() / 8.0f };
 				Color pauseBoxColor = { 255,0,0,255 };
 
@@ -115,233 +119,245 @@ namespace kuznickiSystem
 						enemies[i].DrawEnemy();
 					}
 				}
+
+				DrawRectangleRec(deathButton.body, deathButton.color);
+				DrawText(deathButton.text, deathButton.body.x + deathButton.body.width / 2 - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).x / 2, deathButton.body.y + deathButton.body.height / 2 - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).y / 2, deathButton.fontSize, BLACK);
+
 				DrawTextEx(GetFontDefault(), lostText, lostTextPosition, 72, 1, pauseBoxColor);
 				EndDrawing();
 
-
-				if (IsKeyPressed(KEY_C))
+				if (CheckCollisionPointRec(GetMousePosition(), deathButton.body))
 				{
-					inGame = false;
+					deathButton.color = RED;
+
+					if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+					{
+						inGame = false;
+					}
+				}
+				else
+				{
+					deathButton.color = WHITE;
 				}
 			}
 
-			if (WindowShouldClose())
-			{
-				inGame = false;
-				closeApp = true;
-			}
-		}
-	}
-
-	void RunGame::Init()
-	{
-
-		inGame = true;
-		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
-		currSystemStats.maxNumberOfEnemies = 2.0f;
-		currSystemStats.spawnRate = 3.0f;
-
-		gameState = GameState::Playing;
-	}
-
-	void RunGame::CheckButtonColls()
-	{
-		for (int i = 0; i < 2; i++)
-		{
-			if (CheckCollisionPointRec(GetMousePosition(), pauseButtons[i].body))
-			{
-				pauseButtons[i].color = RED;
-
-				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-				{
-					switch (i)
+					if (WindowShouldClose())
 					{
-					case 0:
-						gameState = GameState::Playing;
-						break;
-					case 1:
-						gameState = GameState::Lost;
-						break;
-					default:
+						inGame = false;
+						closeApp = true;
+					}
+				}
+			}
+
+			void RunGame::Init()
+			{
+
+				inGame = true;
+				player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
+				currSystemStats.maxNumberOfEnemies = 2.0f;
+				currSystemStats.spawnRate = 3.0f;
+
+				gameState = GameState::Playing;
+			}
+
+			void RunGame::CheckButtonColls()
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					if (CheckCollisionPointRec(GetMousePosition(), pauseButtons[i].body))
+					{
+						pauseButtons[i].color = RED;
+
+						if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+						{
+							switch (i)
+							{
+							case 0:
+								gameState = GameState::Playing;
+								break;
+							case 1:
+								gameState = GameState::Lost;
+								break;
+							default:
+								break;
+							}
+						}
+					}
+					else
+					{
+						pauseButtons[i].color = WHITE;
+					}
+				}
+			}
+
+			void SetupEnemies(Enemy enemies[], Texture2D * enemySprite)
+			{
+				for (int i = 0; i < maxEnemies; i++)
+				{
+					enemies[i] = Enemy(enemyConfigs::defaultRadius, WHITE, enemySprite);
+					enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
+				}
+
+			}
+
+			void RunGame::ManageEnemies()
+			{
+				int count = 0;
+				for (int i = 0; i < maxEnemies; i++)
+				{
+					if (enemies[i].GetIsAlive())
+						count++;
+				}
+
+				currSystemStats.numberToSpawn = currSystemStats.maxNumberOfEnemies - count;
+
+				if (currSystemStats.currTimeToSpawn >= currSystemStats.spawnRate && currSystemStats.numberToSpawn > 0)
+				{
+					currSystemStats.currTimeToSpawn = 0;
+					SpawnEnemy();
+				}
+
+				currSystemStats.currTimeToSpawn += GetFrameTime();
+			}
+
+			void RunGame::SpawnEnemy()
+			{
+				for (int i = 0; i < maxEnemies; i++)
+				{
+					if (enemies[i].GetIsAlive() == false)
+					{
+						enemies[i].SetIsAlive(true);
+						enemies[i].SpawnRandPosition();
+						enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x + player.GetBody().width / 2, player.GetBody().y + player.GetBody().height / 2 }, enemies[i].GetPosition())));
+						enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
 						break;
 					}
 				}
 			}
-			else
+
+			void RunGame::TakeInput()
 			{
-				pauseButtons[i].color = WHITE;
+				float speed = 450;
+				Rectangle newBody = player.GetBody();
+
+				if (IsKeyDown(KEY_A) && newBody.x > 0)
+					newBody.x -= speed * GetFrameTime();
+				if (IsKeyDown(KEY_D) && newBody.x + newBody.width < GetScreenWidth())
+					newBody.x += speed * GetFrameTime();
+
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				{
+					player.ShootGun();
+				}
+
+				player.Reposition(newBody.x, newBody.y);
 			}
-		}
-	}
 
-	void SetupEnemies(Enemy enemies[], Texture2D* enemySprite)
-	{
-		for (int i = 0; i < maxEnemies; i++)
-		{
-			enemies[i] = Enemy(enemyConfigs::defaultRadius, WHITE, enemySprite);
-			enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
-		}
-
-	}
-
-	void RunGame::ManageEnemies()
-	{
-		int count = 0;
-		for (int i = 0; i < maxEnemies; i++)
-		{
-			if (enemies[i].GetIsAlive())
-				count++;
-		}
-
-		currSystemStats.numberToSpawn = currSystemStats.maxNumberOfEnemies - count;
-
-		if (currSystemStats.currTimeToSpawn >= currSystemStats.spawnRate && currSystemStats.numberToSpawn > 0)
-		{
-			currSystemStats.currTimeToSpawn = 0;
-			SpawnEnemy();
-		}
-
-		currSystemStats.currTimeToSpawn += GetFrameTime();
-	}
-
-	void RunGame::SpawnEnemy()
-	{
-		for (int i = 0; i < maxEnemies; i++)
-		{
-			if (enemies[i].GetIsAlive() == false)
+			void RunGame::Update()
 			{
-				enemies[i].SetIsAlive(true);
-				enemies[i].SpawnRandPosition();
-				enemies[i].SetDirection(Vector2Normalize(Vector2Subtract({ player.GetBody().x + player.GetBody().width / 2, player.GetBody().y + player.GetBody().height / 2 }, enemies[i].GetPosition())));
-				enemies[i].SetVelocity({ enemyConfigs::defaultVelocityX, enemyConfigs::defaultVelocityY });
-				break;
+				UpdateEnemies();
+				player.Update();
+				UpdateDifficulty();
+				UpdateScore();
 			}
-		}
-	}
 
-	void RunGame::TakeInput()
-	{
-		float speed = 450;
-		Rectangle newBody = player.GetBody();
-
-		if (IsKeyDown(KEY_A) && newBody.x > 0)
-			newBody.x -= speed * GetFrameTime();
-		if (IsKeyDown(KEY_D) && newBody.x + newBody.width < GetScreenWidth())
-			newBody.x += speed * GetFrameTime();
-
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-		{
-			player.ShootGun();
-		}
-
-		player.Reposition(newBody.x, newBody.y);
-	}
-
-	void RunGame::Update()
-	{
-		UpdateEnemies();
-		player.Update();
-		UpdateDifficulty();
-		UpdateScore();
-	}
-
-	void RunGame::UpdateEnemies()
-	{
-		for (int i = 0; i < maxEnemies; i++)
-		{
-			if (enemies[i].GetIsAlive() == true)
+			void RunGame::UpdateEnemies()
 			{
-				enemies[i].Update(player, score);
-				enemies[i].SetVelocity({ currSystemStats.currentEnemyVelocity,currSystemStats.currentEnemyVelocity });
+				for (int i = 0; i < maxEnemies; i++)
+				{
+					if (enemies[i].GetIsAlive() == true)
+					{
+						enemies[i].Update(player, score);
+						enemies[i].SetVelocity({ currSystemStats.currentEnemyVelocity,currSystemStats.currentEnemyVelocity });
+					}
+				}
 			}
-		}
-	}
 
-	void RunGame::UpdateDifficulty()
-	{
-		SystemConstants systemConstants;
-
-		currSystemStats.spawnRate -= systemConstants.spawnRate * GetFrameTime();
-
-		if (currSystemStats.currentEnemyAdderCount >= systemConstants.enemyAdderUnit)
-		{
-			currSystemStats.maxNumberOfEnemies += systemConstants.enemyAdderUnit;
-			currSystemStats.currentEnemyAdderCount -= systemConstants.enemyAdderUnit;
-		}
-
-		currSystemStats.currentEnemyAdderCount += systemConstants.spawnRate * GetFrameTime();
-
-		if (currSystemStats.currentEnemyVelocity < systemConstants.enemyVelocityCap)
-			currSystemStats.currentEnemyVelocity += systemConstants.enemyVelocityAdder * GetFrameTime();
-	}
-
-	void RunGame::UpdateScore()
-	{
-		score += GetFrameTime();
-	}
-
-	void RunGame::CheckGameStateConditions()
-	{
-		if (player.GetIsAlive() == false)
-		{
-			gameState = GameState::Lost;
-		}
-		else if (IsKeyDown(KEY_ESCAPE))
-		{
-			gameState = GameState::Pause;
-		}
-
-
-	}
-
-	void RunGame::DrawFrame()
-	{
-		BeginDrawing();
-		ClearBackground(BLACK);
-
-		DrawBackground();
-		DrawGround();
-
-		player.Draw();
-		DrawText(TextFormat("Score: %8i", static_cast<int>(RAYMATH_H::floor(score))), 0, 50, 48, WHITE);
-		for (int i = 0; i < maxEnemies; i++)
-		{
-			if (enemies[i].GetIsAlive())
+			void RunGame::UpdateDifficulty()
 			{
-				enemies[i].DrawEnemy();
+				SystemConstants systemConstants;
+
+				currSystemStats.spawnRate -= systemConstants.spawnRate * GetFrameTime();
+
+				if (currSystemStats.currentEnemyAdderCount >= systemConstants.enemyAdderUnit)
+				{
+					currSystemStats.maxNumberOfEnemies += systemConstants.enemyAdderUnit;
+					currSystemStats.currentEnemyAdderCount -= systemConstants.enemyAdderUnit;
+				}
+
+				currSystemStats.currentEnemyAdderCount += systemConstants.spawnRate * GetFrameTime();
+
+				if (currSystemStats.currentEnemyVelocity < systemConstants.enemyVelocityCap)
+					currSystemStats.currentEnemyVelocity += systemConstants.enemyVelocityAdder * GetFrameTime();
 			}
-		}
 
-		DrawUI();
+			void RunGame::UpdateScore()
+			{
+				score += GetFrameTime();
+			}
 
-		DrawLine(player.GetGun()->GetPosition().x, player.GetGun()->GetPosition().y, GetMouseX(), GetMouseY(), RED);
+			void RunGame::CheckGameStateConditions()
+			{
+				if (player.GetIsAlive() == false)
+				{
+					gameState = GameState::Lost;
+				}
+				else if (IsKeyDown(KEY_ESCAPE))
+				{
+					gameState = GameState::Pause;
+				}
 
-		EndDrawing();
-	}
 
-	void RunGame::DrawBackground()
-	{
-		Rectangle spriteSource = { 0.0f,0.0f, background1.width, background1.height };
-		Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.2f, GetScreenWidth(), GetScreenHeight() };
-		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+			}
 
-		DrawTexturePro(background0, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
-		DrawTexturePro(background1, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
-		DrawTexturePro(background2, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
-		DrawTexturePro(background3, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
-	}
+			void RunGame::DrawFrame()
+			{
+				BeginDrawing();
+				ClearBackground(BLACK);
 
-	void RunGame::DrawGround()
-	{
-		Rectangle spriteSource = { 0.0f,0.0f, ground.width, ground.height };
-		Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.4f, GetScreenWidth(), GetScreenHeight() * 1.5f };
-		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+				DrawBackground();
+				DrawGround();
 
-		DrawTexturePro(ground, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
-	}
+				player.Draw();
+				DrawText(TextFormat("Score: %8i", static_cast<int>(RAYMATH_H::floor(score))), 0, 50, 48, WHITE);
+				for (int i = 0; i < maxEnemies; i++)
+				{
+					if (enemies[i].GetIsAlive())
+					{
+						enemies[i].DrawEnemy();
+					}
+				}
 
-	void RunGame::DrawUI()
-	{
-		DrawText(TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(), player.GetGun()->GetMaxBulletCount()), 0, GetScreenHeight() / 1.2f, 46, WHITE);
-	}
-};
+				DrawUI();
+
+				DrawLine(player.GetGun()->GetPosition().x, player.GetGun()->GetPosition().y, GetMouseX(), GetMouseY(), RED);
+
+				EndDrawing();
+			}
+
+			void RunGame::DrawBackground()
+			{
+				Rectangle spriteSource = { 0.0f,0.0f, background1.width, background1.height };
+				Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.2f, GetScreenWidth(), GetScreenHeight() };
+				Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
+				DrawTexturePro(background0, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+				DrawTexturePro(background1, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+				DrawTexturePro(background2, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+				DrawTexturePro(background3, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+			}
+
+			void RunGame::DrawGround()
+			{
+				Rectangle spriteSource = { 0.0f,0.0f, ground.width, ground.height };
+				Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.4f, GetScreenWidth(), GetScreenHeight() * 1.5f };
+				Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+
+				DrawTexturePro(ground, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+			}
+
+			void RunGame::DrawUI()
+			{
+				DrawText(TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(), player.GetGun()->GetMaxBulletCount()), 0, GetScreenHeight() / 1.2f, 46, WHITE);
+			}
+		};
