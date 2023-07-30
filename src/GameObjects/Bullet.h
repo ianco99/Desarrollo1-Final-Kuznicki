@@ -9,7 +9,7 @@ namespace kuznickiGameObjects
 		float radius;
 		float angle;
 		Vector2 position;
-
+		
 		Vector2 velocity;	//Only positive values
 		Vector2 acceleration;	//In case I need the bullet to speed up overtime
 		Vector2 direction;

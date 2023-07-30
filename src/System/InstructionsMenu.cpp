@@ -9,7 +9,8 @@ namespace kuznickiSystem
 		InitText();
 
 		playerSprite = LoadTexture("../rsc/adventurer-idle-00.png");
-
+		gunSprite = LoadTexture("../rsc/gun.png");
+		enemySprite = LoadTexture("../rsc/enemy.png");
 	}
 
 	InstructionsMenu::~InstructionsMenu()
@@ -99,11 +100,22 @@ namespace kuznickiSystem
 
 	void InstructionsMenu::DrawTextures()
 	{
-		Rectangle spriteSource = { 0.0f,0.0f, playerSprite.width, playerSprite.height };
-		Rectangle spriteDestination = { instructionsBounds.x + instructionsBounds.width / 8.0f,(instructionsBounds.height - instructionsBounds.height/5.0f), playerSprite.width * 4.75f, playerSprite.height * 4.375f};
-		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+		Rectangle playerSource = { 0.0f,0.0f, playerSprite.width, playerSprite.height };
+		Rectangle playerDestination = { instructionsBounds.x + instructionsBounds.width / 8.0f,(instructionsBounds.height - instructionsBounds.height/5.0f), playerSprite.width * 4.75f, playerSprite.height * 4.375f};
+		Vector2 playerOrigin = { playerDestination.width / 2.0f, playerDestination.height / 2.0f };
 
-		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
-		DrawTexturePro(playerSprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+		DrawTexturePro(playerSprite, playerSource, playerDestination, playerOrigin, 0.0f, WHITE);
+
+		Rectangle gunSource = { 0.0f,0.0f, gunSprite.width, gunSprite.height };
+		Rectangle gunDestination = { instructionsBounds.x + instructionsBounds.width / 2.0f, (instructionsBounds.height - instructionsBounds.height / 5.0f), gunSprite.width * 9.5f, gunSprite.height * 8.750f};
+		Vector2 gunOrigin = { gunDestination.width / 2.0f, gunDestination.height / 2.0f };
+		
+		DrawTexturePro(gunSprite, gunSource, gunDestination, gunOrigin, 0.0f, WHITE);
+
+		Rectangle enemySource = { 0.0f,0.0f, enemySprite.width, enemySprite.height };
+		Rectangle enemyDestination = { instructionsBounds.x + instructionsBounds.width - instructionsBounds.width / 8.0f, (instructionsBounds.height - instructionsBounds.height / 5.0f), gunSprite.width * 8.0f, gunSprite.height * 8.750f };
+		Vector2 enemyOrigin = { gunDestination.width / 2.0f, gunDestination.height / 2.0f };
+
+		DrawTexturePro(enemySprite, enemySource, enemyDestination, enemyOrigin, 0.0f, WHITE);
 	}
 }
