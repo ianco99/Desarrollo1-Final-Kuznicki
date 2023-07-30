@@ -40,7 +40,7 @@ namespace kuznickiSystem
 
 		enemySprite = LoadTexture("../rsc/enemy.png");
 	}
-	
+
 	void RunGame::LoadButtons()
 	{
 		for (int i = 0; i < 2; i++)
@@ -48,7 +48,7 @@ namespace kuznickiSystem
 			pauseButtons[i].body.width = static_cast<float>(pauseBox.width) / 3;
 			pauseButtons[i].body.height = static_cast<float>(pauseBox.height) / 6;
 			pauseButtons[i].body.x = static_cast<float>((pauseBox.x + pauseBox.width / 2)) - pauseButtons[i].body.width / 2;
-			pauseButtons[i].body.y = static_cast<float>((pauseBox.y) * (i * 0.5f) + pauseBox.height/1.4f);
+			pauseButtons[i].body.y = static_cast<float>((pauseBox.y) * (i * 0.5f) + pauseBox.height / 1.4f);
 
 			pauseButtons[i].color = WHITE;
 			pauseButtons[i].fontSize = 24;
@@ -61,12 +61,12 @@ namespace kuznickiSystem
 	void RunGame::Start(bool& closeApp)
 	{
 		Init();
-		
+
 		SetupEnemies(enemies, &enemySprite);
 
 		while (inGame)
 		{
-			if(gameState == GameState::Playing)
+			if (gameState == GameState::Playing)
 			{
 				ManageEnemies();
 
@@ -87,19 +87,28 @@ namespace kuznickiSystem
 				BeginDrawing();
 
 				DrawRectangleRec(pauseBox, pauseBoxColor);
-				DrawText("PAUSE", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "PAUSE", 42, 1).x/2, GetScreenHeight() / 4, 42, WHITE);
+				DrawText("PAUSE", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "PAUSE", 42, 1).x / 2, GetScreenHeight() / 4, 42, WHITE);
 
 				for (int i = 0; i < 2; i++)
 				{
 					DrawRectangleRec(pauseButtons[i].body, pauseButtons[i].color);
-					DrawText(pauseButtons[i].text, pauseButtons[i].body.x + pauseButtons[i].body.width/2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).x / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).y / 2, pauseButtons[i].fontSize, BLACK);
+					DrawText(pauseButtons[i].text, pauseButtons[i].body.x + pauseButtons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).x / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).y / 2, pauseButtons[i].fontSize, BLACK);
 				}
 
 				EndDrawing();
 			}
 			if (gameState == GameState::Lost)
 			{
-				inGame = false;
+				BeginDrawing();
+				DrawBackground();
+				DrawGround();
+				player.Draw();
+				EndDrawing();
+
+				if (IsKeyPressed(KEY_C))
+				{
+					inGame = false;
+				}
 			}
 
 			if (WindowShouldClose())
@@ -112,7 +121,7 @@ namespace kuznickiSystem
 
 	void RunGame::Init()
 	{
-		
+
 		inGame = true;
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
 		currSystemStats.maxNumberOfEnemies = 2.0f;
@@ -128,7 +137,7 @@ namespace kuznickiSystem
 			if (CheckCollisionPointRec(GetMousePosition(), pauseButtons[i].body))
 			{
 				pauseButtons[i].color = RED;
-				
+
 				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 				{
 					switch (i)
@@ -268,7 +277,7 @@ namespace kuznickiSystem
 			gameState = GameState::Pause;
 		}
 
-		
+
 	}
 
 	void RunGame::DrawFrame()
@@ -299,7 +308,7 @@ namespace kuznickiSystem
 	void RunGame::DrawBackground()
 	{
 		Rectangle spriteSource = { 0.0f,0.0f, background1.width, background1.height };
-		Rectangle spriteDestination = { GetScreenWidth()/2,GetScreenHeight()/3.2f, GetScreenWidth(), GetScreenHeight()};
+		Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.2f, GetScreenWidth(), GetScreenHeight() };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		DrawTexturePro(background0, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
@@ -319,6 +328,6 @@ namespace kuznickiSystem
 
 	void RunGame::DrawUI()
 	{
-		DrawText(TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(),player.GetGun()->GetMaxBulletCount()), 0, GetScreenHeight() / 1.2f, 46, WHITE);
+		DrawText(TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(), player.GetGun()->GetMaxBulletCount()), 0, GetScreenHeight() / 1.2f, 46, WHITE);
 	}
 };
