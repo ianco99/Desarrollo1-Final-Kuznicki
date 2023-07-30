@@ -14,7 +14,7 @@ namespace kuznickiGameObjects
 
 		Texture2D sprite;
 
-		int lives = 1;
+		int lives = 3;
 		bool isAlive = true;
 		bool showingDamage = false;
 

@@ -176,7 +176,7 @@ namespace kuznickiSystem
 								gameState = GameState::Playing;
 								break;
 							case 1:
-								gameState = GameState::Lost;
+								inGame = false;
 								break;
 							default:
 								break;
