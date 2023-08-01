@@ -73,6 +73,12 @@ namespace kuznickiSystem
 				EndDrawing();
 				break;
 			case kuznickiSystem::MenuState::Credits:
+				creditsMenu.CheckButtonColls(menuState);
+
+				BeginDrawing();
+				DrawBackground();
+				creditsMenu.DrawMenu();
+				EndDrawing();
 				break;
 			default:
 				break;
@@ -108,6 +114,7 @@ namespace kuznickiSystem
 						menuState = MenuState::Instructions;
 						break;
 					case 2:
+						menuState = MenuState::Credits;
 						break;
 					case 3:
 						closeApp = true;

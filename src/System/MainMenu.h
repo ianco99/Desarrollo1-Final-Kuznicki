@@ -1,5 +1,6 @@
 #pragma once
 #include "Menu.h"
+#include "CreditsMenu.h"
 #include "InstructionsMenu.h"
 
 namespace kuznickiSystem
@@ -7,6 +8,7 @@ namespace kuznickiSystem
 	class MainMenu : Menu
 	{
 	private:
+		CreditsMenu creditsMenu;
 		InstructionsMenu instructionsMenu;
 		RunGame runGame;
 		MenuState menuState;

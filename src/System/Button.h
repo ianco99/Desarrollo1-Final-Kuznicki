@@ -10,6 +10,7 @@ namespace kuznickiSystem
 		Rectangle body;
 		Color color;
 		const char* text;
+		const char* link;
 		float fontSize;
 		float fontSpacing;
 	};

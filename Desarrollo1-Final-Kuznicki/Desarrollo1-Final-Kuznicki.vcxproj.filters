@@ -43,6 +43,9 @@
     <ClCompile Include="..\src\System\MainMenu.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\System\CreditsMenu.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\RunGame.h">
@@ -73,6 +76,9 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="..\src\System\MainMenu.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\CreditsMenu.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
