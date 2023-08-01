@@ -25,6 +25,11 @@ namespace kuznickiSystem
 		buttons[0].fontSize = 24;
 
 		buttons[0].text = "BACK";
+
+		for (int i = 0; i < 10; i++)
+		{
+			linkButtons[i].color = SKYBLUE;
+		}
 	}
 
 	void CreditsMenu::InitText()
@@ -45,9 +50,15 @@ namespace kuznickiSystem
 		linkButtons[3].text = "rvros";
 		linkButtons[3].link = "https://rvros.itch.io";
 
-		const char* text3 = "GUN art by:";
-		linkButtons[3].text = "Mack";
-		linkButtons[3].link = "https://bigmack.itch.io";
+		const char* text4 = "GUN art by:";
+		linkButtons[4].text = "Mack";
+		linkButtons[4].link = "https://bigmack.itch.io";
+
+		texts[0] = text0;
+		texts[1] = text1;
+		texts[2] = text2;
+		texts[3] = text3;
+		texts[4] = text4;
 	}
 
 	void CreditsMenu::InitBackground()
@@ -87,12 +98,13 @@ namespace kuznickiSystem
 	void CreditsMenu::DrawMenu()
 	{
 
-		//for (int i = 0; i < 4; i++)
-		//{
-		//	Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], 24, 1);
-		//	Vector2 position = { instructionsBounds.x + instructionsBounds.width / 2.0f - textMeasure.x / 2, instructionsBounds.y - textMeasure.y / 2 + (i + 1) * instructionsBounds.height / 8.0f };
-		//	DrawTextEx(GetFontDefault(), texts[i], position, 24, 1, WHITE);
-		//}
+		for (int i = 0; i < 5; i++)
+		{
+			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], 24, 1);
+			Vector2 position = { creditsBounds.x + creditsBounds.width / 2.0f - textMeasure.x / 2, creditsBounds.y - textMeasure.y / 2 + (i + 1) * creditsBounds.height / 8.0f };
+			DrawTextEx(GetFontDefault(), texts[i], position, 24, 1, WHITE);
+			DrawTextEx(GetFontDefault(), linkButtons[i].text, { position.x + textMeasure.x + 48, position.y }, 24, 1, linkButtons->color);
+		}
 
 		DrawRectangleLinesEx(creditsBounds, 2.0f, GREEN);
 

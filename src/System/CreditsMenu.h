@@ -8,6 +8,7 @@ namespace kuznickiSystem
 	private:
 		Rectangle creditsBounds;
 		Button linkButtons[10];
+		const char* texts[10];
 	public:
 		CreditsMenu();
 		~CreditsMenu();

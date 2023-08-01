@@ -1,7 +1,7 @@
 #pragma once
 #include "Menu.h"
-#include "CreditsMenu.h"
 #include "InstructionsMenu.h"
+#include "CreditsMenu.h"
 
 namespace kuznickiSystem
 {
