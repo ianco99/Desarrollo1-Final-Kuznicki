@@ -2,6 +2,7 @@
 
 namespace kuznickiSystem
 {
+	static float textSize = 24;
 	CreditsMenu::CreditsMenu()
 	{
 		creditsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 12.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
@@ -16,13 +17,13 @@ namespace kuznickiSystem
 
 	void CreditsMenu::InitButtons()
 	{
-		buttons[0].body.width = static_cast<float>(GetScreenWidth()) / 4;
-		buttons[0].body.height = static_cast<float>(GetScreenHeight()) / 12;
+		buttons[0].body.width = static_cast<float>(GetScreenWidth()) / buttonXDivider;
+		buttons[0].body.height = static_cast<float>(GetScreenHeight()) / buttonYDivider;
 		buttons[0].body.x = static_cast<float>((GetScreenWidth() / 2)) - buttons[0].body.width / 2;
-		buttons[0].body.y = static_cast<float>((GetScreenHeight() / 8) * (3 * 1.5f) + GetScreenHeight() / 3) - buttons[0].body.height / 2;
+		buttons[0].body.y = static_cast<float>((GetScreenHeight() - (GetScreenHeight() / 8) * 2));
 
 		buttons[0].color = WHITE;
-		buttons[0].fontSize = 24;
+		buttons[0].fontSize = textSize;
 
 		buttons[0].text = "BACK";
 
@@ -69,7 +70,7 @@ namespace kuznickiSystem
 
 	void CreditsMenu::MenuLoop()
 	{
-		//CheckButtonColls();
+
 	}
 
 	void CreditsMenu::CheckButtonColls(MenuState& menuState)
@@ -102,30 +103,18 @@ namespace kuznickiSystem
 		}
 	}
 
-	void CreditsMenu::CheckButtonColls()
-	{
-
-	}
-
 	void CreditsMenu::DrawMenu()
 	{
-
+		int spacesBtwn = 48;
 		for (int i = 0; i < 5; i++)
 		{
-			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], 24, 1);
-			Vector2 linkMeasure = MeasureTextEx(GetFontDefault(), linkButtons[i].text, 24, 1);
+			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], textSize, 1);
+			Vector2 linkMeasure = MeasureTextEx(GetFontDefault(), linkButtons[i].text, textSize, 1);
 			Vector2 position = { creditsBounds.x + creditsBounds.width / 2.0f - textMeasure.x / 2, creditsBounds.y - textMeasure.y / 2 + (i + 1) * creditsBounds.height / 8.0f };
-			DrawTextEx(GetFontDefault(), texts[i], position, 24, 1, WHITE);
-			DrawTextEx(GetFontDefault(), linkButtons[i].text, { position.x + textMeasure.x + 48, position.y }, 24, 1, linkButtons->color);
+			DrawTextEx(GetFontDefault(), texts[i], position, textSize, 1, WHITE);
+			DrawTextEx(GetFontDefault(), linkButtons[i].text, { position.x + textMeasure.x + spacesBtwn, position.y }, textSize, 1, linkButtons->color);
 
-			linkButtons[i].body = { position.x + textMeasure.x + 48, position.y, linkMeasure.x, linkMeasure.y};
-		}
-
-		DrawRectangleLinesEx(creditsBounds, 2.0f, GREEN);
-
-		for (int i = 0; i < 5; i++)
-		{
-			DrawRectangleLinesEx(linkButtons[i].body, 2.0f, GREEN);
+			linkButtons[i].body = { position.x + textMeasure.x + spacesBtwn, position.y, linkMeasure.x, linkMeasure.y};
 		}
 
 		DrawTextures();

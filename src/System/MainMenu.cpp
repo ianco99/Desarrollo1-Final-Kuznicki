@@ -19,8 +19,8 @@ namespace kuznickiSystem
 	{
 		for (int i = 0; i < buttonQuantity; i++)
 		{
-			buttons[i].body.width = static_cast<float>(GetScreenWidth()) / 4;
-			buttons[i].body.height = static_cast<float>(GetScreenHeight()) / 12;
+			buttons[i].body.width = static_cast<float>(GetScreenWidth()) / buttonXDivider;
+			buttons[i].body.height = static_cast<float>(GetScreenHeight()) / buttonYDivider;
 			buttons[i].body.x = static_cast<float>((GetScreenWidth() / 2)) - buttons[i].body.width / 2;
 			buttons[i].body.y = static_cast<float>((GetScreenHeight() / 8) * (i * 1.5f) + GetScreenHeight() / 3) - buttons[i].body.height / 2;
 
@@ -58,7 +58,7 @@ namespace kuznickiSystem
 			switch (menuState)
 			{
 			case kuznickiSystem::MenuState::Menu:
-				CheckButtonColls();
+				CheckButtonColls(menuState);
 				DrawMenu();
 				break;
 			case kuznickiSystem::MenuState::Game:
@@ -90,18 +90,19 @@ namespace kuznickiSystem
 		}
 	}
 
-	void MainMenu::CheckButtonColls()
+	void MainMenu::CheckButtonColls(MenuState& menuState)
 	{
 		for (int i = 0; i < buttonQuantity; i++)
 		{
+			MainMenuButtons button = (MainMenuButtons)i;
 			if (CheckCollisionPointRec(GetMousePosition(), buttons[i].body))
 			{
 				buttons[i].color = RED;
 				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 				{
-					switch (i)
+					switch (button)
 					{
-					case 0:
+					case MainMenuButtons::Game:
 						if (menuState != MenuState::Game)
 						{
 							menuState = MenuState::Game;
@@ -110,13 +111,13 @@ namespace kuznickiSystem
 						menuState = MenuState::Menu;
 
 						break;
-					case 1:
+					case MainMenuButtons::Instructions:
 						menuState = MenuState::Instructions;
 						break;
-					case 2:
+					case MainMenuButtons::Credits:
 						menuState = MenuState::Credits;
 						break;
-					case 3:
+					case MainMenuButtons::Quit:
 						closeApp = true;
 						break;
 					default:
@@ -141,7 +142,9 @@ namespace kuznickiSystem
 		for (int i = 0; i < buttonQuantity; i++)
 		{
 			DrawRectangleRec(buttons[i].body, buttons[i].color);
-			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2, buttons[i].body.y + buttons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2, buttons[i].fontSize, BLACK);
+			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2.0f,
+					buttons[i].body.y + buttons[i].body.height / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2.0f, 
+					buttons[i].fontSize, BLACK);
 		}
 
 		EndDrawing();
@@ -168,7 +171,7 @@ namespace kuznickiSystem
 			}
 
 			Rectangle spriteSource = { 0.0f,0.0f, imageToDraw.sprite.width, imageToDraw.sprite.height };
-			Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight() };
+			Rectangle spriteDestination = { GetScreenWidth() / 2.0f,GetScreenHeight() / 2.0f, GetScreenWidth(), GetScreenHeight() };
 			Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 			DrawTexturePro(imageToDraw.sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);

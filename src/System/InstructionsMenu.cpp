@@ -20,10 +20,10 @@ namespace kuznickiSystem
 
 	void InstructionsMenu::InitButtons()
 	{
-		buttons[0].body.width = static_cast<float>(GetScreenWidth()) / 4;
-		buttons[0].body.height = static_cast<float>(GetScreenHeight()) / 12;
+		buttons[0].body.width = static_cast<float>(GetScreenWidth()) / buttonXDivider;
+		buttons[0].body.height = static_cast<float>(GetScreenHeight()) / buttonYDivider;
 		buttons[0].body.x = static_cast<float>((GetScreenWidth() / 2)) - buttons[0].body.width / 2;
-		buttons[0].body.y = static_cast<float>((GetScreenHeight() / 8) * (3 * 1.5f) + GetScreenHeight() / 3) - buttons[0].body.height / 2;
+		buttons[0].body.y = static_cast<float>((GetScreenHeight() - (GetScreenHeight() / 8) * 2));
 
 		buttons[0].color = WHITE;
 		buttons[0].fontSize = 24;
@@ -71,11 +71,6 @@ namespace kuznickiSystem
 				buttons[i].color = WHITE;
 			}
 		}
-	}
-
-	void InstructionsMenu::CheckButtonColls()
-	{
-
 	}
 
 	void InstructionsMenu::DrawMenu()

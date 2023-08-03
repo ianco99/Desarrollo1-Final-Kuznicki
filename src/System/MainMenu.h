@@ -5,6 +5,14 @@
 
 namespace kuznickiSystem
 {
+	enum class MainMenuButtons
+	{
+		Game,
+		Instructions,
+		Credits,
+		Quit
+	};
+
 	class MainMenu : Menu
 	{
 	private:
@@ -21,7 +29,7 @@ namespace kuznickiSystem
 		void InitButtons() override;
 		void InitBackground() override;
 		void MenuLoop() override;
-		void CheckButtonColls() override;
+		void CheckButtonColls(MenuState& menuState) override;
 		void DrawMenu() override;
 		void DrawBackground();
 

@@ -20,8 +20,7 @@ namespace kuznickiSystem
 		void InitText();
 		void InitBackground() override;
 		void MenuLoop() override;
-		void CheckButtonColls(MenuState& gameState);
-		void CheckButtonColls()override;
+		void CheckButtonColls(MenuState& gameState) override;
 		void DrawMenu() override;
 		void DrawTextures();
 	};

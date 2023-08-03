@@ -30,7 +30,7 @@ namespace kuznickiSystem
 		virtual void InitButtons() = 0;
 		virtual void InitBackground() = 0;
 		virtual void MenuLoop() = 0;
-		virtual void CheckButtonColls() = 0;
+		virtual void CheckButtonColls(MenuState& menuState) = 0;
 		virtual void DrawMenu() = 0;
 	};
 
