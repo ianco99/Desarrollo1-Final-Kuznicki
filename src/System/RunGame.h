@@ -65,11 +65,12 @@ namespace kuznickiSystem
 		Texture2D background2;
 		Texture2D background3;
 		Texture2D enemySprite;
+
 	public:
 		RunGame();
 		~RunGame();
 
-		void LoadTextures();
+		void LoadTextures(Texture2D* buttonSprite);
 		void LoadButtons();
 
 		void Start(bool& closeApp);
@@ -89,5 +90,7 @@ namespace kuznickiSystem
 		void ManageEnemies();
 		void SpawnEnemy();
 		void TakeInput();
+
+		void AssignButtonSprite(Texture2D* buttonSprite);
 	};
 }

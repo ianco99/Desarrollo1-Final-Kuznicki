@@ -9,6 +9,7 @@ namespace kuznickiSystem
 		menuState = MenuState::Menu;
 		instructionsMenu = InstructionsMenu(&baseButtonSprite);
 		creditsMenu = CreditsMenu(&baseButtonSprite);
+		runGame.AssignButtonSprite(&baseButtonSprite);
 	}
 
 	MainMenu::~MainMenu()

@@ -12,11 +12,11 @@ namespace kuznickiSystem
 
 	RunGame::RunGame()
 	{
-		score = 0;
 		pauseBox = { GetScreenWidth() / 2.0f - GetScreenWidth() / 4.0f, GetScreenHeight() / 4.0f, GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
-
-		LoadTextures();
 		LoadButtons();
+		LoadTextures(nullptr);
+
+		score = 0;
 	}
 
 	RunGame::~RunGame()
@@ -30,7 +30,7 @@ namespace kuznickiSystem
 		UnloadTexture(enemySprite);
 	}
 
-	void RunGame::LoadTextures()
+	void RunGame::LoadTextures(Texture2D* buttonSprite)
 	{
 		ground = LoadTexture("../rsc/ground.png");
 		background0 = LoadTexture("../rsc/parallax-demon-woods-bg.png");
@@ -39,6 +39,11 @@ namespace kuznickiSystem
 		background3 = LoadTexture("../rsc/parallax-demon-woods-close-trees.png");
 
 		enemySprite = LoadTexture("../rsc/enemy.png");
+
+		/*for (int i = 0; i < 2; i++)
+		{
+			pauseButtons[i].sprite = buttonSprite;
+		}*/
 	}
 
 	void RunGame::LoadButtons()
@@ -95,7 +100,12 @@ namespace kuznickiSystem
 
 				for (int i = 0; i < 2; i++)
 				{
-					DrawRectangleRec(pauseButtons[i].body, pauseButtons[i].color);
+					Rectangle buttonSource = { 0.0f, 0.0f, pauseButtons[i].sprite->width, pauseButtons[i].sprite->height };
+					Rectangle buttonDestination = { pauseButtons[i].body.x + pauseButtons[i].body.width / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2, pauseButtons[i].body.width , pauseButtons[i].body.height };
+					Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
+
+					DrawTexturePro(*pauseButtons[i].sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, pauseButtons[i].color);
+					//DrawRectangleRec(pauseButtons[i].body, pauseButtons[i].color);
 					DrawText(pauseButtons[i].text, pauseButtons[i].body.x + pauseButtons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).x / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).y / 2, pauseButtons[i].fontSize, BLACK);
 				}
 
@@ -361,5 +371,13 @@ namespace kuznickiSystem
 	void RunGame::DrawUI()
 	{
 		DrawText(TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(), player.GetGun()->GetMaxBulletCount()), 0, GetScreenHeight() / 1.2f, 46, WHITE);
+	}
+
+	void RunGame::AssignButtonSprite(Texture2D* buttonSprite)
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			pauseButtons[i].sprite = buttonSprite;
+		}
 	}
 };
