@@ -11,7 +11,7 @@ namespace kuznickiSystem
 		Rectangle body;
 		Font font;
 		Color color;
-		Texture2D sprite;
+		Texture2D* sprite;
 		const char* text;
 		const char* link;
 		float fontSize;

@@ -13,10 +13,11 @@ namespace kuznickiSystem
 		const char* texts[4];
 
 	public:
+		InstructionsMenu(Texture2D* buttonSprite);
 		InstructionsMenu();
 		~InstructionsMenu();
 
-		void InitButtons() override;
+		void InitButtons(Texture2D* buttonSprite) override;
 		void InitText();
 		void InitBackground() override;
 		void MenuLoop() override;

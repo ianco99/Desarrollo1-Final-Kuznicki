@@ -2,10 +2,10 @@
 
 namespace kuznickiSystem
 {
-	InstructionsMenu::InstructionsMenu()
+	InstructionsMenu::InstructionsMenu(Texture2D* buttonSprite)
 	{
 		instructionsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 12.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
-		InitButtons();
+		InitButtons(buttonSprite);
 		InitText();
 
 		playerSprite = LoadTexture("../rsc/adventurer-idle-00.png");
@@ -13,12 +13,17 @@ namespace kuznickiSystem
 		enemySprite = LoadTexture("../rsc/enemy.png");
 	}
 
+	InstructionsMenu::InstructionsMenu()
+	{
+
+	}
+
 	InstructionsMenu::~InstructionsMenu()
 	{
 
 	}
 
-	void InstructionsMenu::InitButtons()
+	void InstructionsMenu::InitButtons(Texture2D* buttonSprite)
 	{
 		buttons[0].body.width = static_cast<float>(GetScreenWidth()) / buttonXDivider;
 		buttons[0].body.height = static_cast<float>(GetScreenHeight()) / buttonYDivider;
@@ -29,6 +34,8 @@ namespace kuznickiSystem
 		buttons[0].fontSize = 24;
 
 		buttons[0].text = "BACK";
+
+		buttons[0].sprite = buttonSprite;
 	}
 
 	void InstructionsMenu::InitText()
@@ -79,31 +86,28 @@ namespace kuznickiSystem
 		for (int i = 0; i < 4; i++)
 		{
 			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], 24, 1);
-			Vector2 position = { instructionsBounds.x + instructionsBounds.width / 2.0f - textMeasure.x / 2, instructionsBounds.y - textMeasure.y / 2 + (i+1) * instructionsBounds.height/8.0f};
+			Vector2 position = { instructionsBounds.x + instructionsBounds.width / 2.0f - textMeasure.x / 2, instructionsBounds.y - textMeasure.y / 2 + (i + 1) * instructionsBounds.height / 8.0f };
 			DrawTextEx(GetFontDefault(), texts[i], position, 24, 1, WHITE);
 		}
 
 		DrawTextures();
 
-		for (int i = 0; i < buttonQuantity; i++)
-		{
-			DrawRectangleRec(buttons[i].body, buttons[i].color);
-			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2, buttons[i].body.y + buttons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2, buttons[i].fontSize, BLACK);
-		}
+		DrawText(buttons[0].text, buttons[0].body.x + buttons[0].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).x / 2, buttons[0].body.y + buttons[0].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).y / 2, buttons[0].fontSize, BLACK);
+
 	}
 
 	void InstructionsMenu::DrawTextures()
 	{
 		Rectangle playerSource = { 0.0f,0.0f, playerSprite.width, playerSprite.height };
-		Rectangle playerDestination = { instructionsBounds.x + instructionsBounds.width / 8.0f,(instructionsBounds.height - instructionsBounds.height/5.0f), playerSprite.width * 4.75f, playerSprite.height * 4.375f};
+		Rectangle playerDestination = { instructionsBounds.x + instructionsBounds.width / 8.0f,(instructionsBounds.height - instructionsBounds.height / 5.0f), playerSprite.width * 4.75f, playerSprite.height * 4.375f };
 		Vector2 playerOrigin = { playerDestination.width / 2.0f, playerDestination.height / 2.0f };
 
 		DrawTexturePro(playerSprite, playerSource, playerDestination, playerOrigin, 0.0f, WHITE);
 
 		Rectangle gunSource = { 0.0f,0.0f, gunSprite.width, gunSprite.height };
-		Rectangle gunDestination = { instructionsBounds.x + instructionsBounds.width / 2.0f, (instructionsBounds.height - instructionsBounds.height / 5.0f), gunSprite.width * 9.5f, gunSprite.height * 8.750f};
+		Rectangle gunDestination = { instructionsBounds.x + instructionsBounds.width / 2.0f, (instructionsBounds.height - instructionsBounds.height / 5.0f), gunSprite.width * 9.5f, gunSprite.height * 8.750f };
 		Vector2 gunOrigin = { gunDestination.width / 2.0f, gunDestination.height / 2.0f };
-		
+
 		DrawTexturePro(gunSprite, gunSource, gunDestination, gunOrigin, 0.0f, WHITE);
 
 		Rectangle enemySource = { 0.0f,0.0f, enemySprite.width, enemySprite.height };
@@ -111,5 +115,11 @@ namespace kuznickiSystem
 		Vector2 enemyOrigin = { gunDestination.width / 2.0f, gunDestination.height / 2.0f };
 
 		DrawTexturePro(enemySprite, enemySource, enemyDestination, enemyOrigin, 0.0f, WHITE);
+
+		Rectangle buttonSource = { 0.0f, 0.0f, buttons[0].sprite->width, buttons[0].sprite->height };
+		Rectangle buttonDestination = { buttons->body.x + buttons[0].body.width /2, buttons->body.y + buttons[0].body.height /2, buttons[0].body.width , buttons[0].body.height};
+		Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
+
+		DrawTexturePro(*buttons[0].sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, buttons[0].color);
 	}
 }

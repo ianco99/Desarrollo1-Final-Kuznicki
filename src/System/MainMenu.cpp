@@ -1,21 +1,29 @@
 #include "MainMenu.h"
-
 namespace kuznickiSystem
 {
 	MainMenu::MainMenu()
 	{
-		menuState = MenuState::Menu;
-
-		InitButtons();
+		InitButtons(nullptr);
 		InitBackground();
+
+		menuState = MenuState::Menu;
+		instructionsMenu = InstructionsMenu(&baseButtonSprite);
+		creditsMenu = CreditsMenu(&baseButtonSprite);
 	}
 
 	MainMenu::~MainMenu()
 	{
+		UnloadTexture(baseButtonSprite);
 
+		UnloadTexture(backgrounds[0].sprite);
+		UnloadTexture(backgrounds[1].sprite);
+		UnloadTexture(backgrounds[2].sprite);
+		UnloadTexture(backgrounds[3].sprite);
+		UnloadTexture(backgrounds[4].sprite);
+		UnloadTexture(backgrounds[5].sprite);
 	}
 
-	void MainMenu::InitButtons()
+	void MainMenu::InitButtons(Texture2D* buttonSprite)
 	{
 		for (int i = 0; i < buttonQuantity; i++)
 		{
@@ -31,7 +39,7 @@ namespace kuznickiSystem
 		buttons[1].text = "INSTRUCTIONS";
 		buttons[2].text = "CREDITS";
 		buttons[3].text = "QUIT";
-
+		baseButtonSprite = LoadTexture("../rsc/button.png");
 	}
 
 	void MainMenu::InitBackground()
@@ -143,8 +151,8 @@ namespace kuznickiSystem
 		{
 			DrawRectangleRec(buttons[i].body, buttons[i].color);
 			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2.0f,
-					buttons[i].body.y + buttons[i].body.height / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2.0f, 
-					buttons[i].fontSize, BLACK);
+				buttons[i].body.y + buttons[i].body.height / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2.0f,
+				buttons[i].fontSize, BLACK);
 		}
 
 		EndDrawing();

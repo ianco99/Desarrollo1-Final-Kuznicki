@@ -10,12 +10,13 @@ namespace kuznickiSystem
 		Button linkButtons[10];
 		const char* texts[10];
 	public:
+		CreditsMenu(Texture2D* buttonSprite);
 		CreditsMenu();
 		~CreditsMenu();
 
 
 
-		void InitButtons() override;
+		void InitButtons(Texture2D* buttonSprite) override;
 		void InitText();
 		void InitBackground() override;
 		void MenuLoop() override;

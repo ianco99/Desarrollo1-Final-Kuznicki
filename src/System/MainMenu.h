@@ -20,13 +20,14 @@ namespace kuznickiSystem
 		InstructionsMenu instructionsMenu;
 		RunGame runGame;
 		MenuState menuState;
+		Texture2D baseButtonSprite;
 		bool closeApp = false;
 
 	public:
 		MainMenu();
 		~MainMenu();
 
-		void InitButtons() override;
+		void InitButtons(Texture2D* buttonSprite) override;
 		void InitBackground() override;
 		void MenuLoop() override;
 		void CheckButtonColls(MenuState& menuState) override;

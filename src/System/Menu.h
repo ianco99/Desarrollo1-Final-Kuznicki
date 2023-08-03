@@ -27,7 +27,7 @@ namespace kuznickiSystem
 		Menu();
 		~Menu();
 
-		virtual void InitButtons() = 0;
+		virtual void InitButtons(Texture2D* buttonSprite) = 0;
 		virtual void InitBackground() = 0;
 		virtual void MenuLoop() = 0;
 		virtual void CheckButtonColls(MenuState& menuState) = 0;

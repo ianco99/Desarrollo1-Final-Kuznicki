@@ -3,11 +3,16 @@
 namespace kuznickiSystem
 {
 	static float textSize = 24;
-	CreditsMenu::CreditsMenu()
+	CreditsMenu::CreditsMenu(Texture2D* buttonSprite)
 	{
 		creditsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 12.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
-		InitButtons();
+		InitButtons(buttonSprite);
 		InitText();
+	}
+
+	CreditsMenu::CreditsMenu()
+	{
+
 	}
 
 	CreditsMenu::~CreditsMenu()
@@ -15,7 +20,7 @@ namespace kuznickiSystem
 
 	}
 
-	void CreditsMenu::InitButtons()
+	void CreditsMenu::InitButtons(Texture2D* buttonSprite)
 	{
 		buttons[0].body.width = static_cast<float>(GetScreenWidth()) / buttonXDivider;
 		buttons[0].body.height = static_cast<float>(GetScreenHeight()) / buttonYDivider;
@@ -26,6 +31,8 @@ namespace kuznickiSystem
 		buttons[0].fontSize = textSize;
 
 		buttons[0].text = "BACK";
+
+		buttons[0].sprite = buttonSprite;
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -114,16 +121,13 @@ namespace kuznickiSystem
 			DrawTextEx(GetFontDefault(), texts[i], position, textSize, 1, WHITE);
 			DrawTextEx(GetFontDefault(), linkButtons[i].text, { position.x + textMeasure.x + spacesBtwn, position.y }, textSize, 1, linkButtons->color);
 
-			linkButtons[i].body = { position.x + textMeasure.x + spacesBtwn, position.y, linkMeasure.x, linkMeasure.y};
+			linkButtons[i].body = { position.x + textMeasure.x + spacesBtwn, position.y, linkMeasure.x, linkMeasure.y };
 		}
 
 		DrawTextures();
 
-		for (int i = 0; i < buttonQuantity; i++)
-		{
-			DrawRectangleRec(buttons[i].body, buttons[i].color);
-			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2, buttons[i].body.y + buttons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2, buttons[i].fontSize, BLACK);
-		}
+		DrawRectangleRec(buttons[0].body, buttons[0].color);
+		DrawText(buttons[0].text, buttons[0].body.x + buttons[0].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).x / 2, buttons[0].body.y + buttons[0].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).y / 2, buttons[0].fontSize, BLACK);
 	}
 
 	void CreditsMenu::DrawTextures()
