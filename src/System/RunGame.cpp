@@ -74,6 +74,8 @@ namespace kuznickiSystem
 
 		while (inGame)
 		{
+			CheckGameStateConditions();
+
 			if (gameState == GameState::Playing)
 			{
 				ManageEnemies();
@@ -82,7 +84,6 @@ namespace kuznickiSystem
 
 				Update();
 
-				CheckGameStateConditions();
 
 				DrawFrame();
 			}
@@ -130,7 +131,11 @@ namespace kuznickiSystem
 					}
 				}
 
-				DrawRectangleRec(deathButton.body, deathButton.color);
+				Rectangle buttonSource = { 0.0f, 0.0f, deathButton.sprite->width, deathButton.sprite->height };
+				Rectangle buttonDestination = { deathButton.body.x + deathButton.body.width / 2, deathButton.body.y + deathButton.body.height / 2, deathButton.body.width , deathButton.body.height };
+				Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
+				DrawTexturePro(*deathButton.sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, deathButton.color);
+
 				DrawText(deathButton.text, deathButton.body.x + deathButton.body.width / 2 - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).x / 2, deathButton.body.y + deathButton.body.height / 2 - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).y / 2, deathButton.fontSize, BLACK);
 
 				DrawTextEx(GetFontDefault(), lostText, lostTextPosition, 72, 1, pauseBoxColor);
@@ -314,9 +319,12 @@ namespace kuznickiSystem
 		{
 			gameState = GameState::Lost;
 		}
-		else if (IsKeyDown(KEY_ESCAPE))
+		else if (IsKeyPressed(KEY_ESCAPE))
 		{
-			gameState = GameState::Pause;
+			if (gameState == GameState::Pause)
+				gameState = GameState::Playing;
+			else
+				gameState = GameState::Pause;
 		}
 
 
@@ -379,5 +387,6 @@ namespace kuznickiSystem
 		{
 			pauseButtons[i].sprite = buttonSprite;
 		}
+		deathButton.sprite = buttonSprite;
 	}
 };
