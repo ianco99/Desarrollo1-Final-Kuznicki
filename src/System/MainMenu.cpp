@@ -25,6 +25,8 @@ namespace kuznickiSystem
 
 	void MainMenu::InitButtons(Texture2D* buttonSprite)
 	{
+		baseButtonSprite = LoadTexture("../rsc/button.png");
+
 		for (int i = 0; i < buttonQuantity; i++)
 		{
 			buttons[i].body.width = static_cast<float>(GetScreenWidth()) / buttonXDivider;
@@ -34,12 +36,12 @@ namespace kuznickiSystem
 
 			buttons[i].color = WHITE;
 			buttons[i].fontSize = 24;
+			buttons[i].sprite = &baseButtonSprite;
 		}
 		buttons[0].text = "PLAY (1P)";
 		buttons[1].text = "INSTRUCTIONS";
 		buttons[2].text = "CREDITS";
 		buttons[3].text = "QUIT";
-		baseButtonSprite = LoadTexture("../rsc/button.png");
 	}
 
 	void MainMenu::InitBackground()
@@ -149,7 +151,12 @@ namespace kuznickiSystem
 
 		for (int i = 0; i < buttonQuantity; i++)
 		{
-			DrawRectangleRec(buttons[i].body, buttons[i].color);
+			Rectangle buttonSource = { 0.0f, 0.0f, buttons[i].sprite->width, buttons[i].sprite->height };
+			Rectangle buttonDestination = { buttons[i].body.x + buttons[i].body.width / 2, buttons[i].body.y + buttons[i].body.height / 2, buttons[i].body.width , buttons[i].body.height };
+			Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
+
+			DrawTexturePro(*buttons[i].sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, buttons[i].color);
+
 			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2.0f,
 				buttons[i].body.y + buttons[i].body.height / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2.0f,
 				buttons[i].fontSize, BLACK);

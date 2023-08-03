@@ -126,12 +126,15 @@ namespace kuznickiSystem
 
 		DrawTextures();
 
-		DrawRectangleRec(buttons[0].body, buttons[0].color);
 		DrawText(buttons[0].text, buttons[0].body.x + buttons[0].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).x / 2, buttons[0].body.y + buttons[0].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).y / 2, buttons[0].fontSize, BLACK);
 	}
 
 	void CreditsMenu::DrawTextures()
 	{
+		Rectangle buttonSource = { 0.0f, 0.0f, buttons[0].sprite->width, buttons[0].sprite->height };
+		Rectangle buttonDestination = { buttons->body.x + buttons[0].body.width / 2, buttons->body.y + buttons[0].body.height / 2, buttons[0].body.width , buttons[0].body.height };
+		Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
 
+		DrawTexturePro(*buttons[0].sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, buttons[0].color);
 	}
 }
