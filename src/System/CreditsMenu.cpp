@@ -36,7 +36,7 @@ namespace kuznickiSystem
 	{
 		const char* text0 = "GAME BACKGROUND art by:";
 		linkButtons[0].text = "David Marah";
-		linkButtons[0].link = "https://www.instagram.com/aethrall/?hl=es";
+		linkButtons[0].link = "https://aethrall.itch.io/demon-woods-parallax-background";
 
 		const char* text1 = "MENU BACKGROUND art by:";
 		linkButtons[1].text = "Szadi art";
@@ -59,6 +59,7 @@ namespace kuznickiSystem
 		texts[2] = text2;
 		texts[3] = text3;
 		texts[4] = text4;
+
 	}
 
 	void CreditsMenu::InitBackground()
@@ -88,6 +89,17 @@ namespace kuznickiSystem
 				buttons[i].color = WHITE;
 			}
 		}
+
+		for (int i = 0; i < 5; i++)
+		{
+			if (CheckCollisionPointRec(GetMousePosition(), linkButtons[i].body))
+			{
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				{
+					OpenURL(linkButtons[i].link);
+				}
+			}
+		}
 	}
 
 	void CreditsMenu::CheckButtonColls()
@@ -101,12 +113,20 @@ namespace kuznickiSystem
 		for (int i = 0; i < 5; i++)
 		{
 			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], 24, 1);
+			Vector2 linkMeasure = MeasureTextEx(GetFontDefault(), linkButtons[i].text, 24, 1);
 			Vector2 position = { creditsBounds.x + creditsBounds.width / 2.0f - textMeasure.x / 2, creditsBounds.y - textMeasure.y / 2 + (i + 1) * creditsBounds.height / 8.0f };
 			DrawTextEx(GetFontDefault(), texts[i], position, 24, 1, WHITE);
 			DrawTextEx(GetFontDefault(), linkButtons[i].text, { position.x + textMeasure.x + 48, position.y }, 24, 1, linkButtons->color);
+
+			linkButtons[i].body = { position.x + textMeasure.x + 48, position.y, linkMeasure.x, linkMeasure.y};
 		}
 
 		DrawRectangleLinesEx(creditsBounds, 2.0f, GREEN);
+
+		for (int i = 0; i < 5; i++)
+		{
+			DrawRectangleLinesEx(linkButtons[i].body, 2.0f, GREEN);
+		}
 
 		DrawTextures();
 
