@@ -156,8 +156,6 @@
     <ClCompile Include="..\src\GameObjects\Enemy.cpp" />
     <ClCompile Include="..\src\GameObjects\Gun.cpp" />
     <ClCompile Include="..\src\GameObjects\Player.cpp" />
-    <ClCompile Include="..\src\Managers\GameManager.cpp" />
-    <ClCompile Include="..\src\Managers\PlayerManager.cpp" />
     <ClCompile Include="..\src\System\CreditsMenu.cpp" />
     <ClCompile Include="..\src\System\InstructionsMenu.cpp" />
     <ClCompile Include="..\src\System\main.cpp" />

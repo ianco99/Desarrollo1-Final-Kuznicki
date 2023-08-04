@@ -15,7 +15,6 @@ namespace kuznickiSystem
 		pauseBox = { GetScreenWidth() / 2.0f - GetScreenWidth() / 4.0f, GetScreenHeight() / 4.0f, GetScreenWidth() / 2.0f, GetScreenHeight() / 2.5f };
 		LoadButtons();
 		LoadTextures();
-		InitMusic();
 
 		score = 0;
 	}
@@ -160,7 +159,6 @@ namespace kuznickiSystem
 				closeApp = true;
 			}
 		}
-		StopMusicStream(gameMusic);
 	}
 
 	void RunGame::Init()
@@ -175,11 +173,6 @@ namespace kuznickiSystem
 
 		gameState = GameState::Playing;
 
-	}
-
-	void RunGame::InitMusic()
-	{
-		gameMusic = LoadMusicStream("../rsc/gameMusic.wav");
 	}
 
 	void RunGame::CheckButtonColls()

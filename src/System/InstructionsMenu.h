@@ -3,7 +3,7 @@
 
 namespace kuznickiSystem
 {
-	const int maxInstructionsTexts = 4;
+	const int maxInstructionsTexts = 5;
 	class InstructionsMenu : Menu
 	{
 	private:
@@ -11,7 +11,7 @@ namespace kuznickiSystem
 		Texture2D playerSprite;
 		Texture2D enemySprite;
 		Texture2D gunSprite;
-		const char* texts[4];
+		const char* texts[maxInstructionsTexts];
 
 	public:
 		InstructionsMenu(Texture2D* buttonSprite);

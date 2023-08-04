@@ -4,7 +4,7 @@ namespace kuznickiSystem
 {
 	InstructionsMenu::InstructionsMenu(Texture2D* buttonSprite)
 	{
-		instructionsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 12.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
+		instructionsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 24.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
 		InitButtons(buttonSprite);
 		InitText();
 
@@ -48,14 +48,16 @@ namespace kuznickiSystem
 	void InstructionsMenu::InitText()
 	{
 		const char* myText0 = "In FEARLESS, your objective is to survive the longest.";
-		const char* myText1 = "You will be equiped with a WEAPON which can only fire one bullet at a time.";
-		const char* myText2 = "SHOOT or DODGE enemies to survive.";
-		const char* myText3 = "Your character can recieve up to three hits. After that, you lose.";
+		const char* myText1 = "You will be equiped with a WEAPON which can only fire one bullet";
+		const char* myText2 = "at a time using LEFT MOUSE BUTTON.";
+		const char* myText3 = "SHOOT or DODGE(A,D keys) enemies to survive.";
+		const char* myText4 = "Your character can recieve up to three hits. After that, you lose.";
 
 		texts[0] = myText0;
 		texts[1] = myText1;
 		texts[2] = myText2;
 		texts[3] = myText3;
+		texts[4] = myText4;
 	}
 
 	void InstructionsMenu::InitBackground()
@@ -65,7 +67,7 @@ namespace kuznickiSystem
 
 	void InstructionsMenu::MenuLoop()
 	{
-		//CheckButtonColls();
+
 	}
 
 	void InstructionsMenu::CheckButtonColls(MenuState& menuState)
@@ -90,7 +92,7 @@ namespace kuznickiSystem
 	void InstructionsMenu::DrawMenu()
 	{
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < maxInstructionsTexts; i++)
 		{
 			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], 24, 1);
 			Vector2 position = { instructionsBounds.x + instructionsBounds.width / 2.0f - textMeasure.x / 2.0f, instructionsBounds.y - textMeasure.y / 2.0f + (i + 1) * instructionsBounds.height / 8.0f };
