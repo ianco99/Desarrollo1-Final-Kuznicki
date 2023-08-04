@@ -39,7 +39,7 @@ namespace kuznickiSystem
 
 		buttons[0].sprite = buttonSprite;
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < linkButtonsSize; i++)
 		{
 			linkButtons[i].color = SKYBLUE;
 		}
@@ -67,11 +67,16 @@ namespace kuznickiSystem
 		linkButtons[4].text = "Mack";
 		linkButtons[4].link = "https://bigmack.itch.io";
 
+		const char* text5 = "MUSIC by:";
+		linkButtons[5].text = "Enzo Coletta";
+		linkButtons[5].link = "https://biscupidtea.itch.io";
+
 		texts[0] = text0;
 		texts[1] = text1;
 		texts[2] = text2;
 		texts[3] = text3;
 		texts[4] = text4;
+		texts[5] = text5;
 
 	}
 
@@ -103,7 +108,7 @@ namespace kuznickiSystem
 			}
 		}
 
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < linkButtonsSize; i++)
 		{
 			if (CheckCollisionPointRec(GetMousePosition(), linkButtons[i].body))
 			{
@@ -118,7 +123,7 @@ namespace kuznickiSystem
 	void CreditsMenu::DrawMenu()
 	{
 		int spacesBtwn = 48;
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < linkButtonsSize; i++)
 		{
 			Vector2 textMeasure = MeasureTextEx(GetFontDefault(), texts[i], textSize, 1);
 			Vector2 linkMeasure = MeasureTextEx(GetFontDefault(), linkButtons[i].text, textSize, 1);

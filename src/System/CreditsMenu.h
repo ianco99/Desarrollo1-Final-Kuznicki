@@ -3,7 +3,7 @@
 
 namespace kuznickiSystem
 {
-	static const int linkButtonsSize = 10;
+	static const int linkButtonsSize = 6;
 	class CreditsMenu : Menu
 	{
 	private:
