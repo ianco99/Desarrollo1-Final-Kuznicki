@@ -30,7 +30,6 @@ namespace kuznickiGameObjects
 
 	void Gun::Update(Rectangle newPlayer)
 	{
-		std::cout << position.x;
 		position = { newPlayer.x + newPlayer.width + sprite.width * 3.8f, newPlayer.y + newPlayer.height / 2.0f + sprite.height * 3.5f };
 		PointGun();
 		for (int i = 0; i < maxBullets; i++)

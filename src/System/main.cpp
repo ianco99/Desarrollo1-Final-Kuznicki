@@ -2,7 +2,7 @@
 
 int main()
 {
-	InitWindow(1024, 768, "MyFinal");
+	InitWindow(1024, 768, "FEARLESS");
 	SetExitKey(NULL);
 	kuznickiSystem::MainMenu menu = kuznickiSystem::MainMenu();
 	menu.MenuLoop();

@@ -75,8 +75,10 @@ namespace kuznickiSystem
 
 		void Start(bool& closeApp, Music mainMusic);
 		void Init();
-		void Update();
 
+		void GameLoop(bool& closeApp, Music mainMusic);
+
+		void Update();
 		void UpdateEnemies();
 		void UpdateDifficulty();
 		void UpdateScore();
@@ -87,6 +89,9 @@ namespace kuznickiSystem
 		void DrawBackground();
 		void DrawGround();
 		void DrawUI();
+
+		void DrawPause();
+		void DrawLoseScreen();
 
 		void ManageEnemies();
 		void SpawnEnemy();
