@@ -165,6 +165,9 @@ namespace kuznickiSystem
 		ClearBackground(BLACK);
 		DrawBackground();
 
+		Vector2 measureTitle = MeasureTextEx(GetFontDefault(), "FEARLESS", 64, 1);
+			DrawTextEx(GetFontDefault(), "FEARLESS", { GetScreenWidth()/2.0f - measureTitle.x / 2.0f, GetScreenHeight() / 18.0f }, 64, 1, WHITE);
+
 		for (int i = 0; i < buttonQuantity; i++)
 		{
 			Rectangle buttonSource = { 0.0f, 0.0f, static_cast<float>(buttons[i].sprite->width), static_cast<float>(buttons[i].sprite->height) };
