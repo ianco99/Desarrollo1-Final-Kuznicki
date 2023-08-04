@@ -10,8 +10,8 @@ namespace kuznickiGameObjects
 		float angle = 0.0f;
 		Vector2 position = { 0.0f, 0.0f };
 		
-		Vector2 velocity = { 0.0f, 0.0f };	//Only positive values
-		Vector2 acceleration = { 0.0f, 0.0f };	//In case I need the bullet to speed up overtime
+		Vector2 velocity = { 0.0f, 0.0f };	
+		Vector2 acceleration = { 0.0f, 0.0f };	
 		Vector2 direction = { 0.0f, 0.0f };
 
 		Color color = WHITE;

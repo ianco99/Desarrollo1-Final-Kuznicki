@@ -50,7 +50,6 @@ namespace kuznickiGameObjects
 	void Player::ShootGun()
 	{
 		this->gun.PullTrigger(body);
-		//maybe play an anim
 	}
 
 	void Player::Draw()

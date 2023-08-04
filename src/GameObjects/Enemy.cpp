@@ -54,6 +54,24 @@ namespace kuznickiGameObjects
 		}
 	}
 
+	void Enemy::Move()
+	{
+		this->position.x += direction.x * velocity.x * GetFrameTime();
+		this->position.y += direction.y * velocity.y * GetFrameTime();
+	}
+
+	void Enemy::CheckPlayerCollision(Player& player)
+	{
+		if (CheckCollisionCircleRec(position, radius, player.GetBody()))
+		{
+			player.Damage(damage);
+			if (player.GetIsAlive())
+			{
+				SetIsAlive(false);
+			}
+		}
+	}
+
 	void Enemy::CheckBulletCollisions(Gun* currGun, int bulletsSize, float& score)
 	{
 		for (int i = 0; i < bulletsSize; i++)
@@ -72,16 +90,14 @@ namespace kuznickiGameObjects
 		}
 	}
 
-	void Enemy::CheckPlayerCollision(Player& player)
+	bool Enemy::CheckCollisions(Bullet& bullet)
 	{
-		if (CheckCollisionCircleRec(position, radius, player.GetBody()))
+		if (CheckCollisionCircles(position, radius, bullet.GetPosition(), bullet.GetRadius()))
 		{
-			player.Damage(damage);
-			if (player.GetIsAlive())
-			{
-				SetIsAlive(false);
-			}
+			return true;
+
 		}
+		return false;
 	}
 
 	void Enemy::CheckOutOfBounds()
@@ -92,22 +108,6 @@ namespace kuznickiGameObjects
 		{
 			isAlive = false;
 		}
-	}
-
-	void Enemy::Move()
-	{
-		this->position.x += direction.x * velocity.x * GetFrameTime();
-		this->position.y += direction.y * velocity.y * GetFrameTime();
-	}
-
-	bool Enemy::CheckCollisions(Bullet& bullet)
-	{
-		if (CheckCollisionCircles(position, radius, bullet.GetPosition(), bullet.GetRadius()))
-		{
-			return true;
-
-		}
-		return false;
 	}
 
 	void Enemy::SpawnRandPosition()
@@ -185,14 +185,14 @@ namespace kuznickiGameObjects
 		return color;
 	}
 
-	bool Enemy::GetIsAlive()
-	{
-		return isAlive;
-	}
-
 	void Enemy::SetIsAlive(bool value)
 	{
 		isAlive = value;
+	}
+
+	bool Enemy::GetIsAlive()
+	{
+		return isAlive;
 	}
 
 	float Enemy::GetRadius()

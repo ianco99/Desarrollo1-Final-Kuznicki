@@ -90,13 +90,13 @@ namespace kuznickiGameObjects
 		return this->color;
 	}
 
-	bool Bullet::GetIsAlive()
-	{
-		return isAlive;
-	}
-
 	void Bullet::SetIsAlive(bool value)
 	{
 		isAlive = value;
+	}
+
+	bool Bullet::GetIsAlive()
+	{
+		return isAlive;
 	}
 }

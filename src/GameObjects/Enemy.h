@@ -23,8 +23,8 @@ namespace kuznickiGameObjects
 		bool isAlive;
 
 	public:
-		Enemy();
 		Enemy(float radius, Color color, Texture2D* sprite);
+		Enemy();
 		~Enemy();
 
 		void Update(Player& player, float& score);
