@@ -5,6 +5,7 @@ namespace kuznickiSystem
 	{
 		InitButtons(nullptr);
 		InitBackground();
+		InitMusic();
 
 		menuState = MenuState::Menu;
 		instructionsMenu = InstructionsMenu(&baseButtonSprite);
@@ -22,6 +23,9 @@ namespace kuznickiSystem
 		UnloadTexture(backgrounds[3].sprite);
 		UnloadTexture(backgrounds[4].sprite);
 		UnloadTexture(backgrounds[5].sprite);
+
+		UnloadMusicStream(mainMusic);
+		CloseAudioDevice();
 	}
 
 	void MainMenu::InitButtons(Texture2D* buttonSprite)
@@ -63,10 +67,20 @@ namespace kuznickiSystem
 		backgrounds[5].sprite = LoadTexture("../rsc/menuBackground5.png");
 	}
 
+	void MainMenu::InitMusic()
+	{
+		InitAudioDevice();
+
+		mainMusic = LoadMusicStream("../rsc/Menu_Song.wav");
+		mainMusic.looping = true;
+	}
+
 	void MainMenu::MenuLoop()
 	{
+		PlayMusicStream(mainMusic);
 		while (!WindowShouldClose() && !closeApp)
 		{
+			UpdateMusicStream(mainMusic);
 			switch (menuState)
 			{
 			case kuznickiSystem::MenuState::Menu:
@@ -118,7 +132,7 @@ namespace kuznickiSystem
 						if (currMenuState != MenuState::Game)
 						{
 							currMenuState = MenuState::Game;
-							runGame.Start(closeApp);
+							runGame.Start(closeApp, mainMusic);
 						}
 						currMenuState = MenuState::Menu;
 

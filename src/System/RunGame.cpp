@@ -15,6 +15,7 @@ namespace kuznickiSystem
 		pauseBox = { GetScreenWidth() / 2.0f - GetScreenWidth() / 4.0f, GetScreenHeight() / 4.0f, GetScreenWidth() / 2.0f, GetScreenHeight() / 2.5f };
 		LoadButtons();
 		LoadTextures();
+		InitMusic();
 
 		score = 0;
 	}
@@ -62,14 +63,15 @@ namespace kuznickiSystem
 		pauseButtons[1].text = "GO TO MENU";
 	}
 
-	void RunGame::Start(bool& closeApp)
+	void RunGame::Start(bool& closeApp, Music mainMusic)
 	{
 		Init();
 
 		SetupEnemies(enemies, &enemySprite);
-
+		PlayMusicStream(mainMusic);
 		while (inGame)
 		{
+			UpdateMusicStream(mainMusic);
 			CheckGameStateConditions();
 
 			if (gameState == GameState::Playing)
@@ -158,6 +160,7 @@ namespace kuznickiSystem
 				closeApp = true;
 			}
 		}
+		StopMusicStream(gameMusic);
 	}
 
 	void RunGame::Init()
@@ -171,6 +174,12 @@ namespace kuznickiSystem
 		score = 0.0f;
 
 		gameState = GameState::Playing;
+
+	}
+
+	void RunGame::InitMusic()
+	{
+		gameMusic = LoadMusicStream("../rsc/gameMusic.wav");
 	}
 
 	void RunGame::CheckButtonColls()

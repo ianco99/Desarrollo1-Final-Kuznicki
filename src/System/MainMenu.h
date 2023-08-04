@@ -21,6 +21,7 @@ namespace kuznickiSystem
 		RunGame runGame;
 		MenuState menuState;
 		Texture2D baseButtonSprite;
+		Music mainMusic;
 		bool closeApp = false;
 
 	public:
@@ -29,6 +30,7 @@ namespace kuznickiSystem
 
 		void InitButtons(Texture2D* buttonSprite) override;
 		void InitBackground() override;
+		void InitMusic();
 		void MenuLoop() override;
 		void CheckButtonColls(MenuState& menuState) override;
 		void DrawMenu() override;

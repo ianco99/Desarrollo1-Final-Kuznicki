@@ -66,6 +66,10 @@ namespace kuznickiSystem
 		Texture2D background3;
 		Texture2D enemySprite;
 
+		Music gameMusic;
+		Sound triggerSound;
+		Sound shootSound;
+
 	public:
 		RunGame();
 		~RunGame();
@@ -73,9 +77,11 @@ namespace kuznickiSystem
 		void LoadTextures();
 		void LoadButtons();
 
-		void Start(bool& closeApp);
+		void Start(bool& closeApp, Music mainMusic);
 		void Init();
+		void InitMusic();
 		void Update();
+
 		void UpdateEnemies();
 		void UpdateDifficulty();
 		void UpdateScore();
