@@ -12,7 +12,7 @@ namespace kuznickiSystem
 
 	RunGame::RunGame()
 	{
-		pauseBox = { GetScreenWidth() / 2.0f - GetScreenWidth() / 4.0f, GetScreenHeight() / 4.0f, GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+		pauseBox = { GetScreenWidth() / 2.0f - GetScreenWidth() / 4.0f, GetScreenHeight() / 4.0f, GetScreenWidth() / 2.0f, GetScreenHeight() / 2.5f };
 		LoadButtons();
 		LoadTextures(nullptr);
 
@@ -39,21 +39,17 @@ namespace kuznickiSystem
 		background3 = LoadTexture("../rsc/parallax-demon-woods-close-trees.png");
 
 		enemySprite = LoadTexture("../rsc/enemy.png");
-
-		/*for (int i = 0; i < 2; i++)
-		{
-			pauseButtons[i].sprite = buttonSprite;
-		}*/
 	}
 
 	void RunGame::LoadButtons()
 	{
+		Vector2 pauseButtonDividers = { 3.0f, 6.0f };
 		for (int i = 0; i < 2; i++)
 		{
-			pauseButtons[i].body.width = static_cast<float>(pauseBox.width) / 3;
-			pauseButtons[i].body.height = static_cast<float>(pauseBox.height) / 6;
+			pauseButtons[i].body.width = static_cast<float>(pauseBox.width) / pauseButtonDividers.x;
+			pauseButtons[i].body.height = static_cast<float>(pauseBox.height) / pauseButtonDividers.y;
 			pauseButtons[i].body.x = static_cast<float>((pauseBox.x + pauseBox.width / 2)) - pauseButtons[i].body.width / 2;
-			pauseButtons[i].body.y = static_cast<float>((pauseBox.y) * (i * 0.5f) + pauseBox.height / 1.4f);
+			pauseButtons[i].body.y = static_cast<float>((pauseBox.y + pauseBox.height / 3.0f) + (i * pauseBox.height / 3.0f));
 
 			pauseButtons[i].color = WHITE;
 			pauseButtons[i].fontSize = 24;
@@ -89,7 +85,7 @@ namespace kuznickiSystem
 			}
 			if (gameState == GameState::Pause)
 			{
-				Color pauseBoxColor = { 255,180,209,255 };
+				Color pauseBoxColor = { 255,100,100,255 };
 
 				CheckButtonColls();
 
@@ -326,8 +322,6 @@ namespace kuznickiSystem
 			else
 				gameState = GameState::Pause;
 		}
-
-
 	}
 
 	void RunGame::DrawFrame()
