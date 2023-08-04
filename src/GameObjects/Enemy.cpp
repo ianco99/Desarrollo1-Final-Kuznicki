@@ -12,13 +12,25 @@ namespace kuznickiGameObjects
 		this->color = color;
 		this->isAlive = false;
 		this->scoreToGive = 5.0f;
+		this->acceleration = { 0.0f, 0.0f };
+		this->direction = { 0.0f, 0.0f };
+		this->velocity = { 0.0f, 0.0f };
 
 		this->sprite = sprite;
 	}
 
 	Enemy::Enemy()
 	{
+		this->position = { 0.0f, 0.0f };
+		this->velocity = { 0.0f, 0.0f };
+		this->acceleration = { 0.0f, 0.0f };
+		this->direction = { 0.0f, 0.0f };
+		this->radius = 0.0f;
 
+		this->color = WHITE;
+		this->sprite = nullptr;
+		this->scoreToGive = 0.0f;
+		this->isAlive = false;
 	}
 
 	Enemy::~Enemy()
@@ -31,21 +43,20 @@ namespace kuznickiGameObjects
 		if (isAlive)
 		{
 			Gun* currGun = player.GetGun();
-			int maxBullets = currGun->GetMaxBullets();
 
 			Move();
 
 			CheckPlayerCollision(player);
 
-			CheckBulletCollisions(player.GetGun(), player.GetGun()->GetMaxBullets(), score);
+			CheckBulletCollisions(currGun, currGun->GetMaxBullets(), score);
 
 			CheckOutOfBounds();
 		}
 	}
 
-	void Enemy::CheckBulletCollisions(Gun* currGun, int maxBullets, float& score)
+	void Enemy::CheckBulletCollisions(Gun* currGun, int bulletsSize, float& score)
 	{
-		for (int i = 0; i < maxBullets; i++)
+		for (int i = 0; i < bulletsSize; i++)
 		{
 			if (currGun->GetBulletByIndex(i)->GetIsAlive() == true)
 			{
@@ -101,26 +112,28 @@ namespace kuznickiGameObjects
 
 	void Enemy::SpawnRandPosition()
 	{
+		float screenMargin = 10.0f;
+		int yLimit = static_cast<int>(GetScreenHeight() / 3.0f);
 		SpawnSites sites = (SpawnSites)(rand() % 3);
 		Vector2 spawnPos;
 
 		switch (sites)
 		{
 		case kuznickiGameObjects::SpawnSites::Left:
-			spawnPos.x = -10;
-			spawnPos.y = rand() % GetScreenHeight() / 3;
+			spawnPos.x = -screenMargin;
+			spawnPos.y = static_cast<float>(rand() % yLimit);
 			break;
 		case kuznickiGameObjects::SpawnSites::Right:
-			spawnPos.x = GetScreenWidth() + 10;
-			spawnPos.y = rand() % GetScreenHeight() / 3;
+			spawnPos.x = GetScreenWidth() + screenMargin;
+			spawnPos.y = static_cast<float>(rand() % yLimit);
 			break;
 		case kuznickiGameObjects::SpawnSites::Top:
-			spawnPos.x = rand() % GetScreenWidth();
-			spawnPos.y = -10;
+			spawnPos.x = static_cast<float>(rand() % GetScreenWidth());
+			spawnPos.y = -screenMargin;
 			break;
 		default:
-			spawnPos.x = -10;
-			spawnPos.y = -10;
+			spawnPos.x = -screenMargin;
+			spawnPos.y = -screenMargin;
 			break;
 		}
 

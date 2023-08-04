@@ -14,7 +14,7 @@ namespace kuznickiSystem
 	{
 		pauseBox = { GetScreenWidth() / 2.0f - GetScreenWidth() / 4.0f, GetScreenHeight() / 4.0f, GetScreenWidth() / 2.0f, GetScreenHeight() / 2.5f };
 		LoadButtons();
-		LoadTextures(nullptr);
+		LoadTextures();
 
 		score = 0;
 	}
@@ -30,7 +30,7 @@ namespace kuznickiSystem
 		UnloadTexture(enemySprite);
 	}
 
-	void RunGame::LoadTextures(Texture2D* buttonSprite)
+	void RunGame::LoadTextures()
 	{
 		ground = LoadTexture("../rsc/ground.png");
 		background0 = LoadTexture("../rsc/parallax-demon-woods-bg.png");
@@ -93,17 +93,17 @@ namespace kuznickiSystem
 
 				CheckButtonColls();
 				DrawRectangleRec(pauseBox, pauseBoxColor);
-				DrawText("PAUSE", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "PAUSE", 42, 1).x / 2, GetScreenHeight() / 4, 42, WHITE);
+				DrawTextEx(GetFontDefault(), "PAUSE", { GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "PAUSE", 42, 1).x / 2.0f, GetScreenHeight() / 4.0f }, 42, 1,WHITE);
 
 				for (int i = 0; i < 2; i++)
 				{
-					Rectangle buttonSource = { 0.0f, 0.0f, pauseButtons[i].sprite->width, pauseButtons[i].sprite->height };
+					Rectangle buttonSource = { 0.0f, 0.0f, static_cast<float>(pauseButtons[i].sprite->width), static_cast<float>(pauseButtons[i].sprite->height) };
 					Rectangle buttonDestination = { pauseButtons[i].body.x + pauseButtons[i].body.width / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2, pauseButtons[i].body.width , pauseButtons[i].body.height };
 					Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
 
 					DrawTexturePro(*pauseButtons[i].sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, pauseButtons[i].color);
-					//DrawRectangleRec(pauseButtons[i].body, pauseButtons[i].color);
-					DrawText(pauseButtons[i].text, pauseButtons[i].body.x + pauseButtons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).x / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).y / 2, pauseButtons[i].fontSize, BLACK);
+
+					DrawTextEx(GetFontDefault(), pauseButtons[i].text, { pauseButtons[i].body.x + pauseButtons[i].body.width / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).x / 2, pauseButtons[i].body.y + pauseButtons[i].body.height / 2 - MeasureTextEx(GetFontDefault(), pauseButtons[i].text, pauseButtons[i].fontSize, 1).y / 2 }, pauseButtons[i].fontSize, 1,BLACK);
 				}
 
 				EndDrawing();
@@ -127,12 +127,12 @@ namespace kuznickiSystem
 					}
 				}
 
-				Rectangle buttonSource = { 0.0f, 0.0f, deathButton.sprite->width, deathButton.sprite->height };
-				Rectangle buttonDestination = { deathButton.body.x + deathButton.body.width / 2, deathButton.body.y + deathButton.body.height / 2, deathButton.body.width , deathButton.body.height };
+				Rectangle buttonSource = { 0.0f, 0.0f, static_cast<float>(deathButton.sprite->width), static_cast<float>(deathButton.sprite->height) };
+				Rectangle buttonDestination = { deathButton.body.x + deathButton.body.width / 2.0f, deathButton.body.y + deathButton.body.height / 2.0f, deathButton.body.width , deathButton.body.height };
 				Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
 				DrawTexturePro(*deathButton.sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, deathButton.color);
 
-				DrawText(deathButton.text, deathButton.body.x + deathButton.body.width / 2 - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).x / 2, deathButton.body.y + deathButton.body.height / 2 - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).y / 2, deathButton.fontSize, BLACK);
+				DrawTextEx(GetFontDefault(), deathButton.text, { deathButton.body.x + deathButton.body.width / 2.0f - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).x / 2.0f, deathButton.body.y + deathButton.body.height / 2.0f - MeasureTextEx(GetFontDefault(), deathButton.text, deathButton.fontSize, 1).y / 2.0f }, deathButton.fontSize, 1,BLACK);
 
 				DrawTextEx(GetFontDefault(), lostText, lostTextPosition, 72, 1, pauseBoxColor);
 				EndDrawing();
@@ -165,10 +165,10 @@ namespace kuznickiSystem
 
 		inGame = true;
 		player = Player(GetScreenWidth() / 2.0f, 6 * GetScreenHeight() / 9.5f, GetScreenWidth() / 26.0f, GetScreenHeight() / 8.7f, WHITE);
-		currSystemStats.maxNumberOfEnemies = 2.0f;
+		currSystemStats.maxNumberOfEnemies = 2;
 		currSystemStats.spawnRate = 3.0f;
 		currSystemStats.currTimeToSpawn = 0.0f;
-		score = 0;
+		score = 0.0f;
 
 		gameState = GameState::Playing;
 	}
@@ -344,15 +344,14 @@ namespace kuznickiSystem
 
 		DrawUI();
 
-		DrawLine(player.GetGun()->GetPosition().x, player.GetGun()->GetPosition().y, GetMouseX(), GetMouseY(), RED);
 
 		EndDrawing();
 	}
 
 	void RunGame::DrawBackground()
 	{
-		Rectangle spriteSource = { 0.0f,0.0f, background1.width, background1.height };
-		Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.2f, GetScreenWidth(), GetScreenHeight() };
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(background1.width), static_cast<float>(background1.height) };
+		Rectangle spriteDestination = { GetScreenWidth() / 2.0f,GetScreenHeight() / 3.2f, static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		DrawTexturePro(background0, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
@@ -363,8 +362,8 @@ namespace kuznickiSystem
 
 	void RunGame::DrawGround()
 	{
-		Rectangle spriteSource = { 0.0f,0.0f, ground.width, ground.height };
-		Rectangle spriteDestination = { GetScreenWidth() / 2,GetScreenHeight() / 3.4f, GetScreenWidth(), GetScreenHeight() * 1.5f };
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(ground.width), static_cast<float>(ground.height) };
+		Rectangle spriteDestination = { GetScreenWidth() / 2.0f,GetScreenHeight() / 3.4f, static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) * 1.5f };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		DrawTexturePro(ground, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
@@ -372,7 +371,7 @@ namespace kuznickiSystem
 
 	void RunGame::DrawUI()
 	{
-		DrawText(TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(), player.GetGun()->GetMaxBulletCount()), 0, GetScreenHeight() / 1.2f, 46, WHITE);
+		DrawTextEx(GetFontDefault(), TextFormat("Bullets: %2i/%2i", player.GetGun()->GetCurrentBulletCount(), player.GetGun()->GetMaxBulletCount()), { 0, GetScreenHeight() / 1.2f }, 46, 1.0f, WHITE);
 	}
 
 	void RunGame::AssignButtonSprite(Texture2D* buttonSprite)

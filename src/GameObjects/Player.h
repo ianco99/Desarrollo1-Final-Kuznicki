@@ -8,7 +8,7 @@ namespace kuznickiGameObjects
 	class Player
 	{
 	private:
-		Rectangle* body;
+		Rectangle body = { 0.0f,0.0f,0.0f, 0.0f };
 		Color color;
 		Gun gun = Gun(body);
 

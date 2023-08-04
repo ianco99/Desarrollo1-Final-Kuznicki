@@ -6,7 +6,7 @@ namespace kuznickiGameObjects
 {
 	Player::Player(float posX, float posY, float sizeX, float sizeY, Color givenColor)
 	{
-		this->body = new Rectangle{ posX, posY, sizeX, sizeY };
+		this->body = Rectangle{ posX, posY, sizeX, sizeY };
 		this->color = givenColor;
 
 		this->gun = Gun(body);
@@ -16,7 +16,6 @@ namespace kuznickiGameObjects
 
 	Player::~Player()
 	{
-
 	}
 
 	void Player::Update()
@@ -33,13 +32,14 @@ namespace kuznickiGameObjects
 			}
 		}
 
-		this->gun.Update();
+		gun.Update(body);
 	}
 
 	void Player::Reposition(float newX, float newY)
 	{
-		body->x = newX;
-		body->y = newY;
+		body.x = newX;
+		body.y = newY;
+		gun.Update(body);
 	}
 
 	Gun* Player::GetGun()
@@ -49,26 +49,24 @@ namespace kuznickiGameObjects
 
 	void Player::ShootGun()
 	{
-		this->gun.PullTrigger();
+		this->gun.PullTrigger(body);
 		//maybe play an anim
 	}
 
 	void Player::Draw()
 	{
-		//DrawRectangleRec(*body, color);
-		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
-		Rectangle spriteDestination = { body->x + body->width / 2,body->y + body->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(sprite.width), static_cast<float>(sprite.height) };
+		Rectangle spriteDestination = { body.x + body.width / 2,body.y + body.height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-		//DrawRectanglePro(bullets[i].GetRadius(), spriteOrigin, bullets[i].GetAngle(), bullets[i].GetColor());
 		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, color);
 
-		gun.Draw();
+		gun.Draw(body);
 	}
 
 	Rectangle Player::GetBody()
 	{
-		return *body;
+		return body;
 	}
 
 	void Player::Damage(int damage)

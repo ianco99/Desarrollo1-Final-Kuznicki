@@ -4,21 +4,22 @@
 
 namespace kuznickiGameObjects
 {
-	Gun::Gun(Rectangle* myPlayer)
+	Gun::Gun(Rectangle& myNewPlayer)
 	{
 		for (int i = 0; i < maxBullets; i++)
 		{
 			bullets[i] = Bullet(8.0f, 1, RED);
 			bullets[i].SetIsAlive(false);
 		}
+		this->angle = 0.0f;
+		this->myPlayer = &myNewPlayer;
+		this->position = { myPlayer->x, myPlayer->y };
+		this->canShoot = true;
 
-		this->myPlayer = myPlayer;
-		canShoot = true;
+		this->currentBullets = 1;
+		this->maxBulletCount = 1;
 
-		currentBullets = 1;
-		maxBulletCount = 1;
-
-		sprite = LoadTexture("../rsc/gun.png");
+		this->sprite = LoadTexture("../rsc/gun.png");
 
 	}
 
@@ -27,9 +28,10 @@ namespace kuznickiGameObjects
 
 	}
 
-	void Gun::Update()
+	void Gun::Update(Rectangle newPlayer)
 	{
-		position = { myPlayer->x + myPlayer->width + sprite.width * 3.8f, myPlayer->y + myPlayer->height / 2 + sprite.height * 3.5f };
+		std::cout << position.x;
+		position = { newPlayer.x + newPlayer.width + sprite.width * 3.8f, newPlayer.y + newPlayer.height / 2.0f + sprite.height * 3.5f };
 		PointGun();
 		for (int i = 0; i < maxBullets; i++)
 		{
@@ -49,24 +51,24 @@ namespace kuznickiGameObjects
 
 		Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
 
-		double angle = atan(distance.y / distance.x);
+		double currAngle = atan(distance.y / distance.x);
 
-		angle = angle * 180 / PI;
+		currAngle = currAngle * 180 / PI;
 
 		if (distance.x > 0 && distance.y < 0) //Quad 4
 		{
-			angle += 360;
+			currAngle += 360;
 		}
 		else if (distance.x < 0 && distance.y < 0) //Quad 3
 		{
-			angle += 180;
+			currAngle += 180;
 		}
 		else if (distance.x < 0 && distance.y > 0) //Quad 2
 		{
-			angle += 180;
+			currAngle += 180;
 		}
 
-		this->angle = static_cast<float>(angle);
+		this->angle = static_cast<float>(currAngle);
 	}
 
 	void Gun::ToggleCanShoot(bool value)
@@ -74,7 +76,7 @@ namespace kuznickiGameObjects
 		canShoot = value;
 	}
 
-	void Gun::PullTrigger()
+	void Gun::PullTrigger(Rectangle playerBody)
 	{
 		if (canShoot)
 		{
@@ -87,15 +89,15 @@ namespace kuznickiGameObjects
 
 			if (bulletCount < maxBulletCount)
 			{
-				Shoot();
+				Shoot(playerBody);
 				currentBullets++;
 			}
 		}
 	}
 
-	void Gun::Shoot()
+	void Gun::Shoot(Rectangle playerBody)
 	{
-		Vector2 direction = GetBulletDirection();
+		Vector2 direction = GetBulletDirection(playerBody);
 
 		float rotationAngle = GetBulletRotation(direction);
 
@@ -105,18 +107,18 @@ namespace kuznickiGameObjects
 			{
 				bullets[i].SetAngle(rotationAngle);
 				bullets[i].ChangeDirection(Vector2Normalize(direction));
-				bullets[i].ChangeVelocity({ 700,700 });
-				bullets[i].ChangePosition({ myPlayer->x + myPlayer->width + sprite.width,myPlayer->y + myPlayer->height / 2 });
+				bullets[i].ChangeVelocity({ 550,550 });
+				bullets[i].ChangePosition({ playerBody.x + playerBody.width + sprite.width,playerBody.y + playerBody.height / 2.0f });
 				bullets[i].SetIsAlive(true);
 				break;
 			}
 		}
 	}
 
-	Vector2 Gun::GetBulletDirection()
+	Vector2 Gun::GetBulletDirection(Rectangle playerBody)
 	{
 		Vector2 mousePos = GetMousePosition();
-		Vector2 distance = Vector2Subtract(mousePos, { myPlayer->x + myPlayer->width + sprite.width,myPlayer->y + myPlayer->height / 2 });
+		Vector2 distance = Vector2Subtract(mousePos, { playerBody.x + playerBody.width + sprite.width,playerBody.y + playerBody.height / 2.0f });
 
 		return distance;
 	}
@@ -165,7 +167,7 @@ namespace kuznickiGameObjects
 
 	int Gun::GetCurrentBulletCount()
 	{
-		float bulletCount = maxBulletCount;
+		int bulletCount = maxBulletCount;
 		for (int i = 0; i < maxBullets; i++)
 		{
 			if (bullets[i].GetIsAlive() == true)
@@ -180,10 +182,10 @@ namespace kuznickiGameObjects
 		return{ myPlayer->x + myPlayer->width + sprite.width, myPlayer->y + myPlayer->height / 2.0f};
 	}
 
-	void Gun::Draw()
+	void Gun::Draw(Rectangle playerBody)
 	{
-		Rectangle spriteSource = { 0.0f,0.0f, sprite.width, sprite.height };
-		Rectangle spriteDestination = { myPlayer->x + myPlayer->width,myPlayer->y + myPlayer->height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(sprite.width), static_cast<float>(sprite.height) };
+		Rectangle spriteDestination = { playerBody.x + playerBody.width, playerBody.y + playerBody.height / 2, sprite.width * 3.8f, sprite.height * 3.5f };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 		DrawTexturePro(sprite, spriteSource, spriteDestination, spriteOrigin, angle, WHITE);
@@ -195,5 +197,8 @@ namespace kuznickiGameObjects
 				DrawCircleV(bullets[i].GetPosition(), bullets[i].GetRadius(), bullets[i].GetColor());
 			}
 		}
+
+		DrawLineEx({ playerBody.x + playerBody.width + sprite.width,playerBody.y + playerBody.height / 2.0f }, { static_cast<float>(GetMouseX()), static_cast<float>(GetMouseY()) }, 1.0f, RED);
+
 	}
 }

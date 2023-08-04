@@ -3,6 +3,7 @@
 
 namespace kuznickiSystem
 {
+	const int maxInstructionsTexts = 4;
 	class InstructionsMenu : Menu
 	{
 	private:

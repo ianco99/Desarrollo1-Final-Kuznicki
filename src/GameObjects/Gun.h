@@ -5,7 +5,7 @@
 
 namespace kuznickiGameObjects
 {
-	const int maxBullets = 200;
+	static const int maxBullets = 200;
 
 	class Gun
 	{
@@ -23,18 +23,18 @@ namespace kuznickiGameObjects
 		int maxBulletCount;
 
 	public:
-		Gun(Rectangle* myPlayer);
+		Gun(Rectangle& myNewPlayer);
 		~Gun();
 
-		void Update();
+		void Update(Rectangle myNewPlayer);
 		void PointGun();
 
 		void ToggleCanShoot(bool value);
 
-		void PullTrigger();
-		void Shoot();
+		void PullTrigger(Rectangle playerBody);
+		void Shoot(Rectangle playerBody);
 
-		Vector2 GetBulletDirection();
+		Vector2 GetBulletDirection(Rectangle playerBody);
 		float GetBulletRotation(Vector2 distance);
 
 		Bullet* GetBulletByIndex(int index);
@@ -44,6 +44,6 @@ namespace kuznickiGameObjects
 		int GetCurrentBulletCount();
 		Vector2 GetPosition();
 
-		void Draw();
+		void Draw(Rectangle playerBody);
 	};
 }

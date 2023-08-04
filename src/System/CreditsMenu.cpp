@@ -5,14 +5,19 @@ namespace kuznickiSystem
 	static float textSize = 24;
 	CreditsMenu::CreditsMenu(Texture2D* buttonSprite)
 	{
-		creditsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 12.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
+		this->creditsBounds = { GetScreenWidth() / 2.0f - GetScreenWidth() / 2.4f, GetScreenHeight() / 12.0f, GetScreenWidth() / 1.2f, GetScreenHeight() / 1.35f };
 		InitButtons(buttonSprite);
 		InitText();
 	}
 
 	CreditsMenu::CreditsMenu()
 	{
-
+		this->creditsBounds = { 0.0f,0.0f,0.0f,0.0f };
+		for (int i = 0; i < linkButtonsSize; i++)
+		{
+			this->linkButtons[i] = { {0.0f,0.0f,0.0f,0.0f}, GetFontDefault(), WHITE, nullptr, "", "", 1, 1 };
+			this->texts[i] = "";
+		}
 	}
 
 	CreditsMenu::~CreditsMenu()
@@ -24,8 +29,8 @@ namespace kuznickiSystem
 	{
 		buttons[0].body.width = static_cast<float>(GetScreenWidth()) / buttonXDivider;
 		buttons[0].body.height = static_cast<float>(GetScreenHeight()) / buttonYDivider;
-		buttons[0].body.x = static_cast<float>((GetScreenWidth() / 2)) - buttons[0].body.width / 2;
-		buttons[0].body.y = static_cast<float>((GetScreenHeight() - (GetScreenHeight() / 8) * 2));
+		buttons[0].body.x = static_cast<float>((GetScreenWidth() / 2.0f)) - buttons[0].body.width / 2.0f;
+		buttons[0].body.y = static_cast<float>((GetScreenHeight() - (GetScreenHeight() / 8.0f) * 2.0f));
 
 		buttons[0].color = WHITE;
 		buttons[0].fontSize = textSize;
@@ -126,13 +131,13 @@ namespace kuznickiSystem
 
 		DrawTextures();
 
-		DrawText(buttons[0].text, buttons[0].body.x + buttons[0].body.width / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).x / 2, buttons[0].body.y + buttons[0].body.height / 2 - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1).y / 2, buttons[0].fontSize, BLACK);
+		DrawTextEx(GetFontDefault(), buttons[0].text, { buttons[0].body.x + buttons[0].body.width / 2.0f - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1.0f).x / 2.0f, buttons[0].body.y + buttons[0].body.height / 2.0f - MeasureTextEx(GetFontDefault(), buttons[0].text, buttons[0].fontSize, 1.0f).y / 2.0f }, buttons[0].fontSize, 1.0f, BLACK);
 	}
 
 	void CreditsMenu::DrawTextures()
 	{
-		Rectangle buttonSource = { 0.0f, 0.0f, buttons[0].sprite->width, buttons[0].sprite->height };
-		Rectangle buttonDestination = { buttons[0].body.x + buttons[0].body.width / 2, buttons[0].body.y + buttons[0].body.height / 2, buttons[0].body.width , buttons[0].body.height };
+		Rectangle buttonSource = { 0.0f, 0.0f, static_cast<float>(buttons[0].sprite->width), static_cast<float>(buttons[0].sprite->height) };
+		Rectangle buttonDestination = { buttons[0].body.x + buttons[0].body.width / 2.0f, buttons[0].body.y + buttons[0].body.height / 2.0f, buttons[0].body.width , buttons[0].body.height };
 		Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
 
 		DrawTexturePro(*buttons[0].sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, buttons[0].color);

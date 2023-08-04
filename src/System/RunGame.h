@@ -25,13 +25,13 @@ namespace kuznickiSystem
 
 	struct SystemStats
 	{
-		int maxNumberOfEnemies;
-		float currentEnemyAdderCount;
+		int maxNumberOfEnemies = 0;
+		float currentEnemyAdderCount = 0;
 		float currentEnemyVelocity = enemyConfigs::defaultVelocityX;
 
-		int numberToSpawn;
+		int numberToSpawn = 0;
 		float currTimeToSpawn = 0;
-		float spawnRate; //Time in seconds
+		float spawnRate = 0; //Time in seconds
 	};
 
 	struct SystemConstants
@@ -70,7 +70,7 @@ namespace kuznickiSystem
 		RunGame();
 		~RunGame();
 
-		void LoadTextures(Texture2D* buttonSprite);
+		void LoadTextures();
 		void LoadButtons();
 
 		void Start(bool& closeApp);

@@ -26,7 +26,8 @@ namespace kuznickiSystem
 
 	void MainMenu::InitButtons(Texture2D* buttonSprite)
 	{
-		baseButtonSprite = LoadTexture("../rsc/button.png");
+		if (buttonSprite == nullptr)
+			baseButtonSprite = LoadTexture("../rsc/button.png");
 
 		for (int i = 0; i < buttonQuantity; i++)
 		{
@@ -101,7 +102,7 @@ namespace kuznickiSystem
 		}
 	}
 
-	void MainMenu::CheckButtonColls(MenuState& menuState)
+	void MainMenu::CheckButtonColls(MenuState& currMenuState)
 	{
 		for (int i = 0; i < buttonQuantity; i++)
 		{
@@ -114,19 +115,19 @@ namespace kuznickiSystem
 					switch (button)
 					{
 					case MainMenuButtons::Game:
-						if (menuState != MenuState::Game)
+						if (currMenuState != MenuState::Game)
 						{
-							menuState = MenuState::Game;
+							currMenuState = MenuState::Game;
 							runGame.Start(closeApp);
 						}
-						menuState = MenuState::Menu;
+						currMenuState = MenuState::Menu;
 
 						break;
 					case MainMenuButtons::Instructions:
-						menuState = MenuState::Instructions;
+						currMenuState = MenuState::Instructions;
 						break;
 					case MainMenuButtons::Credits:
-						menuState = MenuState::Credits;
+						currMenuState = MenuState::Credits;
 						break;
 					case MainMenuButtons::Quit:
 						closeApp = true;
@@ -152,15 +153,15 @@ namespace kuznickiSystem
 
 		for (int i = 0; i < buttonQuantity; i++)
 		{
-			Rectangle buttonSource = { 0.0f, 0.0f, buttons[i].sprite->width, buttons[i].sprite->height };
-			Rectangle buttonDestination = { buttons[i].body.x + buttons[i].body.width / 2, buttons[i].body.y + buttons[i].body.height / 2, buttons[i].body.width , buttons[i].body.height };
+			Rectangle buttonSource = { 0.0f, 0.0f, static_cast<float>(buttons[i].sprite->width), static_cast<float>(buttons[i].sprite->height) };
+			Rectangle buttonDestination = { buttons[i].body.x + buttons[i].body.width / 2.0f, buttons[i].body.y + buttons[i].body.height / 2.0f, buttons[i].body.width , buttons[i].body.height };
 			Vector2 buttonOrigin = { buttonDestination.width / 2.0f, buttonDestination.height / 2.0f };
 
 			DrawTexturePro(*buttons[i].sprite, buttonSource, buttonDestination, buttonOrigin, 0.0f, buttons[i].color);
 
-			DrawText(buttons[i].text, buttons[i].body.x + buttons[i].body.width / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2.0f,
-				buttons[i].body.y + buttons[i].body.height / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2.0f,
-				buttons[i].fontSize, BLACK);
+			DrawTextEx(GetFontDefault(), buttons[i].text, { buttons[i].body.x + buttons[i].body.width / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).x / 2.0f,
+				buttons[i].body.y + buttons[i].body.height / 2.0f - MeasureTextEx(GetFontDefault(), buttons[i].text, buttons[i].fontSize, 1).y / 2.0f },
+				buttons[i].fontSize, 1.0f,BLACK);
 		}
 
 		EndDrawing();
@@ -172,7 +173,9 @@ namespace kuznickiSystem
 		int lastLayer = 1000;
 		int smallestLayer = 0;
 		int currentLayer = lastLayer;
+
 		BackgroundImage imageToDraw;
+		imageToDraw = { WHITE, backgrounds[0].sprite, 0, {0.0f, 0.0f,0.0f,0.0f}, 0 };
 
 		for (int i = 0; i < backgroundQuantity; i++)
 		{
@@ -186,8 +189,8 @@ namespace kuznickiSystem
 				}
 			}
 
-			Rectangle spriteSource = { 0.0f,0.0f, imageToDraw.sprite.width, imageToDraw.sprite.height };
-			Rectangle spriteDestination = { GetScreenWidth() / 2.0f,GetScreenHeight() / 2.0f, GetScreenWidth(), GetScreenHeight() };
+			Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(imageToDraw.sprite.width), static_cast<float>(imageToDraw.sprite.height) };
+			Rectangle spriteDestination = { GetScreenWidth() / 2.0f,GetScreenHeight() / 2.0f, static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) };
 			Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
 			DrawTexturePro(imageToDraw.sprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);

@@ -21,14 +21,14 @@ namespace kuznickiGameObjects
 
 	}
 
-	void Bullet::ChangeDirection(Vector2 direction)
+	void Bullet::ChangeDirection(Vector2 newDirection)
 	{
-		this->direction = direction;
+		this->direction = newDirection;
 	}
 
-	void Bullet::ChangeVelocity(Vector2 velocity)
+	void Bullet::ChangeVelocity(Vector2 newVelocity)
 	{
-		this->velocity = velocity;
+		this->velocity = newVelocity;
 	}
 
 	void Bullet::ChangePosition(Vector2 newPosition)
@@ -60,9 +60,9 @@ namespace kuznickiGameObjects
 		health -= damage;
 	}
 
-	void Bullet::SetColor(Color color)
+	void Bullet::SetColor(Color newColor)
 	{
-		this->color = color;
+		this->color = newColor;
 	}
 
 	void Bullet::SetAngle(float newAngle)

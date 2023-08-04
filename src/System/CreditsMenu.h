@@ -3,12 +3,13 @@
 
 namespace kuznickiSystem
 {
+	static const int linkButtonsSize = 10;
 	class CreditsMenu : Menu
 	{
 	private:
 		Rectangle creditsBounds;
-		Button linkButtons[10];
-		const char* texts[10];
+		Button linkButtons[linkButtonsSize];
+		const char* texts[linkButtonsSize];
 	public:
 		CreditsMenu(Texture2D* buttonSprite);
 		CreditsMenu();

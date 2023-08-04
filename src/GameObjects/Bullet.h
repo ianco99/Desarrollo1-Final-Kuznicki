@@ -6,17 +6,17 @@ namespace kuznickiGameObjects
 	class Bullet
 	{
 	private:
-		float radius;
-		float angle;
-		Vector2 position;
+		float radius = 0.0f;
+		float angle = 0.0f;
+		Vector2 position = { 0.0f, 0.0f };
 		
-		Vector2 velocity;	//Only positive values
-		Vector2 acceleration;	//In case I need the bullet to speed up overtime
-		Vector2 direction;
+		Vector2 velocity = { 0.0f, 0.0f };	//Only positive values
+		Vector2 acceleration = { 0.0f, 0.0f };	//In case I need the bullet to speed up overtime
+		Vector2 direction = { 0.0f, 0.0f };
 
-		Color color;
+		Color color = WHITE;
 
-		int health;
+		int health = 0;
 
 		bool isAlive = false;
 
@@ -25,16 +25,16 @@ namespace kuznickiGameObjects
 		Bullet();
 		~Bullet();
 
-		void ChangeDirection(Vector2 direction);
-		void ChangeVelocity(Vector2 velocity);
-		void ChangePosition(Vector2 velocity);
+		void ChangeDirection(Vector2 newDirection);
+		void ChangeVelocity(Vector2 newVelocity);
+		void ChangePosition(Vector2 newPosition);
 
 		void Move();
 		void CheckOutOfBounds();
 
 		void RecieveDamage(int damage);
 
-		void SetColor(Color color);
+		void SetColor(Color newColor);
 		void SetAngle(float newAngle);
 		float GetAngle();
 
